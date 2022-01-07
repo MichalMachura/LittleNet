@@ -1,0 +1,4 @@
+vhdl xil_defaultlib  \
+"../../../ip/DSP_A_mul_B_PCOUT/sim/DSP_A_mul_B_PCOUT.vhd" \
+
+nosort

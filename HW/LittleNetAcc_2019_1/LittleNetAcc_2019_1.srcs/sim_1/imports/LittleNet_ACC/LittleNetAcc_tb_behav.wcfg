@@ -1,0 +1,1133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="LittleNetAccAxi_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="LittleNetAccAxi_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="62400000000001fs"></ZoomEndTime>
+      <Cursor1Time time="23328640000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="295"></NameColumnWidth>
+      <ValueColumnWidth column_width="58"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="277" />
+   <wvobject fp_name="/LittleNetAccAxi_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/data" type="array">
+      <obj_property name="ElementShortName">data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/data_validity" type="logic">
+      <obj_property name="ElementShortName">data_validity</obj_property>
+      <obj_property name="ObjectShortName">data_validity</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/s_axis_clk" type="logic">
+      <obj_property name="ElementShortName">s_axis_clk</obj_property>
+      <obj_property name="ObjectShortName">s_axis_clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/s_axis_tdata" type="array">
+      <obj_property name="ElementShortName">s_axis_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axis_tdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/s_axis_tkeep" type="array">
+      <obj_property name="ElementShortName">s_axis_tkeep[3:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axis_tkeep[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/s_axis_tlast" type="logic">
+      <obj_property name="ElementShortName">s_axis_tlast</obj_property>
+      <obj_property name="ObjectShortName">s_axis_tlast</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/s_axis_tvalid" type="logic">
+      <obj_property name="ElementShortName">s_axis_tvalid</obj_property>
+      <obj_property name="ObjectShortName">s_axis_tvalid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/s_axis_tready" type="logic">
+      <obj_property name="ElementShortName">s_axis_tready</obj_property>
+      <obj_property name="ObjectShortName">s_axis_tready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/m_axis_clk" type="logic">
+      <obj_property name="ElementShortName">m_axis_clk</obj_property>
+      <obj_property name="ObjectShortName">m_axis_clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/m_axis_tdata" type="array">
+      <obj_property name="ElementShortName">m_axis_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/m_axis_tkeep" type="array">
+      <obj_property name="ElementShortName">m_axis_tkeep[3:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tkeep[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/m_axis_tlast" type="logic">
+      <obj_property name="ElementShortName">m_axis_tlast</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tlast</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/m_axis_tvalid" type="logic">
+      <obj_property name="ElementShortName">m_axis_tvalid</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tvalid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/m_axis_tready" type="logic">
+      <obj_property name="ElementShortName">m_axis_tready</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/data_in" type="array">
+      <obj_property name="ElementShortName">data_in[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/data_in_validity" type="logic">
+      <obj_property name="ElementShortName">data_in_validity</obj_property>
+      <obj_property name="ObjectShortName">data_in_validity</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/write_possible" type="logic">
+      <obj_property name="ElementShortName">write_possible</obj_property>
+      <obj_property name="ObjectShortName">write_possible</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/output_data_ready" type="logic">
+      <obj_property name="ElementShortName">output_data_ready</obj_property>
+      <obj_property name="ObjectShortName">output_data_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/output_data" type="array">
+      <obj_property name="ElementShortName">output_data[0:6][7:0]</obj_property>
+      <obj_property name="ObjectShortName">output_data[0:6][7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/output_was_read" type="logic">
+      <obj_property name="ElementShortName">output_was_read</obj_property>
+      <obj_property name="ObjectShortName">output_was_read</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_0_0_addra" type="array">
+      <obj_property name="ElementShortName">ram_0_0_addra[13:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_0_0_addra[13:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_0_0_dina" type="array">
+      <obj_property name="ElementShortName">ram_0_0_dina[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_0_0_dina[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_0_0_wea" type="logic">
+      <obj_property name="ElementShortName">ram_0_0_wea</obj_property>
+      <obj_property name="ObjectShortName">ram_0_0_wea</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_0_0_ena" type="logic">
+      <obj_property name="ElementShortName">ram_0_0_ena</obj_property>
+      <obj_property name="ObjectShortName">ram_0_0_ena</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_0_0_addrb" type="array">
+      <obj_property name="ElementShortName">ram_0_0_addrb[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_0_0_addrb[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_0_0_doutb" type="array">
+      <obj_property name="ElementShortName">ram_0_0_doutb[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_0_0_doutb[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_0_0_enb" type="logic">
+      <obj_property name="ElementShortName">ram_0_0_enb</obj_property>
+      <obj_property name="ObjectShortName">ram_0_0_enb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_0_0_sleep" type="logic">
+      <obj_property name="ElementShortName">ram_0_0_sleep</obj_property>
+      <obj_property name="ObjectShortName">ram_0_0_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_0_addra" type="array">
+      <obj_property name="ElementShortName">ram_1_0_addra[16:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_1_0_addra[16:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_0_dina" type="array">
+      <obj_property name="ElementShortName">ram_1_0_dina[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_1_0_dina[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_0_wea" type="logic">
+      <obj_property name="ElementShortName">ram_1_0_wea</obj_property>
+      <obj_property name="ObjectShortName">ram_1_0_wea</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_0_ena" type="logic">
+      <obj_property name="ElementShortName">ram_1_0_ena</obj_property>
+      <obj_property name="ObjectShortName">ram_1_0_ena</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_0_addrb" type="array">
+      <obj_property name="ElementShortName">ram_1_0_addrb[18:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_1_0_addrb[18:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_0_doutb" type="array">
+      <obj_property name="ElementShortName">ram_1_0_doutb[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_1_0_doutb[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_0_enb" type="logic">
+      <obj_property name="ElementShortName">ram_1_0_enb</obj_property>
+      <obj_property name="ObjectShortName">ram_1_0_enb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_0_sleep" type="logic">
+      <obj_property name="ElementShortName">ram_1_0_sleep</obj_property>
+      <obj_property name="ObjectShortName">ram_1_0_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_0_addr_in" type="array">
+      <obj_property name="ElementShortName">ram_1_0_addr_in[0:1][16:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_1_0_addr_in[0:1][16:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_0_data_in" type="array">
+      <obj_property name="ElementShortName">ram_1_0_data_in[0:1][31:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_1_0_data_in[0:1][31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_0_write_enable" type="array">
+      <obj_property name="ElementShortName">ram_1_0_write_enable[0:1]</obj_property>
+      <obj_property name="ObjectShortName">ram_1_0_write_enable[0:1]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_0_write_sel" type="logic">
+      <obj_property name="ElementShortName">ram_1_0_write_sel</obj_property>
+      <obj_property name="ObjectShortName">ram_1_0_write_sel</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_0_addr_out" type="array">
+      <obj_property name="ElementShortName">ram_1_0_addr_out[0:1][18:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_1_0_addr_out[0:1][18:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_0_read_enable" type="array">
+      <obj_property name="ElementShortName">ram_1_0_read_enable[0:1]</obj_property>
+      <obj_property name="ObjectShortName">ram_1_0_read_enable[0:1]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_0_data_out" type="array">
+      <obj_property name="ElementShortName">ram_1_0_data_out[0:1][7:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_1_0_data_out[0:1][7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_0_read_sel" type="logic">
+      <obj_property name="ElementShortName">ram_1_0_read_sel</obj_property>
+      <obj_property name="ObjectShortName">ram_1_0_read_sel</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_1_addra" type="array">
+      <obj_property name="ElementShortName">ram_1_1_addra[14:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_1_1_addra[14:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_1_dina" type="array">
+      <obj_property name="ElementShortName">ram_1_1_dina[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_1_1_dina[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_1_wea" type="logic">
+      <obj_property name="ElementShortName">ram_1_1_wea</obj_property>
+      <obj_property name="ObjectShortName">ram_1_1_wea</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_1_ena" type="logic">
+      <obj_property name="ElementShortName">ram_1_1_ena</obj_property>
+      <obj_property name="ObjectShortName">ram_1_1_ena</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_1_addrb" type="array">
+      <obj_property name="ElementShortName">ram_1_1_addrb[16:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_1_1_addrb[16:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_1_doutb" type="array">
+      <obj_property name="ElementShortName">ram_1_1_doutb[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_1_1_doutb[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_1_enb" type="logic">
+      <obj_property name="ElementShortName">ram_1_1_enb</obj_property>
+      <obj_property name="ObjectShortName">ram_1_1_enb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_1_sleep" type="logic">
+      <obj_property name="ElementShortName">ram_1_1_sleep</obj_property>
+      <obj_property name="ObjectShortName">ram_1_1_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_0_addra" type="array">
+      <obj_property name="ElementShortName">ram_2_0_addra[13:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_2_0_addra[13:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_0_dina" type="array">
+      <obj_property name="ElementShortName">ram_2_0_dina[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_2_0_dina[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_0_wea" type="logic">
+      <obj_property name="ElementShortName">ram_2_0_wea</obj_property>
+      <obj_property name="ObjectShortName">ram_2_0_wea</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_0_ena" type="logic">
+      <obj_property name="ElementShortName">ram_2_0_ena</obj_property>
+      <obj_property name="ObjectShortName">ram_2_0_ena</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_0_addrb" type="array">
+      <obj_property name="ElementShortName">ram_2_0_addrb[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_2_0_addrb[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_0_doutb" type="array">
+      <obj_property name="ElementShortName">ram_2_0_doutb[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_2_0_doutb[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_0_enb" type="logic">
+      <obj_property name="ElementShortName">ram_2_0_enb</obj_property>
+      <obj_property name="ObjectShortName">ram_2_0_enb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_0_sleep" type="logic">
+      <obj_property name="ElementShortName">ram_2_0_sleep</obj_property>
+      <obj_property name="ObjectShortName">ram_2_0_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_0_addr_in" type="array">
+      <obj_property name="ElementShortName">ram_2_0_addr_in[0:1][13:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_2_0_addr_in[0:1][13:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_0_data_in" type="array">
+      <obj_property name="ElementShortName">ram_2_0_data_in[0:1][31:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_2_0_data_in[0:1][31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_0_write_enable" type="array">
+      <obj_property name="ElementShortName">ram_2_0_write_enable[0:1]</obj_property>
+      <obj_property name="ObjectShortName">ram_2_0_write_enable[0:1]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_0_write_sel" type="logic">
+      <obj_property name="ElementShortName">ram_2_0_write_sel</obj_property>
+      <obj_property name="ObjectShortName">ram_2_0_write_sel</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_0_addr_out" type="array">
+      <obj_property name="ElementShortName">ram_2_0_addr_out[0:1][15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_2_0_addr_out[0:1][15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_0_read_enable" type="array">
+      <obj_property name="ElementShortName">ram_2_0_read_enable[0:1]</obj_property>
+      <obj_property name="ObjectShortName">ram_2_0_read_enable[0:1]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_0_data_out" type="array">
+      <obj_property name="ElementShortName">ram_2_0_data_out[0:1][7:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_2_0_data_out[0:1][7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_0_read_sel" type="logic">
+      <obj_property name="ElementShortName">ram_2_0_read_sel</obj_property>
+      <obj_property name="ObjectShortName">ram_2_0_read_sel</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_1_addra" type="array">
+      <obj_property name="ElementShortName">ram_2_1_addra[14:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_2_1_addra[14:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_1_dina" type="array">
+      <obj_property name="ElementShortName">ram_2_1_dina[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_2_1_dina[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_1_wea" type="logic">
+      <obj_property name="ElementShortName">ram_2_1_wea</obj_property>
+      <obj_property name="ObjectShortName">ram_2_1_wea</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_1_ena" type="logic">
+      <obj_property name="ElementShortName">ram_2_1_ena</obj_property>
+      <obj_property name="ObjectShortName">ram_2_1_ena</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_1_addrb" type="array">
+      <obj_property name="ElementShortName">ram_2_1_addrb[16:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_2_1_addrb[16:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_1_doutb" type="array">
+      <obj_property name="ElementShortName">ram_2_1_doutb[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_2_1_doutb[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_1_enb" type="logic">
+      <obj_property name="ElementShortName">ram_2_1_enb</obj_property>
+      <obj_property name="ObjectShortName">ram_2_1_enb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_1_sleep" type="logic">
+      <obj_property name="ElementShortName">ram_2_1_sleep</obj_property>
+      <obj_property name="ObjectShortName">ram_2_1_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_0_addra" type="array">
+      <obj_property name="ElementShortName">ram_3_0_addra[13:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_3_0_addra[13:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_0_dina" type="array">
+      <obj_property name="ElementShortName">ram_3_0_dina[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_3_0_dina[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_0_wea" type="logic">
+      <obj_property name="ElementShortName">ram_3_0_wea</obj_property>
+      <obj_property name="ObjectShortName">ram_3_0_wea</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_0_ena" type="logic">
+      <obj_property name="ElementShortName">ram_3_0_ena</obj_property>
+      <obj_property name="ObjectShortName">ram_3_0_ena</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_0_addrb" type="array">
+      <obj_property name="ElementShortName">ram_3_0_addrb[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_3_0_addrb[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_0_doutb" type="array">
+      <obj_property name="ElementShortName">ram_3_0_doutb[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_3_0_doutb[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_0_enb" type="logic">
+      <obj_property name="ElementShortName">ram_3_0_enb</obj_property>
+      <obj_property name="ObjectShortName">ram_3_0_enb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_0_sleep" type="logic">
+      <obj_property name="ElementShortName">ram_3_0_sleep</obj_property>
+      <obj_property name="ObjectShortName">ram_3_0_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_0_addr_in" type="array">
+      <obj_property name="ElementShortName">ram_3_0_addr_in[0:1][13:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_3_0_addr_in[0:1][13:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_0_data_in" type="array">
+      <obj_property name="ElementShortName">ram_3_0_data_in[0:1][31:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_3_0_data_in[0:1][31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_0_write_enable" type="array">
+      <obj_property name="ElementShortName">ram_3_0_write_enable[0:1]</obj_property>
+      <obj_property name="ObjectShortName">ram_3_0_write_enable[0:1]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_0_write_sel" type="logic">
+      <obj_property name="ElementShortName">ram_3_0_write_sel</obj_property>
+      <obj_property name="ObjectShortName">ram_3_0_write_sel</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_0_addr_out" type="array">
+      <obj_property name="ElementShortName">ram_3_0_addr_out[0:1][15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_3_0_addr_out[0:1][15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_0_read_enable" type="array">
+      <obj_property name="ElementShortName">ram_3_0_read_enable[0:1]</obj_property>
+      <obj_property name="ObjectShortName">ram_3_0_read_enable[0:1]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_0_data_out" type="array">
+      <obj_property name="ElementShortName">ram_3_0_data_out[0:1][7:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_3_0_data_out[0:1][7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_0_read_sel" type="logic">
+      <obj_property name="ElementShortName">ram_3_0_read_sel</obj_property>
+      <obj_property name="ObjectShortName">ram_3_0_read_sel</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_1_addra" type="array">
+      <obj_property name="ElementShortName">ram_3_1_addra[11:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_3_1_addra[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_1_dina" type="array">
+      <obj_property name="ElementShortName">ram_3_1_dina[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_3_1_dina[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_1_wea" type="logic">
+      <obj_property name="ElementShortName">ram_3_1_wea</obj_property>
+      <obj_property name="ObjectShortName">ram_3_1_wea</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_1_ena" type="logic">
+      <obj_property name="ElementShortName">ram_3_1_ena</obj_property>
+      <obj_property name="ObjectShortName">ram_3_1_ena</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_1_addrb" type="array">
+      <obj_property name="ElementShortName">ram_3_1_addrb[13:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_3_1_addrb[13:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_1_doutb" type="array">
+      <obj_property name="ElementShortName">ram_3_1_doutb[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_3_1_doutb[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_1_enb" type="logic">
+      <obj_property name="ElementShortName">ram_3_1_enb</obj_property>
+      <obj_property name="ObjectShortName">ram_3_1_enb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_1_sleep" type="logic">
+      <obj_property name="ElementShortName">ram_3_1_sleep</obj_property>
+      <obj_property name="ObjectShortName">ram_3_1_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_0_addra" type="array">
+      <obj_property name="ElementShortName">ram_4_0_addra[12:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_4_0_addra[12:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_0_dina" type="array">
+      <obj_property name="ElementShortName">ram_4_0_dina[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_4_0_dina[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_0_wea" type="logic">
+      <obj_property name="ElementShortName">ram_4_0_wea</obj_property>
+      <obj_property name="ObjectShortName">ram_4_0_wea</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_0_ena" type="logic">
+      <obj_property name="ElementShortName">ram_4_0_ena</obj_property>
+      <obj_property name="ObjectShortName">ram_4_0_ena</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_0_addrb" type="array">
+      <obj_property name="ElementShortName">ram_4_0_addrb[14:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_4_0_addrb[14:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_0_doutb" type="array">
+      <obj_property name="ElementShortName">ram_4_0_doutb[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_4_0_doutb[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_0_enb" type="logic">
+      <obj_property name="ElementShortName">ram_4_0_enb</obj_property>
+      <obj_property name="ObjectShortName">ram_4_0_enb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_0_sleep" type="logic">
+      <obj_property name="ElementShortName">ram_4_0_sleep</obj_property>
+      <obj_property name="ObjectShortName">ram_4_0_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_0_addr_in" type="array">
+      <obj_property name="ElementShortName">ram_4_0_addr_in[0:1][12:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_4_0_addr_in[0:1][12:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_0_data_in" type="array">
+      <obj_property name="ElementShortName">ram_4_0_data_in[0:1][31:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_4_0_data_in[0:1][31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_0_write_enable" type="array">
+      <obj_property name="ElementShortName">ram_4_0_write_enable[0:1]</obj_property>
+      <obj_property name="ObjectShortName">ram_4_0_write_enable[0:1]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_0_write_sel" type="logic">
+      <obj_property name="ElementShortName">ram_4_0_write_sel</obj_property>
+      <obj_property name="ObjectShortName">ram_4_0_write_sel</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_0_addr_out" type="array">
+      <obj_property name="ElementShortName">ram_4_0_addr_out[0:1][14:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_4_0_addr_out[0:1][14:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_0_read_enable" type="array">
+      <obj_property name="ElementShortName">ram_4_0_read_enable[0:1]</obj_property>
+      <obj_property name="ObjectShortName">ram_4_0_read_enable[0:1]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_0_data_out" type="array">
+      <obj_property name="ElementShortName">ram_4_0_data_out[0:1][7:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_4_0_data_out[0:1][7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_0_read_sel" type="logic">
+      <obj_property name="ElementShortName">ram_4_0_read_sel</obj_property>
+      <obj_property name="ObjectShortName">ram_4_0_read_sel</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_1_addra" type="array">
+      <obj_property name="ElementShortName">ram_4_1_addra[12:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_4_1_addra[12:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_1_dina" type="array">
+      <obj_property name="ElementShortName">ram_4_1_dina[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_4_1_dina[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_1_wea" type="logic">
+      <obj_property name="ElementShortName">ram_4_1_wea</obj_property>
+      <obj_property name="ObjectShortName">ram_4_1_wea</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_1_ena" type="logic">
+      <obj_property name="ElementShortName">ram_4_1_ena</obj_property>
+      <obj_property name="ObjectShortName">ram_4_1_ena</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_1_addrb" type="array">
+      <obj_property name="ElementShortName">ram_4_1_addrb[14:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_4_1_addrb[14:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_1_doutb" type="array">
+      <obj_property name="ElementShortName">ram_4_1_doutb[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_4_1_doutb[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_1_enb" type="logic">
+      <obj_property name="ElementShortName">ram_4_1_enb</obj_property>
+      <obj_property name="ObjectShortName">ram_4_1_enb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_1_sleep" type="logic">
+      <obj_property name="ElementShortName">ram_4_1_sleep</obj_property>
+      <obj_property name="ObjectShortName">ram_4_1_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_5_0_dina" type="array">
+      <obj_property name="ElementShortName">ram_5_0_dina[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_5_0_dina[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_5_0_addra" type="array">
+      <obj_property name="ElementShortName">ram_5_0_addra[2:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_5_0_addra[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_5_0_wea" type="logic">
+      <obj_property name="ElementShortName">ram_5_0_wea</obj_property>
+      <obj_property name="ObjectShortName">ram_5_0_wea</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_5_0_registers" type="array">
+      <obj_property name="ElementShortName">ram_5_0_registers[0:6][7:0]</obj_property>
+      <obj_property name="ObjectShortName">ram_5_0_registers[0:6][7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_1_0_data_out" type="array">
+      <obj_property name="ElementShortName">rom_dw_1_0_data_out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_1_0_data_out[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_1_0_data_address" type="array">
+      <obj_property name="ElementShortName">rom_dw_1_0_data_address[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_1_0_data_address[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_1_0_data_read_enable" type="logic">
+      <obj_property name="ElementShortName">rom_dw_1_0_data_read_enable</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_1_0_data_read_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_1_0_sleep" type="logic">
+      <obj_property name="ElementShortName">rom_dw_1_0_sleep</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_1_0_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_1_1_data_out" type="array">
+      <obj_property name="ElementShortName">rom_pw_1_1_data_out[127:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_1_1_data_out[127:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_1_1_data_address" type="array">
+      <obj_property name="ElementShortName">rom_pw_1_1_data_address[4:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_1_1_data_address[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_1_1_data_read_enable" type="logic">
+      <obj_property name="ElementShortName">rom_pw_1_1_data_read_enable</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_1_1_data_read_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_1_1_sleep" type="logic">
+      <obj_property name="ElementShortName">rom_pw_1_1_sleep</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_1_1_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_1_2_data_out" type="array">
+      <obj_property name="ElementShortName">rom_dw_1_2_data_out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_1_2_data_out[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_1_2_data_address" type="array">
+      <obj_property name="ElementShortName">rom_dw_1_2_data_address[8:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_1_2_data_address[8:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_1_2_data_read_enable" type="logic">
+      <obj_property name="ElementShortName">rom_dw_1_2_data_read_enable</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_1_2_data_read_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_1_2_sleep" type="logic">
+      <obj_property name="ElementShortName">rom_dw_1_2_sleep</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_1_2_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_2_0_data_out" type="array">
+      <obj_property name="ElementShortName">rom_pw_2_0_data_out[127:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_2_0_data_out[127:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_2_0_data_address" type="array">
+      <obj_property name="ElementShortName">rom_pw_2_0_data_address[6:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_2_0_data_address[6:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_2_0_data_read_enable" type="logic">
+      <obj_property name="ElementShortName">rom_pw_2_0_data_read_enable</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_2_0_data_read_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_2_0_sleep" type="logic">
+      <obj_property name="ElementShortName">rom_pw_2_0_sleep</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_2_0_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_2_1_data_out" type="array">
+      <obj_property name="ElementShortName">rom_dw_2_1_data_out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_2_1_data_out[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_2_1_data_address" type="array">
+      <obj_property name="ElementShortName">rom_dw_2_1_data_address[9:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_2_1_data_address[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_2_1_data_read_enable" type="logic">
+      <obj_property name="ElementShortName">rom_dw_2_1_data_read_enable</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_2_1_data_read_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_2_1_sleep" type="logic">
+      <obj_property name="ElementShortName">rom_dw_2_1_sleep</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_2_1_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_2_2_data_out" type="array">
+      <obj_property name="ElementShortName">rom_pw_2_2_data_out[127:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_2_2_data_out[127:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_2_2_data_address" type="array">
+      <obj_property name="ElementShortName">rom_pw_2_2_data_address[8:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_2_2_data_address[8:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_2_2_data_read_enable" type="logic">
+      <obj_property name="ElementShortName">rom_pw_2_2_data_read_enable</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_2_2_data_read_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_2_2_sleep" type="logic">
+      <obj_property name="ElementShortName">rom_pw_2_2_sleep</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_2_2_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_3_0_data_out" type="array">
+      <obj_property name="ElementShortName">rom_dw_3_0_data_out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_3_0_data_out[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_3_0_data_address" type="array">
+      <obj_property name="ElementShortName">rom_dw_3_0_data_address[10:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_3_0_data_address[10:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_3_0_data_read_enable" type="logic">
+      <obj_property name="ElementShortName">rom_dw_3_0_data_read_enable</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_3_0_data_read_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_3_0_sleep" type="logic">
+      <obj_property name="ElementShortName">rom_dw_3_0_sleep</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_3_0_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_3_1_data_out" type="array">
+      <obj_property name="ElementShortName">rom_pw_3_1_data_out[127:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_3_1_data_out[127:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_3_1_data_address" type="array">
+      <obj_property name="ElementShortName">rom_pw_3_1_data_address[10:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_3_1_data_address[10:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_3_1_data_read_enable" type="logic">
+      <obj_property name="ElementShortName">rom_pw_3_1_data_read_enable</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_3_1_data_read_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_3_1_sleep" type="logic">
+      <obj_property name="ElementShortName">rom_pw_3_1_sleep</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_3_1_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_3_2_data_out" type="array">
+      <obj_property name="ElementShortName">rom_dw_3_2_data_out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_3_2_data_out[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_3_2_data_address" type="array">
+      <obj_property name="ElementShortName">rom_dw_3_2_data_address[11:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_3_2_data_address[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_3_2_data_read_enable" type="logic">
+      <obj_property name="ElementShortName">rom_dw_3_2_data_read_enable</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_3_2_data_read_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_3_2_sleep" type="logic">
+      <obj_property name="ElementShortName">rom_dw_3_2_sleep</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_3_2_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_4_0_data_out" type="array">
+      <obj_property name="ElementShortName">rom_pw_4_0_data_out[127:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_4_0_data_out[127:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_4_0_data_address" type="array">
+      <obj_property name="ElementShortName">rom_pw_4_0_data_address[11:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_4_0_data_address[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_4_0_data_read_enable" type="logic">
+      <obj_property name="ElementShortName">rom_pw_4_0_data_read_enable</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_4_0_data_read_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_4_0_sleep" type="logic">
+      <obj_property name="ElementShortName">rom_pw_4_0_sleep</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_4_0_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_4_1_data_out" type="array">
+      <obj_property name="ElementShortName">rom_dw_4_1_data_out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_4_1_data_out[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_4_1_data_address" type="array">
+      <obj_property name="ElementShortName">rom_dw_4_1_data_address[11:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_4_1_data_address[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_4_1_data_read_enable" type="logic">
+      <obj_property name="ElementShortName">rom_dw_4_1_data_read_enable</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_4_1_data_read_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_4_1_sleep" type="logic">
+      <obj_property name="ElementShortName">rom_dw_4_1_sleep</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_4_1_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_4_2_data_out" type="array">
+      <obj_property name="ElementShortName">rom_pw_4_2_data_out[127:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_4_2_data_out[127:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_4_2_data_address" type="array">
+      <obj_property name="ElementShortName">rom_pw_4_2_data_address[12:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_4_2_data_address[12:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_4_2_data_read_enable" type="logic">
+      <obj_property name="ElementShortName">rom_pw_4_2_data_read_enable</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_4_2_data_read_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_4_2_sleep" type="logic">
+      <obj_property name="ElementShortName">rom_pw_4_2_sleep</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_4_2_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_5_0_data_out" type="array">
+      <obj_property name="ElementShortName">rom_pw_5_0_data_out[39:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_5_0_data_out[39:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_5_0_data_address" type="array">
+      <obj_property name="ElementShortName">rom_pw_5_0_data_address[9:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_5_0_data_address[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_5_0_data_read_enable" type="logic">
+      <obj_property name="ElementShortName">rom_pw_5_0_data_read_enable</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_5_0_data_read_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_5_0_sleep" type="logic">
+      <obj_property name="ElementShortName">rom_pw_5_0_sleep</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_5_0_sleep</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/iw_0_0_reset" type="logic">
+      <obj_property name="ElementShortName">iw_0_0_reset</obj_property>
+      <obj_property name="ObjectShortName">iw_0_0_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/iw_0_0_enable" type="logic">
+      <obj_property name="ElementShortName">iw_0_0_enable</obj_property>
+      <obj_property name="ObjectShortName">iw_0_0_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/iw_0_0_finished" type="logic">
+      <obj_property name="ElementShortName">iw_0_0_finished</obj_property>
+      <obj_property name="ObjectShortName">iw_0_0_finished</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/iw_0_0_last_data_received" type="logic">
+      <obj_property name="ElementShortName">iw_0_0_last_data_received</obj_property>
+      <obj_property name="ObjectShortName">iw_0_0_last_data_received</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_1_0_reset" type="logic">
+      <obj_property name="ElementShortName">dw_1_0_reset</obj_property>
+      <obj_property name="ObjectShortName">dw_1_0_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_1_0_enable" type="logic">
+      <obj_property name="ElementShortName">dw_1_0_enable</obj_property>
+      <obj_property name="ObjectShortName">dw_1_0_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_1_0_finished" type="logic">
+      <obj_property name="ElementShortName">dw_1_0_finished</obj_property>
+      <obj_property name="ObjectShortName">dw_1_0_finished</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_1_1_reset" type="logic">
+      <obj_property name="ElementShortName">pw_1_1_reset</obj_property>
+      <obj_property name="ObjectShortName">pw_1_1_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_1_1_enable" type="logic">
+      <obj_property name="ElementShortName">pw_1_1_enable</obj_property>
+      <obj_property name="ObjectShortName">pw_1_1_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_1_1_finished" type="logic">
+      <obj_property name="ElementShortName">pw_1_1_finished</obj_property>
+      <obj_property name="ObjectShortName">pw_1_1_finished</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_1_2_reset" type="logic">
+      <obj_property name="ElementShortName">dw_1_2_reset</obj_property>
+      <obj_property name="ObjectShortName">dw_1_2_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_1_2_enable" type="logic">
+      <obj_property name="ElementShortName">dw_1_2_enable</obj_property>
+      <obj_property name="ObjectShortName">dw_1_2_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_1_2_finished" type="logic">
+      <obj_property name="ElementShortName">dw_1_2_finished</obj_property>
+      <obj_property name="ObjectShortName">dw_1_2_finished</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_2_0_reset" type="logic">
+      <obj_property name="ElementShortName">pw_2_0_reset</obj_property>
+      <obj_property name="ObjectShortName">pw_2_0_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_2_0_enable" type="logic">
+      <obj_property name="ElementShortName">pw_2_0_enable</obj_property>
+      <obj_property name="ObjectShortName">pw_2_0_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_2_0_finished" type="logic">
+      <obj_property name="ElementShortName">pw_2_0_finished</obj_property>
+      <obj_property name="ObjectShortName">pw_2_0_finished</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_2_1_reset" type="logic">
+      <obj_property name="ElementShortName">dw_2_1_reset</obj_property>
+      <obj_property name="ObjectShortName">dw_2_1_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_2_1_enable" type="logic">
+      <obj_property name="ElementShortName">dw_2_1_enable</obj_property>
+      <obj_property name="ObjectShortName">dw_2_1_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_2_1_finished" type="logic">
+      <obj_property name="ElementShortName">dw_2_1_finished</obj_property>
+      <obj_property name="ObjectShortName">dw_2_1_finished</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_2_2_reset" type="logic">
+      <obj_property name="ElementShortName">pw_2_2_reset</obj_property>
+      <obj_property name="ObjectShortName">pw_2_2_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_2_2_enable" type="logic">
+      <obj_property name="ElementShortName">pw_2_2_enable</obj_property>
+      <obj_property name="ObjectShortName">pw_2_2_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_2_2_finished" type="logic">
+      <obj_property name="ElementShortName">pw_2_2_finished</obj_property>
+      <obj_property name="ObjectShortName">pw_2_2_finished</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_3_0_reset" type="logic">
+      <obj_property name="ElementShortName">dw_3_0_reset</obj_property>
+      <obj_property name="ObjectShortName">dw_3_0_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_3_0_enable" type="logic">
+      <obj_property name="ElementShortName">dw_3_0_enable</obj_property>
+      <obj_property name="ObjectShortName">dw_3_0_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_3_0_finished" type="logic">
+      <obj_property name="ElementShortName">dw_3_0_finished</obj_property>
+      <obj_property name="ObjectShortName">dw_3_0_finished</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_3_1_reset" type="logic">
+      <obj_property name="ElementShortName">pw_3_1_reset</obj_property>
+      <obj_property name="ObjectShortName">pw_3_1_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_3_1_enable" type="logic">
+      <obj_property name="ElementShortName">pw_3_1_enable</obj_property>
+      <obj_property name="ObjectShortName">pw_3_1_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_3_1_finished" type="logic">
+      <obj_property name="ElementShortName">pw_3_1_finished</obj_property>
+      <obj_property name="ObjectShortName">pw_3_1_finished</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_3_2_reset" type="logic">
+      <obj_property name="ElementShortName">dw_3_2_reset</obj_property>
+      <obj_property name="ObjectShortName">dw_3_2_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_3_2_enable" type="logic">
+      <obj_property name="ElementShortName">dw_3_2_enable</obj_property>
+      <obj_property name="ObjectShortName">dw_3_2_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_3_2_finished" type="logic">
+      <obj_property name="ElementShortName">dw_3_2_finished</obj_property>
+      <obj_property name="ObjectShortName">dw_3_2_finished</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_4_0_reset" type="logic">
+      <obj_property name="ElementShortName">pw_4_0_reset</obj_property>
+      <obj_property name="ObjectShortName">pw_4_0_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_4_0_enable" type="logic">
+      <obj_property name="ElementShortName">pw_4_0_enable</obj_property>
+      <obj_property name="ObjectShortName">pw_4_0_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_4_0_finished" type="logic">
+      <obj_property name="ElementShortName">pw_4_0_finished</obj_property>
+      <obj_property name="ObjectShortName">pw_4_0_finished</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_4_1_reset" type="logic">
+      <obj_property name="ElementShortName">dw_4_1_reset</obj_property>
+      <obj_property name="ObjectShortName">dw_4_1_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_4_1_enable" type="logic">
+      <obj_property name="ElementShortName">dw_4_1_enable</obj_property>
+      <obj_property name="ObjectShortName">dw_4_1_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_4_1_finished" type="logic">
+      <obj_property name="ElementShortName">dw_4_1_finished</obj_property>
+      <obj_property name="ObjectShortName">dw_4_1_finished</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_4_2_reset" type="logic">
+      <obj_property name="ElementShortName">pw_4_2_reset</obj_property>
+      <obj_property name="ObjectShortName">pw_4_2_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_4_2_enable" type="logic">
+      <obj_property name="ElementShortName">pw_4_2_enable</obj_property>
+      <obj_property name="ObjectShortName">pw_4_2_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_4_2_finished" type="logic">
+      <obj_property name="ElementShortName">pw_4_2_finished</obj_property>
+      <obj_property name="ObjectShortName">pw_4_2_finished</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_5_0_reset" type="logic">
+      <obj_property name="ElementShortName">pw_5_0_reset</obj_property>
+      <obj_property name="ObjectShortName">pw_5_0_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_5_0_enable" type="logic">
+      <obj_property name="ElementShortName">pw_5_0_enable</obj_property>
+      <obj_property name="ObjectShortName">pw_5_0_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_5_0_finished" type="logic">
+      <obj_property name="ElementShortName">pw_5_0_finished</obj_property>
+      <obj_property name="ObjectShortName">pw_5_0_finished</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/iw_0_0_enable_reg" type="logic">
+      <obj_property name="ElementShortName">iw_0_0_enable_reg</obj_property>
+      <obj_property name="ObjectShortName">iw_0_0_enable_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_1_0_enable_reg" type="logic">
+      <obj_property name="ElementShortName">dw_1_0_enable_reg</obj_property>
+      <obj_property name="ObjectShortName">dw_1_0_enable_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_1_1_enable_reg" type="logic">
+      <obj_property name="ElementShortName">pw_1_1_enable_reg</obj_property>
+      <obj_property name="ObjectShortName">pw_1_1_enable_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_1_2_enable_reg" type="logic">
+      <obj_property name="ElementShortName">dw_1_2_enable_reg</obj_property>
+      <obj_property name="ObjectShortName">dw_1_2_enable_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_2_0_enable_reg" type="logic">
+      <obj_property name="ElementShortName">pw_2_0_enable_reg</obj_property>
+      <obj_property name="ObjectShortName">pw_2_0_enable_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_2_1_enable_reg" type="logic">
+      <obj_property name="ElementShortName">dw_2_1_enable_reg</obj_property>
+      <obj_property name="ObjectShortName">dw_2_1_enable_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_2_2_enable_reg" type="logic">
+      <obj_property name="ElementShortName">pw_2_2_enable_reg</obj_property>
+      <obj_property name="ObjectShortName">pw_2_2_enable_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_3_0_enable_reg" type="logic">
+      <obj_property name="ElementShortName">dw_3_0_enable_reg</obj_property>
+      <obj_property name="ObjectShortName">dw_3_0_enable_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_3_1_enable_reg" type="logic">
+      <obj_property name="ElementShortName">pw_3_1_enable_reg</obj_property>
+      <obj_property name="ObjectShortName">pw_3_1_enable_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_3_2_enable_reg" type="logic">
+      <obj_property name="ElementShortName">dw_3_2_enable_reg</obj_property>
+      <obj_property name="ObjectShortName">dw_3_2_enable_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_4_0_enable_reg" type="logic">
+      <obj_property name="ElementShortName">pw_4_0_enable_reg</obj_property>
+      <obj_property name="ObjectShortName">pw_4_0_enable_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_4_1_enable_reg" type="logic">
+      <obj_property name="ElementShortName">dw_4_1_enable_reg</obj_property>
+      <obj_property name="ObjectShortName">dw_4_1_enable_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_4_2_enable_reg" type="logic">
+      <obj_property name="ElementShortName">pw_4_2_enable_reg</obj_property>
+      <obj_property name="ObjectShortName">pw_4_2_enable_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_5_0_enable_reg" type="logic">
+      <obj_property name="ElementShortName">pw_5_0_enable_reg</obj_property>
+      <obj_property name="ObjectShortName">pw_5_0_enable_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/iw_0_0_reset_reg" type="logic">
+      <obj_property name="ElementShortName">iw_0_0_reset_reg</obj_property>
+      <obj_property name="ObjectShortName">iw_0_0_reset_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_1_0_reset_reg" type="logic">
+      <obj_property name="ElementShortName">dw_1_0_reset_reg</obj_property>
+      <obj_property name="ObjectShortName">dw_1_0_reset_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_1_1_reset_reg" type="logic">
+      <obj_property name="ElementShortName">pw_1_1_reset_reg</obj_property>
+      <obj_property name="ObjectShortName">pw_1_1_reset_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_1_2_reset_reg" type="logic">
+      <obj_property name="ElementShortName">dw_1_2_reset_reg</obj_property>
+      <obj_property name="ObjectShortName">dw_1_2_reset_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_2_0_reset_reg" type="logic">
+      <obj_property name="ElementShortName">pw_2_0_reset_reg</obj_property>
+      <obj_property name="ObjectShortName">pw_2_0_reset_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_2_1_reset_reg" type="logic">
+      <obj_property name="ElementShortName">dw_2_1_reset_reg</obj_property>
+      <obj_property name="ObjectShortName">dw_2_1_reset_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_2_2_reset_reg" type="logic">
+      <obj_property name="ElementShortName">pw_2_2_reset_reg</obj_property>
+      <obj_property name="ObjectShortName">pw_2_2_reset_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_3_0_reset_reg" type="logic">
+      <obj_property name="ElementShortName">dw_3_0_reset_reg</obj_property>
+      <obj_property name="ObjectShortName">dw_3_0_reset_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_3_1_reset_reg" type="logic">
+      <obj_property name="ElementShortName">pw_3_1_reset_reg</obj_property>
+      <obj_property name="ObjectShortName">pw_3_1_reset_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_3_2_reset_reg" type="logic">
+      <obj_property name="ElementShortName">dw_3_2_reset_reg</obj_property>
+      <obj_property name="ObjectShortName">dw_3_2_reset_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_4_0_reset_reg" type="logic">
+      <obj_property name="ElementShortName">pw_4_0_reset_reg</obj_property>
+      <obj_property name="ObjectShortName">pw_4_0_reset_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/dw_4_1_reset_reg" type="logic">
+      <obj_property name="ElementShortName">dw_4_1_reset_reg</obj_property>
+      <obj_property name="ObjectShortName">dw_4_1_reset_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_4_2_reset_reg" type="logic">
+      <obj_property name="ElementShortName">pw_4_2_reset_reg</obj_property>
+      <obj_property name="ObjectShortName">pw_4_2_reset_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/pw_5_0_reset_reg" type="logic">
+      <obj_property name="ElementShortName">pw_5_0_reset_reg</obj_property>
+      <obj_property name="ObjectShortName">pw_5_0_reset_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_0_0_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">ram_0_0_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">ram_0_0_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_1_1_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">ram_1_1_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">ram_1_1_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_2_1_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">ram_2_1_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">ram_2_1_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_3_1_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">ram_3_1_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">ram_3_1_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/ram_4_1_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">ram_4_1_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">ram_4_1_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_1_0_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">rom_dw_1_0_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_1_0_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_1_1_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">rom_pw_1_1_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_1_1_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_1_2_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">rom_dw_1_2_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_1_2_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_2_0_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">rom_pw_2_0_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_2_0_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_2_1_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">rom_dw_2_1_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_2_1_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_2_2_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">rom_pw_2_2_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_2_2_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_3_0_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">rom_dw_3_0_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_3_0_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_3_1_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">rom_pw_3_1_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_3_1_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_3_2_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">rom_dw_3_2_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_3_2_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_4_0_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">rom_pw_4_0_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_4_0_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_dw_4_1_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">rom_dw_4_1_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">rom_dw_4_1_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_4_2_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">rom_pw_4_2_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_4_2_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/rom_pw_5_0_sleep_reg" type="logic">
+      <obj_property name="ElementShortName">rom_pw_5_0_sleep_reg</obj_property>
+      <obj_property name="ObjectShortName">rom_pw_5_0_sleep_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/state" type="array">
+      <obj_property name="ElementShortName">state[3:0]</obj_property>
+      <obj_property name="ObjectShortName">state[3:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/awakening_cntr" type="array">
+      <obj_property name="ElementShortName">awakening_cntr[4:0]</obj_property>
+      <obj_property name="ObjectShortName">awakening_cntr[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/AWAKENING_TIME" type="array">
+      <obj_property name="ElementShortName">AWAKENING_TIME[31:0]</obj_property>
+      <obj_property name="ObjectShortName">AWAKENING_TIME[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/LittleNetAccAxi_tb/LNAA/ln/AWAKENING_TIME_BITS" type="array">
+      <obj_property name="ElementShortName">AWAKENING_TIME_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">AWAKENING_TIME_BITS[31:0]</obj_property>
+   </wvobject>
+</wave_config>

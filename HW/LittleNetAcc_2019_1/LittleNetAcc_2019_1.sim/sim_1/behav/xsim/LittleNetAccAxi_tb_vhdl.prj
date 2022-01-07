@@ -1,0 +1,13 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_add_C/sim/DSP_A_mul_B_add_C.vhd" \
+"../../../../LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_add_C/sim/DSP_A_add_C.vhd" \
+"../../../../LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_ACC/sim/DSP_A_mul_B_ACC.vhd" \
+"../../../../LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_STREAMER/sim/DSP_STREAMER.vhd" \
+"../../../../LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_add_C_PCOUT/sim/DSP_A_mul_B_add_C_PCOUT.vhd" \
+"../../../../LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_add_PCIN/sim/DSP_A_mul_B_add_PCIN.vhd" \
+"../../../../LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_add_PCIN_PCOUT/sim/DSP_A_mul_B_add_PCIN_PCOUT.vhd" \
+"../../../../LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_PCOUT/sim/DSP_A_mul_B_PCOUT.vhd" \
+
+# Do not sort compile order
+nosort

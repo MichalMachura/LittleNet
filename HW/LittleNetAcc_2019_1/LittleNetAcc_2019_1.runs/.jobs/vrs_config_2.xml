@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<Runs Version="1" Minor="0">
+	<Run Id="DSP_A_mul_B_add_PCIN_synth_1" LaunchDir="F:/LittleNet_ACC_verilog/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_add_PCIN_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="DSP_A_mul_B_PCOUT_synth_1" LaunchDir="F:/LittleNet_ACC_verilog/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_PCOUT_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="DSP_A_mul_B_add_PCIN_PCOUT_synth_1" LaunchDir="F:/LittleNet_ACC_verilog/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_add_PCIN_PCOUT_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="DSP_A_mul_B_add_C_PCOUT_synth_1" LaunchDir="F:/LittleNet_ACC_verilog/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_add_C_PCOUT_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="DSP_A_mul_B_add_C_synth_1" LaunchDir="F:/LittleNet_ACC_verilog/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_add_C_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="DSP_STREAMER_synth_1" LaunchDir="F:/LittleNet_ACC_verilog/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_STREAMER_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="RAM_A32_15000e_14a_B8_16a_synth_1" LaunchDir="F:/LittleNet_ACC_verilog/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/RAM_A32_15000e_14a_B8_16a_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="synth_1" LaunchDir="F:/LittleNet_ACC_verilog/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado">
+		<Parent Id="DSP_A_mul_B_add_PCIN_synth_1"/>
+		<Parent Id="DSP_A_mul_B_PCOUT_synth_1"/>
+		<Parent Id="DSP_A_mul_B_add_PCIN_PCOUT_synth_1"/>
+		<Parent Id="DSP_A_mul_B_add_C_PCOUT_synth_1"/>
+		<Parent Id="DSP_A_mul_B_add_C_synth_1"/>
+		<Parent Id="DSP_STREAMER_synth_1"/>
+		<Parent Id="RAM_A32_15000e_14a_B8_16a_synth_1"/>
+	</Run>
+	<Parameters>
+		<Parameter Name="runs.monitorLSFJobs" Val="true" Type="bool"/>
+	</Parameters>
+</Runs>
+

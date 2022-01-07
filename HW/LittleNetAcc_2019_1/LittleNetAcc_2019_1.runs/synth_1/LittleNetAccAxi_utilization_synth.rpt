@@ -1,0 +1,215 @@
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
+| Date         : Mon Aug  2 15:38:27 2021
+| Host         : LAPTOP-9SUCMO01 running 64-bit major release  (build 9200)
+| Command      : report_utilization -file LittleNetAccAxi_utilization_synth.rpt -pb LittleNetAccAxi_utilization_synth.pb
+| Design       : LittleNetAccAxi
+| Device       : xczu3egsbva484-1
+| Design State : Synthesized
+-------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. CLB Logic
+1.1 Summary of Registers by Type
+2. BLOCKRAM
+3. ARITHMETIC
+4. I/O
+5. CLOCK
+6. ADVANCED
+7. CONFIGURATION
+8. Primitives
+9. Black Boxes
+10. Instantiated Netlists
+
+1. CLB Logic
+------------
+
++----------------------------+-------+-------+-----------+-------+
+|          Site Type         |  Used | Fixed | Available | Util% |
++----------------------------+-------+-------+-----------+-------+
+| CLB LUTs*                  | 17851 |     0 |     70560 | 25.30 |
+|   LUT as Logic             | 11364 |     0 |     70560 | 16.11 |
+|   LUT as Memory            |  6487 |     0 |     28800 | 22.52 |
+|     LUT as Distributed RAM |     0 |     0 |           |       |
+|     LUT as Shift Register  |  6487 |     0 |           |       |
+| CLB Registers              | 19752 |     0 |    141120 | 14.00 |
+|   Register as Flip Flop    | 19752 |     0 |    141120 | 14.00 |
+|   Register as Latch        |     0 |     0 |    141120 |  0.00 |
+| CARRY8                     |  1286 |     0 |      8820 | 14.58 |
+| F7 Muxes                   |   565 |     0 |     35280 |  1.60 |
+| F8 Muxes                   |   271 |     0 |     17640 |  1.54 |
+| F9 Muxes                   |     0 |     0 |      8820 |  0.00 |
++----------------------------+-------+-------+-----------+-------+
+* Warning! The Final LUT count, after physical optimizations and full implementation, is typically lower. Run opt_design after synthesis, if not already completed, for a more realistic count.
+
+
+1.1 Summary of Registers by Type
+--------------------------------
+
++-------+--------------+-------------+--------------+
+| Total | Clock Enable | Synchronous | Asynchronous |
++-------+--------------+-------------+--------------+
+| 0     |            _ |           - |            - |
+| 0     |            _ |           - |          Set |
+| 0     |            _ |           - |        Reset |
+| 0     |            _ |         Set |            - |
+| 0     |            _ |       Reset |            - |
+| 0     |          Yes |           - |            - |
+| 0     |          Yes |           - |          Set |
+| 0     |          Yes |           - |        Reset |
+| 973   |          Yes |         Set |            - |
+| 18779 |          Yes |       Reset |            - |
++-------+--------------+-------------+--------------+
+
+
+2. BLOCKRAM
+-----------
+
++----------------+------+-------+-----------+-------+
+|    Site Type   | Used | Fixed | Available | Util% |
++----------------+------+-------+-----------+-------+
+| Block RAM Tile |    0 |     0 |       216 |  0.00 |
+|   RAMB36/FIFO* |    0 |     0 |       216 |  0.00 |
+|   RAMB18       |    0 |     0 |       432 |  0.00 |
++----------------+------+-------+-----------+-------+
+* Note: Each Block RAM Tile only has one FIFO logic available and therefore can accommodate only one FIFO36E2 or one FIFO18E2. However, if a FIFO18E2 occupies a Block RAM Tile, that tile can still accommodate a RAMB18E2
+
+
+3. ARITHMETIC
+-------------
+
++-----------+------+-------+-----------+-------+
+| Site Type | Used | Fixed | Available | Util% |
++-----------+------+-------+-----------+-------+
+| DSPs      |    0 |     0 |       360 |  0.00 |
++-----------+------+-------+-----------+-------+
+
+
+4. I/O
+------
+
++------------+------+-------+-----------+-------+
+|  Site Type | Used | Fixed | Available | Util% |
++------------+------+-------+-----------+-------+
+| Bonded IOB |   77 |     0 |        82 | 93.90 |
++------------+------+-------+-----------+-------+
+
+
+5. CLOCK
+--------
+
++----------------------+------+-------+-----------+-------+
+|       Site Type      | Used | Fixed | Available | Util% |
++----------------------+------+-------+-----------+-------+
+| GLOBAL CLOCK BUFFERs |    3 |     0 |       196 |  1.53 |
+|   BUFGCE             |    3 |     0 |        88 |  3.41 |
+|   BUFGCE_DIV         |    0 |     0 |        12 |  0.00 |
+|   BUFG_PS            |    0 |     0 |        72 |  0.00 |
+|   BUFGCTRL*          |    0 |     0 |        24 |  0.00 |
+| PLL                  |    0 |     0 |         6 |  0.00 |
+| MMCM                 |    0 |     0 |         3 |  0.00 |
++----------------------+------+-------+-----------+-------+
+* Note: Each used BUFGCTRL counts as two GLOBAL CLOCK BUFFERs. This table does not include global clocking resources, only buffer cell usage. See the Clock Utilization Report (report_clock_utilization) for detailed accounting of global clocking resource availability.
+
+
+6. ADVANCED
+-----------
+
++-----------+------+-------+-----------+-------+
+| Site Type | Used | Fixed | Available | Util% |
++-----------+------+-------+-----------+-------+
+| PS8       |    0 |     0 |         1 |  0.00 |
+| SYSMONE4  |    0 |     0 |         1 |  0.00 |
++-----------+------+-------+-----------+-------+
+
+
+7. CONFIGURATION
+----------------
+
++-------------+------+-------+-----------+-------+
+|  Site Type  | Used | Fixed | Available | Util% |
++-------------+------+-------+-----------+-------+
+| BSCANE2     |    0 |     0 |         4 |  0.00 |
+| DNA_PORTE2  |    0 |     0 |         1 |  0.00 |
+| EFUSE_USR   |    0 |     0 |         1 |  0.00 |
+| FRAME_ECCE4 |    0 |     0 |         1 |  0.00 |
+| ICAPE3      |    0 |     0 |         2 |  0.00 |
+| MASTER_JTAG |    0 |     0 |         1 |  0.00 |
+| STARTUPE3   |    0 |     0 |         1 |  0.00 |
++-------------+------+-------+-----------+-------+
+
+
+8. Primitives
+-------------
+
++----------+-------+---------------------+
+| Ref Name |  Used | Functional Category |
++----------+-------+---------------------+
+| FDRE     | 18779 |            Register |
+| LUT2     | 11426 |                 CLB |
+| SRL16E   |  5351 |                 CLB |
+| LUT6     |  2383 |                 CLB |
+| LUT3     |  2198 |                 CLB |
+| LUT4     |  1397 |                 CLB |
+| CARRY8   |  1286 |                 CLB |
+| SRLC32E  |  1136 |                 CLB |
+| FDSE     |   973 |            Register |
+| LUT5     |   724 |                 CLB |
+| MUXF7    |   565 |                 CLB |
+| LUT1     |   469 |                 CLB |
+| MUXF8    |   271 |                 CLB |
+| OBUF     |    39 |                 I/O |
+| INBUF    |    38 |                 I/O |
+| IBUFCTRL |    38 |              Others |
+| BUFGCE   |     3 |               Clock |
++----------+-------+---------------------+
+
+
+9. Black Boxes
+--------------
+
++----------------------------+------+
+|          Ref Name          | Used |
++----------------------------+------+
+| DSP_A_mul_B_add_C          |  102 |
+| DSP_A_mul_B_ACC            |  101 |
+| DSP_A_mul_B_add_PCIN_PCOUT |   42 |
+| DSP_STREAMER               |    7 |
+| DSP_A_mul_B_add_PCIN       |    6 |
+| DSP_A_mul_B_PCOUT          |    6 |
+| DSP_A_add_C                |    5 |
+| RAM_A32_5824e_13a_B8_15a   |    2 |
+| RAM_A32_20000e_15a_B8_17a  |    2 |
+| ROM_PW_5_0                 |    1 |
+| ROM_PW_4_2                 |    1 |
+| ROM_PW_4_0                 |    1 |
+| ROM_PW_3_1                 |    1 |
+| ROM_PW_2_2                 |    1 |
+| ROM_PW_2_0                 |    1 |
+| ROM_PW_1_1                 |    1 |
+| ROM_DW_4_1                 |    1 |
+| ROM_DW_3_2                 |    1 |
+| ROM_DW_3_0                 |    1 |
+| ROM_DW_2_1                 |    1 |
+| ROM_DW_1_2                 |    1 |
+| ROM_DW_1_0                 |    1 |
+| RAM_A32_75000e_17a_B8_19a  |    1 |
+| RAM_A32_2912e_12a_B8_14a   |    1 |
+| RAM_A32_15000e_14a_B8_16a  |    1 |
+| RAM_A32_10400e_14a_B8_16a  |    1 |
+| RAM_A32_10000e_14a_B8_16a  |    1 |
++----------------------------+------+
+
+
+10. Instantiated Netlists
+-------------------------
+
++----------+------+
+| Ref Name | Used |
++----------+------+
+
+

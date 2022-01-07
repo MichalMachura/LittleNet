@@ -1,0 +1,12 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../LittleNetAcc_2019_1.srcs/sources_1/ip/ROM_PW_1_1/sim/ROM_PW_1_1.v" \
+
+sv xil_defaultlib  \
+"../../../../LittleNetAcc_2019_1.srcs/sim_1/new/tmp.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

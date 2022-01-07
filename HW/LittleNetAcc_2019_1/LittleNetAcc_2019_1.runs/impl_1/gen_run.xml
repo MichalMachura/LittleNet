@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="impl_1" LaunchPart="xczu3eg-sbva484-1-i" LaunchTime="1627911207">
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="LittleNetAccAxi_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="LittleNetAccAxi_postroute_physopt.dcp"/>
+  <File Type="PHYSOPT-DCP" Name="LittleNetAccAxi_physopt.dcp"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="LittleNetAccAxi_postplace_pwropt.dcp"/>
+  <File Type="PWROPT-DCP" Name="LittleNetAccAxi_pwropt.dcp"/>
+  <File Type="PLACE-DCP" Name="LittleNetAccAxi_placed.dcp"/>
+  <File Type="OPT-DCP" Name="LittleNetAccAxi_opt.dcp"/>
+  <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
+  <File Type="BITSTR-LTX" Name="LittleNetAccAxi.ltx"/>
+  <File Type="BITSTR-SYSDEF" Name="LittleNetAccAxi.sysdef"/>
+  <File Type="BITSTR-MMI" Name="LittleNetAccAxi.mmi"/>
+  <File Type="BITSTR-BMM" Name="LittleNetAccAxi_bd.bmm"/>
+  <File Type="BITSTR-NKY" Name="LittleNetAccAxi.nky"/>
+  <File Type="BITSTR-RBT" Name="LittleNetAccAxi.rbt"/>
+  <File Type="REPORTS-TCL" Name="LittleNetAccAxi_reports.tcl"/>
+  <File Type="BITSTR-MSK" Name="LittleNetAccAxi.msk"/>
+  <File Type="PA-TCL" Name="LittleNetAccAxi.tcl"/>
+  <File Type="ROUTE-TIMING-PB" Name="LittleNetAccAxi_timing_summary_routed.pb"/>
+  <File Type="BG-BIN" Name="LittleNetAccAxi.bin"/>
+  <File Type="BG-BGN" Name="LittleNetAccAxi.bgn"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="LittleNetAccAxi_routed_bb.dcp"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <File Type="RDI-RDI" Name="LittleNetAccAxi.vdi"/>
+  <File Type="BG-DRC" Name="LittleNetAccAxi.drc"/>
+  <File Type="ROUTE-ERROR-DCP" Name="LittleNetAccAxi_routed_error.dcp"/>
+  <File Type="BG-BIT" Name="LittleNetAccAxi.bit"/>
+  <File Type="OPT-HWDEF" Name="LittleNetAccAxi.hwdef"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="LittleNetAccAxi_incremental_reuse_pre_placed.rpt"/>
+  <File Type="ROUTE-DCP" Name="LittleNetAccAxi_routed.dcp"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/ip/DSP_A_mul_B_add_C/DSP_A_mul_B_add_C.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/DSP_A_add_C/DSP_A_add_C.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/DSP_A_mul_B_ACC/DSP_A_mul_B_ACC.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/DSP_STREAMER/DSP_STREAMER.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/DSP_A_mul_B_add_C_PCOUT/DSP_A_mul_B_add_C_PCOUT.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/DSP_A_mul_B_add_PCIN/DSP_A_mul_B_add_PCIN.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/DSP_A_mul_B_add_PCIN_PCOUT/DSP_A_mul_B_add_PCIN_PCOUT.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/DSP_A_mul_B_PCOUT/DSP_A_mul_B_PCOUT.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/RAM_A32_5824e_13a_B8_15a/RAM_A32_5824e_13a_B8_15a.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/RAM_A32_2912e_12a_B8_14a/RAM_A32_2912e_12a_B8_14a.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/RAM_A32_10400e_14a_B8_16a/RAM_A32_10400e_14a_B8_16a.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/RAM_A32_20000e_15a_B8_17a/RAM_A32_20000e_15a_B8_17a.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/RAM_A32_10000e_14a_B8_16a/RAM_A32_10000e_14a_B8_16a.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/RAM_A32_75000e_17a_B8_19a/RAM_A32_75000e_17a_B8_19a.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/RAM_A32_15000e_14a_B8_16a/RAM_A32_15000e_14a_B8_16a.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/delay_line.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/LittleNet_ACC.srcs/sources_1/new/delay_line.sv"/>
+        <Attr Name="ImportTime" Val="1624549975"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/depthwise_conv2d_unit.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/LittleNet_ACC.srcs/sources_1/new/depthwise_conv2d_unit.sv"/>
+        <Attr Name="ImportTime" Val="1624909500"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/little_net_acc.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/LittleNet_ACC.srcs/sources_1/new/little_net_acc.sv"/>
+        <Attr Name="ImportTime" Val="1625573553"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/maxpool2d_unit.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/LittleNet_ACC.srcs/sources_1/new/maxpool2d_unit.sv"/>
+        <Attr Name="ImportTime" Val="1624549977"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/mux_writer_unit.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/LittleNet_ACC.srcs/sources_1/new/mux_writer_unit.sv"/>
+        <Attr Name="ImportTime" Val="1624996210"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/pointwise_conv2d_unit.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/LittleNet_ACC.srcs/sources_1/new/pointwise_conv2d_unit.sv"/>
+        <Attr Name="ImportTime" Val="1625494420"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/shift_reg.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/LittleNet_ACC.srcs/sources_1/new/shift_reg.sv"/>
+        <Attr Name="ImportTime" Val="1623870210"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/sliding_window_unit.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/LittleNet_ACC.srcs/sources_1/new/sliding_window_unit.sv"/>
+        <Attr Name="ImportTime" Val="1623928855"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/streamer_unit.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/LittleNet_ACC.srcs/sources_1/new/streamer_unit.sv"/>
+        <Attr Name="ImportTime" Val="1624571996"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/utils.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/LittleNet_ACC.srcs/sources_1/new/utils.sv"/>
+        <Attr Name="ImportTime" Val="1625737209"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/weights_loading_unit.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/LittleNet_ACC.srcs/sources_1/new/weights_loading_unit.sv"/>
+        <Attr Name="ImportTime" Val="1624044128"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/packaged_littlenet.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/LittleNet_ACC.srcs/sources_1/new/packaged_littlenet.sv"/>
+        <Attr Name="ImportTime" Val="1625573551"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/ln_debug.sv">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/memory_prototype.sv">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/LittleNet_ACC.srcs/sources_1/new/memory_prototype.sv"/>
+        <Attr Name="ImportTime" Val="1624386824"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/LittleNet_ACC/memory_init/rom_dw_1_0.coe">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/memory_init/rom_dw_1_0.coe"/>
+        <Attr Name="ImportTime" Val="1625736628"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/LittleNet_ACC/memory_init/rom_dw_1_2.coe">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/memory_init/rom_dw_1_2.coe"/>
+        <Attr Name="ImportTime" Val="1625694493"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/LittleNet_ACC/memory_init/rom_pw_1_1.coe">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/memory_init/rom_pw_1_1.coe"/>
+        <Attr Name="ImportTime" Val="1625694493"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/LittleNet_ACC/memory_init/rom_pw_2_0.coe">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/memory_init/rom_pw_2_0.coe"/>
+        <Attr Name="ImportTime" Val="1625694493"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/LittleNet_ACC/memory_init/rom_dw_2_1.coe">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/memory_init/rom_dw_2_1.coe"/>
+        <Attr Name="ImportTime" Val="1625694493"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/LittleNet_ACC/memory_init/rom_pw_2_2.coe">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/memory_init/rom_pw_2_2.coe"/>
+        <Attr Name="ImportTime" Val="1625694493"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/LittleNet_ACC/memory_init/rom_dw_3_0.coe">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/memory_init/rom_dw_3_0.coe"/>
+        <Attr Name="ImportTime" Val="1625694493"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/LittleNet_ACC/memory_init/rom_pw_3_1.coe">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/memory_init/rom_pw_3_1.coe"/>
+        <Attr Name="ImportTime" Val="1625694493"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/LittleNet_ACC/memory_init/rom_dw_3_2.coe">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/memory_init/rom_dw_3_2.coe"/>
+        <Attr Name="ImportTime" Val="1625694493"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/LittleNet_ACC/memory_init/rom_pw_4_0.coe">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/memory_init/rom_pw_4_0.coe"/>
+        <Attr Name="ImportTime" Val="1625694493"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/LittleNet_ACC/memory_init/rom_dw_4_1.coe">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/memory_init/rom_dw_4_1.coe"/>
+        <Attr Name="ImportTime" Val="1625694493"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/LittleNet_ACC/memory_init/rom_pw_4_2.coe">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/memory_init/rom_pw_4_2.coe"/>
+        <Attr Name="ImportTime" Val="1625694493"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/LittleNet_ACC/memory_init/rom_pw_5_0.coe">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNet_ACC/memory_init/rom_pw_5_0.coe"/>
+        <Attr Name="ImportTime" Val="1625694493"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/rom_init/rom_dw_1_0.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/rom_init/rom_pw_1_1.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/rom_init/rom_dw_1_2.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/rom_init/rom_pw_2_0.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/rom_init/rom_dw_2_1.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/rom_init/rom_pw_2_2.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/rom_init/rom_dw_3_0.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/rom_init/rom_pw_3_1.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/rom_init/rom_dw_3_2.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/rom_init/rom_pw_4_0.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/rom_init/rom_dw_4_1.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/rom_init/rom_pw_4_2.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/rom_init/rom_pw_5_0.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/component.xml">
+      <FileInfo SFType="IPXACT"/>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="LittleNetAccAxi"/>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1">
+    <Filter Type="Utils"/>
+    <Config>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2019"/>
+    <Step Id="init_design"/>
+    <Step Id="opt_design"/>
+    <Step Id="power_opt_design" EnableStepBool="1"/>
+    <Step Id="place_design"/>
+    <Step Id="post_place_power_opt_design" EnableStepBool="1"/>
+    <Step Id="phys_opt_design" EnableStepBool="1"/>
+    <Step Id="route_design"/>
+    <Step Id="post_route_phys_opt_design" EnableStepBool="1"/>
+    <Step Id="write_bitstream"/>
+    <Step Id="write_device_image"/>
+  </Strategy>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_4_2"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_2_2"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_3_1"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_2_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_1_1"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_4_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_1_2"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_3_2"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_5_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_1_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_3_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_2_1"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_4_1"/>
+</GenRun>

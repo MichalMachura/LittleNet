@@ -1,0 +1,31 @@
+{
+    "folds":{
+        "fold_idx": {
+            "0":{
+                "path":"str - path to file",
+                "bbox":{
+                    "l" : "int - left",
+                    "t" : "int - top",
+                    "r" : "int - right",
+                    "b" : "int - bottom"
+                }
+            },
+            "1":"same as previous struct",
+            "2":"...."
+        }
+    },
+    
+    "test":{
+        "0":{
+            "path":"str - path to file",
+            "bbox":{
+                "l" : "int - left",
+                "t" : "int - top",
+                "r" : "int - right",
+                "b" : "int - bottom"
+            }
+        },
+        "1":"same as previous struct",
+        "2":"...."
+    }
+}

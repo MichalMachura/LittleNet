@@ -1,0 +1,9 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"LittleNetAccAxi_tb_func_synth.v" \
+
+sv xil_defaultlib  \
+"../../../../../LittleNetAcc_2019_1.srcs/sim_1/new/packaged_littlenet_axis_tb.sv" \
+
+# Do not sort compile order
+nosort

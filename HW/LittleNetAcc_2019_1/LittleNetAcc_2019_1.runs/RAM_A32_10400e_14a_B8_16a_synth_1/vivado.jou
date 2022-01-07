@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:47 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Thu Jan  6 21:52:20 2022
+# Process ID: 15777
+# Current directory: /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/RAM_A32_10400e_14a_B8_16a_synth_1
+# Command line: vivado -log RAM_A32_10400e_14a_B8_16a.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source RAM_A32_10400e_14a_B8_16a.tcl
+# Log file: /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/RAM_A32_10400e_14a_B8_16a_synth_1/RAM_A32_10400e_14a_B8_16a.vds
+# Journal file: /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/RAM_A32_10400e_14a_B8_16a_synth_1/vivado.jou
+#-----------------------------------------------------------
+source RAM_A32_10400e_14a_B8_16a.tcl -notrace

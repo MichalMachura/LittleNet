@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../LittleNet_ACC.srcs/sources_1/new/little_net_acc.v" \
+"../../../../LittleNet_ACC.srcs/sim_1/new/tb_DelayLine.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
