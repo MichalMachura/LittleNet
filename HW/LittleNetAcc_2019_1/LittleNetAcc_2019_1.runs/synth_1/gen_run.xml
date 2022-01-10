@@ -13,7 +13,21 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/ip/DSP_A_mul_B_add_C.xcix">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/ip/DSP_A_add_C/DSP_A_add_C.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/DSP_A_add_C.xcix">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -27,7 +41,21 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/ip/DSP_A_mul_B_ACC.xcix">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/ip/DSP_STREAMER/DSP_STREAMER.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/DSP_STREAMER.xcix">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -41,7 +69,21 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/ip/DSP_A_mul_B_add_C_PCOUT.xcix">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/ip/DSP_A_mul_B_add_PCIN/DSP_A_mul_B_add_PCIN.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/DSP_A_mul_B_add_PCIN.xcix">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -55,7 +97,21 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/ip/DSP_A_mul_B_add_PCIN_PCOUT.xcix">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/ip/DSP_A_mul_B_PCOUT/DSP_A_mul_B_PCOUT.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/DSP_A_mul_B_PCOUT.xcix">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -69,7 +125,21 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/ip/RAM_A32_5824e_13a_B8_15a.xcix">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/ip/RAM_A32_2912e_12a_B8_14a/RAM_A32_2912e_12a_B8_14a.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/RAM_A32_2912e_12a_B8_14a.xcix">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -83,7 +153,21 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/ip/RAM_A32_10400e_14a_B8_16a.xcix">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/ip/RAM_A32_20000e_15a_B8_17a/RAM_A32_20000e_15a_B8_17a.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/RAM_A32_20000e_15a_B8_17a.xcix">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -97,6 +181,13 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/ip/RAM_A32_10000e_14a_B8_16a.xcix">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/ip/RAM_A32_75000e_17a_B8_19a/RAM_A32_75000e_17a_B8_19a.xci">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -104,7 +195,21 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/ip/RAM_A32_75000e_17a_B8_19a.xcix">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/ip/RAM_A32_15000e_14a_B8_16a/RAM_A32_15000e_14a_B8_16a.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/RAM_A32_15000e_14a_B8_16a.xcix">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -443,22 +548,22 @@
   <Strategy Version="1" Minor="2">
     <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2019"/>
     <Step Id="synth_design">
-      <Option Id="ResourceSharing">2</Option>
       <Option Id="KeepEquivalentRegisters">1</Option>
       <Option Id="ControlSetOptThreshold">0</Option>
+      <Option Id="ResourceSharing">2</Option>
     </Step>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_4_2"/>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_2_2"/>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_3_1"/>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_2_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_1_1"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_PW_4_0"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_DW_1_2"/>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_3_2"/>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_5_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_1_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_3_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_2_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_1_1"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_3_1"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_4_2"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_2_2"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_DW_2_1"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_DW_4_1"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_3_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_5_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_1_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_3_2"/>
 </GenRun>

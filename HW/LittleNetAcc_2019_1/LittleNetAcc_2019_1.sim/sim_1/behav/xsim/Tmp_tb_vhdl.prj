@@ -1,6 +1,7 @@
 # compile vhdl design source files
 vhdl xil_defaultlib  \
-"../../../../LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_ACC/sim/DSP_A_mul_B_ACC.vhd" \
+"../../../../LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_add_C/sim/DSP_A_mul_B_add_C.vhd" \
+"../../../../LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_ACC/sim/DSP_A_mul_B_ACC.vhd" \
 
 # Do not sort compile order
 nosort

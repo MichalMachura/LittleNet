@@ -1,10 +1,10 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2020.2 (lin64) Build 3064766 Wed Nov 18 09:12:47 MST 2020
-// Date        : Thu Jan  6 21:47:55 2022
+// Date        : Sun Jan  9 02:56:36 2022
 // Host        : michal-Lenovo-ideapad-700-17ISK running 64-bit Ubuntu 20.04.3 LTS
 // Command     : write_verilog -force -mode synth_stub
-//               /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_stub.v
+//               /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_stub.v
 // Design      : DSP_A_mul_B_ACC
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xczu3eg-sbva484-1-i

@@ -14,20 +14,39 @@ module PointwiseComputationUnit
 		 parameter WEIGHT_DATA_BIT_WIDTH = 8,
 		 parameter WEIGHT_DATA_INT_WIDTH = 1,
 		 parameter WEIGHT_DATA_SIGN=1,
+		 // bias data format
+		 parameter BIAS_DATA_BIT_WIDTH = 8,
+		 parameter BIAS_DATA_INT_WIDTH = 1,
+		 parameter BIAS_DATA_SIGN=1,
+		 // output data format
+		 parameter INTER_DATA_BIT_WIDTH = 8,
+		 parameter INTER_DATA_INT_WIDTH = 1,
+		 parameter INTER_DATA_SIGN=1,
+		 // output data format
+		 parameter BN_W_DATA_BIT_WIDTH = 8,
+		 parameter BN_W_DATA_INT_WIDTH = 1,
+		 parameter BN_W_DATA_SIGN=1,
+		 // output data format
+		 parameter BN_B_DATA_BIT_WIDTH = 8,
+		 parameter BN_B_DATA_INT_WIDTH = 1,
+		 parameter BN_B_DATA_SIGN=1,
 		 // output data format
 		 parameter OUT_DATA_BIT_WIDTH = 8,
 		 parameter OUT_DATA_INT_WIDTH = 1,
 		 parameter OUT_DATA_SIGN=1,
 		 
-		 localparam IN_DATA_FRAC=IN_DATA_BIT_WIDTH-IN_DATA_INT_WIDTH,
-		 localparam WEIGHT_DATA_FRAC=WEIGHT_DATA_BIT_WIDTH-WEIGHT_DATA_INT_WIDTH,
-		 localparam OUT_DATA_FRAC=OUT_DATA_BIT_WIDTH-OUT_DATA_INT_WIDTH,
+		 localparam IN_DATA_FRAC = IN_DATA_BIT_WIDTH - IN_DATA_INT_WIDTH,
+		 localparam WEIGHT_DATA_FRAC = WEIGHT_DATA_BIT_WIDTH - WEIGHT_DATA_INT_WIDTH,
+		 localparam BIAS_DATA_FRAC = BIAS_DATA_BIT_WIDTH - BIAS_DATA_INT_WIDTH,
+		 localparam INTER_DATA_FRAC = INTER_DATA_BIT_WIDTH - INTER_DATA_INT_WIDTH,
+		 localparam BN_W_DATA_FRAC = BN_W_DATA_BIT_WIDTH - BN_W_DATA_INT_WIDTH,
+		 localparam BN_B_DATA_FRAC = BN_B_DATA_BIT_WIDTH - BN_B_DATA_INT_WIDTH,
+		 localparam OUT_DATA_FRAC = OUT_DATA_BIT_WIDTH - OUT_DATA_INT_WIDTH,
 		 
 		 localparam DSP_ACC_LATENCY=4,
 		 localparam DSP_ADD_LATENCY=4,
 		 localparam DSP_MUL_ADD_LATENCY=4,
 		 localparam FULL_LATENCY = DSP_ACC_LATENCY
-		 							+DSP_ADD_LATENCY*USE_BIAS
 									 +DSP_MUL_ADD_LATENCY*USE_BN
 		 )
 		 (
@@ -43,24 +62,55 @@ module PointwiseComputationUnit
 		  output [OUT_DATA_BIT_WIDTH-1:0] output_data,
 		  output output_data_validity
 		 );
+	
 	wire [17:0] aligned_data;
 	wire [26:0] aligned_weight;
+	wire [47:0] aligned_bias;
 	wire processing_state = enable && !reset;
-	wire BY_PASS;
+	reg NEW_POINT = 1;
 	
-	ResettableDelayRegister
-        #(
-         .WIDTH(1)
-         )
-		 delay_of_point_end
-         (
-         .clk(clk),
-         .enable(processing_state),
-		 .reset(reset),
-         .data_in(input_end_of_point),
-         .data_out(BY_PASS)
-         );
-		 
+	// 
+	always @(posedge clk) 
+		begin
+		if (reset)
+			NEW_POINT <= 1'b1;
+		else if (enable)
+			begin
+			if (input_end_of_point)
+				NEW_POINT <= 1'b1;
+			else if (input_validity)
+				NEW_POINT <= 1'b0;
+			end	
+		end
+	
+	generate
+	if (USE_BIAS)
+		begin
+		// align bias
+		PointAlignment #(
+						.B_BITS(BIAS_DATA_BIT_WIDTH),
+						.B_INT(BIAS_DATA_INT_WIDTH),
+						.B_SIGN(BIAS_DATA_SIGN),
+						.W_BITS(WEIGHT_DATA_BIT_WIDTH),
+						.W_INT(WEIGHT_DATA_INT_WIDTH),
+						.W_SIGN(WEIGHT_DATA_SIGN),
+						.DATA_BITS(IN_DATA_BIT_WIDTH),
+						.DATA_INT(IN_DATA_INT_WIDTH),
+						.DATA_SIGN(IN_DATA_SIGN),
+						.DST_WIDTH(48)
+						)
+						bias_alignment
+						(
+						.in_bias(input_weights[1]),
+						.out_bias(aligned_bias)
+						);
+		end
+	else
+		begin
+		assign aligned_bias =48'd0;
+		end
+		
+	endgenerate
 	// ALIGN DATA and WEIGHT
 	SignAlignment#(
 				.WIDTH(IN_DATA_BIT_WIDTH), 
@@ -90,83 +140,39 @@ module PointwiseComputationUnit
 					.CE(processing_state),
 					.SCLR(reset),
 					// select mode
-					// 00 - normal acc
-					// 01 - by pass
-					// 10 - do not add this mul
-					// 11 - do not add and reset acc (probably never achieved)
-					.SEL({!input_validity, BY_PASS}),
+					// 00 - normal acc -> P = P + A * B
+					// 01 - by pass -> P = A * B + BIAS
+					// 10 - do not add this mul P = P
+					// 11 - do not add this mul,
+					// but reset acc -> init acc with BIAS -> P = BIAS
+					// .SEL({!input_validity, BY_PASS}),
+					.SEL({!input_validity, NEW_POINT}),
 					.A(aligned_weight),
 					.B(aligned_data),
-					.C(P), // signal from accumulator output
+					.C(aligned_bias), // signal from accumulator output
 					.P(P)
 					);
 	
-	localparam RESULT_ACC_SIGNED = IN_DATA_SIGN || WEIGHT_DATA_SIGN;
+	localparam RESULT_ACC_SIGNED = IN_DATA_SIGN || WEIGHT_DATA_SIGN || BIAS_DATA_SIGN;
 	
-	wire [47:0] added_bias;
-	generate
-	if (USE_BIAS)
-		begin
-		wire [WEIGHT_DATA_BIT_WIDTH-1:0] delayed_bias;
-		DelayLine 	#(
-					.WIDTH(WEIGHT_DATA_BIT_WIDTH),
-					.DELAY(DSP_ACC_LATENCY)
-					)
-					delay_of_bias
-					(
-					.clk(clk),
-					.enable(processing_state),
-					.data_in(input_weights[1]),
-					.data_out(delayed_bias)
-					);
-		
-		wire [26:0] adjusted_bias;
-		PointAlignment #(
-						.W_BITS(WEIGHT_DATA_BIT_WIDTH),
-						.W_INT(WEIGHT_DATA_INT_WIDTH),
-						.W_SIGN(WEIGHT_DATA_SIGN),
-						.DATA_BITS(IN_DATA_BIT_WIDTH),
-						.DATA_INT(IN_DATA_INT_WIDTH),
-						.DATA_SIGN(IN_DATA_SIGN),
-						.DST_WIDTH(27)
-						)
-						bias_alignment
-						(
-						.in_bias(delayed_bias),
-						.out_bias(adjusted_bias)
-						);
-			
-		DSP_A_add_C bias_adding
-				(
-				.CLK(clk),
-				.CE(processing_state),
-				.SCLR(reset),
-				.A(adjusted_bias),
-				.C(P),
-				.P(added_bias)
-				);
-		end
-	else
-		assign  added_bias = P;
-	endgenerate
 	
 	// quantize / limit range
 	// REDUCTION OF BIT WIDTH 
-	wire [OUT_DATA_BIT_WIDTH-1:0] reduced_added_bias;
+	wire [OUT_DATA_BIT_WIDTH-1:0] reduced_P;
 	WidthReduction #(
 					.IN_WIDTH(48),
 					.IN_FRAC(IN_DATA_FRAC+WEIGHT_DATA_FRAC),
 					.IN_SIGNED(RESULT_ACC_SIGNED),
-					.DST_WIDTH(OUT_DATA_BIT_WIDTH),
-					.DST_INT(OUT_DATA_INT_WIDTH),
-					.DST_SIGNED(OUT_DATA_SIGN),
+					.DST_WIDTH(INTER_DATA_BIT_WIDTH),
+					.DST_INT(INTER_DATA_INT_WIDTH),
+					.DST_SIGNED(INTER_DATA_SIGN),
 					.RELU(USE_RELU && !USE_BN),
 					.CUT_TOP(3)
 	 				)
-					reduction_after_added_bias
+					reduction_after_acc
 					(
-					.in_signal(added_bias),
-					.out_signal(reduced_added_bias)
+					.in_signal(P),
+					.out_signal(reduced_P)
 					);
 	
 	wire [OUT_DATA_BIT_WIDTH-1:0] final_data;
@@ -180,8 +186,8 @@ module PointwiseComputationUnit
 		wire [WEIGHT_DATA_BIT_WIDTH-1:0] delayed_bn_bias;
 		
 		DelayLine  #(
-					.WIDTH(2*WEIGHT_DATA_BIT_WIDTH),
-					.DELAY(DSP_ACC_LATENCY+USE_BIAS*DSP_ADD_LATENCY)
+					.WIDTH(BN_W_DATA_BIT_WIDTH + BN_B_DATA_BIT_WIDTH),
+					.DELAY(DSP_ACC_LATENCY)
 					)
 					delay_of_bn_weights
 					(
@@ -194,10 +200,10 @@ module PointwiseComputationUnit
 		// ALIGN BN WEIGHT, BIAS AND REDUCED KERNEL 
 		wire [26:0] bn_weight_aligned;
 		wire [47:0] bn_bias_aligned;
-		wire [17:0] reduced_added_bias_aligned;
+		wire [17:0] reduced_P_sign_aligned;
 		SignAlignment#(
-					.WIDTH(WEIGHT_DATA_BIT_WIDTH), 
-					.SIGN(WEIGHT_DATA_SIGN),
+					.WIDTH(BN_W_DATA_BIT_WIDTH), 
+					.SIGN(BN_W_DATA_SIGN),
 					.DST_WIDTH(27)
 					)
 					align_bn_weight
@@ -212,13 +218,16 @@ module PointwiseComputationUnit
 					)
 					align_reduced_added_bias
 					(
-					.in_signal(reduced_added_bias),
-					.out_signal(reduced_added_bias_aligned)
+					.in_signal(reduced_P),
+					.out_signal(reduced_P_sign_aligned)
 					);
 		PointAlignment #(
-				.W_BITS(WEIGHT_DATA_BIT_WIDTH),
-				.W_INT(WEIGHT_DATA_INT_WIDTH),
-				.W_SIGN(WEIGHT_DATA_SIGN),
+				.BIAS_BITS(BN_B_DATA_BIT_WIDTH),
+				.BIAS_INT(BN_B_DATA_INT_WIDTH),
+				.BIAS_SIGN(BN_B_DATA_SIGN),
+				.W_BITS(BN_W_DATA_BIT_WIDTH),
+				.W_INT(BN_W_DATA_INT_WIDTH),
+				.W_SIGN(BN_W_DATA_SIGN),
 				.DATA_BITS(OUT_DATA_BIT_WIDTH),
 				.DATA_INT(OUT_DATA_INT_WIDTH),
 				.DATA_SIGN(OUT_DATA_SIGN),
@@ -261,7 +270,7 @@ module PointwiseComputationUnit
 		end
 	else
 		begin
-		assign final_data = reduced_added_bias;
+		assign final_data = reduced_P;
 		end
 	endgenerate
 	

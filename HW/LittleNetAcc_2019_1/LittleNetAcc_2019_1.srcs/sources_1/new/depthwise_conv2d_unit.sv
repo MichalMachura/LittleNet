@@ -21,6 +21,22 @@ module DepthwiseConv2dUnit
 		 parameter WEIGHT_DATA_BIT_WIDTH = 8,
 		 parameter WEIGHT_DATA_INT_WIDTH = 1,
 		 parameter WEIGHT_DATA_SIGN=1,
+		 // bias data format
+		 parameter BIAS_DATA_BIT_WIDTH = 8,
+		 parameter BIAS_DATA_INT_WIDTH = 1,
+		 parameter BIAS_DATA_SIGN=1,
+		 // intermediate data format
+		 parameter INTER_DATA_BIT_WIDTH = 8,
+		 parameter INTER_DATA_INT_WIDTH = 1,
+		 parameter INTER_DATA_SIGN=1,
+		 // batch norm weight data format
+		 parameter BN_W_DATA_BIT_WIDTH = 8,
+		 parameter BN_W_DATA_INT_WIDTH = 1,
+		 parameter BN_W_DATA_SIGN=1,
+		 // batch norm bias data format
+		 parameter BN_B_DATA_BIT_WIDTH = 8,
+		 parameter BN_B_DATA_INT_WIDTH = 1,
+		 parameter BN_B_DATA_SIGN=1,
 		 // output data format
 		 parameter OUT_DATA_BIT_WIDTH = 8,
 		 parameter OUT_DATA_INT_WIDTH = 1,
@@ -41,6 +57,10 @@ module DepthwiseConv2dUnit
 		 // fractional parts sizes
 		 localparam IN_DATA_FRAC = IN_DATA_BIT_WIDTH - IN_DATA_INT_WIDTH,
 		 localparam WEIGHT_DATA_FRAC = WEIGHT_DATA_BIT_WIDTH - WEIGHT_DATA_INT_WIDTH,
+		 localparam BIAS_DATA_FRAC = BIAS_DATA_BIT_WIDTH - BIAS_DATA_INT_WIDTH,
+		 localparam INTER_DATA_FRAC = INTER_DATA_BIT_WIDTH - INTER_DATA_INT_WIDTH,
+		 localparam BN_W_DATA_FRAC = BN_W_DATA_BIT_WIDTH - BN_W_DATA_INT_WIDTH,
+		 localparam BN_B_DATA_FRAC = BN_B_DATA_BIT_WIDTH - BN_B_DATA_INT_WIDTH,
 		 localparam OUT_DATA_FRAC = OUT_DATA_BIT_WIDTH - OUT_DATA_INT_WIDTH,
 		 // number of additional weights to load
 		 // like batch norm or just bias
@@ -236,7 +256,7 @@ module DepthwiseConv2dUnit
 	
 	// CASCADE of SUM-MUL on DSP48
 	
-	localparam RESULT_SIGNED = WEIGHT_DATA_SIGN || IN_DATA_SIGN;
+	localparam RESULT_SIGNED = WEIGHT_DATA_SIGN || IN_DATA_SIGN || USE_BIAS && BIAS_DATA_SIGN;
 	
 	// bunch of signals for cascade od DSP
 	wire [47:0] PCOUT [K_SIZE*K_SIZE-1]; // last is not connected to next dsp
@@ -289,6 +309,9 @@ module DepthwiseConv2dUnit
 				begin
 				wire [47:0] bias_aligned;
 				PointAlignment #(
+						.B_BITS(BIAS_DATA_BIT_WIDTH),
+						.B_INT(BIAS_DATA_INT_WIDTH),
+						.B_SIGN(BIAS_DATA_SIGN),
 						.W_BITS(WEIGHT_DATA_BIT_WIDTH),
 						.W_INT(WEIGHT_DATA_INT_WIDTH),
 						.W_SIGN(WEIGHT_DATA_SIGN),
@@ -366,9 +389,9 @@ module DepthwiseConv2dUnit
 					.IN_WIDTH(48),
 					.IN_FRAC(IN_DATA_FRAC+WEIGHT_DATA_FRAC),
 					.IN_SIGNED(RESULT_SIGNED),
-					.DST_WIDTH(OUT_DATA_BIT_WIDTH),
-					.DST_INT(OUT_DATA_INT_WIDTH),
-					.DST_SIGNED(OUT_DATA_SIGN),
+					.DST_WIDTH(INTER_DATA_BIT_WIDTH),
+					.DST_INT(INTER_DATA_INT_WIDTH),
+					.DST_SIGNED(INTER_DATA_SIGN),
 					.RELU(USE_RELU && !USE_BN),
 					.CUT_TOP(3)
 	 				)
@@ -378,7 +401,7 @@ module DepthwiseConv2dUnit
 					.out_signal(reduced_kernel)
 					);
 	// signal of reduced kernel or normalized reduced kernel
-	wire [OUT_DATA_BIT_WIDTH-1:0] final_data;
+	wire [INTER_DATA_BIT_WIDTH-1:0] final_data;
 	
 	// BATCH NORMALIZATION
 	generate
@@ -389,7 +412,7 @@ module DepthwiseConv2dUnit
 		wire [WEIGHT_DATA_BIT_WIDTH-1:0] bn_bias;
 		
 		DelayLine  #(
-					.WIDTH(2*WEIGHT_DATA_BIT_WIDTH),
+					.WIDTH(BN_W_DATA_BIT_WIDTH+BN_B_DATA_BIT_WIDTH),
 					.DELAY(CASCADE_LATENCY)
 					)
 					delay_of_bn_weights
@@ -405,8 +428,8 @@ module DepthwiseConv2dUnit
 		wire [47:0] bn_bias_aligned;
 		wire [17:0] reduced_kernel_aligned;
 		SignAlignment#(
-					.WIDTH(WEIGHT_DATA_BIT_WIDTH), 
-					.SIGN(WEIGHT_DATA_SIGN),
+					.WIDTH(BN_W_DATA_BIT_WIDTH), 
+					.SIGN(BN_W_DATA_SIGN),
 					.DST_WIDTH(27)
 					)
 					align_bn_weight
@@ -415,8 +438,8 @@ module DepthwiseConv2dUnit
 					.out_signal(bn_weight_aligned)
 					);
 		SignAlignment#(
-					.WIDTH(OUT_DATA_BIT_WIDTH), 
-					.SIGN(OUT_DATA_SIGN),
+					.WIDTH(INTER_DATA_BIT_WIDTH), 
+					.SIGN(INTER_DATA_SIGN),
 					.DST_WIDTH(18)
 					)
 					align_reduced_kernel
@@ -425,12 +448,19 @@ module DepthwiseConv2dUnit
 					.out_signal(reduced_kernel_aligned)
 					);
 		PointAlignment #(
-				.W_BITS(WEIGHT_DATA_BIT_WIDTH),
-				.W_INT(WEIGHT_DATA_INT_WIDTH),
-				.W_SIGN(WEIGHT_DATA_SIGN),
-				.DATA_BITS(OUT_DATA_BIT_WIDTH),
-				.DATA_INT(OUT_DATA_INT_WIDTH),
-				.DATA_SIGN(OUT_DATA_SIGN),
+				
+				.B_BITS(BN_B_DATA_BIT_WIDTH),
+				.B_INT(BN_B_DATA_INT_WIDTH),
+				.B_SIGN(BN_B_DATA_SIGN),
+				
+				.W_BITS(BN_W_DATA_BIT_WIDTH),
+				.W_INT(BN_W_DATA_INT_WIDTH),
+				.W_SIGN(BN_W_DATA_SIGN),
+				
+				.DATA_BITS(INTER_DATA_BIT_WIDTH),
+				.DATA_INT(INTER_DATA_INT_WIDTH),
+				.DATA_SIGN(INTER_DATA_SIGN),
+				
 				.DST_WIDTH(48)
 				)
 				align_bn_bias
@@ -452,13 +482,14 @@ module DepthwiseConv2dUnit
 		
 		WidthReduction #(
 					.IN_WIDTH(48),
-					.IN_FRAC(OUT_DATA_FRAC+WEIGHT_DATA_FRAC),
-					// before bn were applied output quantization/reduction
-					.IN_SIGNED(OUT_DATA_SIGN || WEIGHT_DATA_SIGN),
+					.IN_FRAC(INTER_DATA_FRAC+BN_W_DATA_FRAC),
+					// after bn were applied output quantization/reduction
+					.IN_SIGNED(INTER_DATA_SIGN || BN_W_DATA_SIGN || BN_B_DATA_SIGNED),
 					
 					.DST_WIDTH(OUT_DATA_BIT_WIDTH),
 					.DST_INT(OUT_DATA_INT_WIDTH),
 					.DST_SIGNED(OUT_DATA_SIGN),
+					
 					.RELU(USE_RELU),
 					.CUT_TOP(3)
 	 				)
@@ -475,7 +506,7 @@ module DepthwiseConv2dUnit
 		end
 	endgenerate
 	
-	// delay validity of processing latency
+	// delay validity by processing latency
 	DelayLine #(
 			   .WIDTH(1),
 			   .DELAY(FULL_LATENCY)

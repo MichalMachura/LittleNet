@@ -2,14 +2,21 @@
 
 // align data point in reference to result of multiplication
 module PointAlignment #(
+
+					parameter B_BITS=8,
+					parameter B_INT=1,
+					parameter B_SIGN=1,
+					
 					parameter W_BITS=8,
 					parameter W_INT=1,
 					parameter W_SIGN=1,
+					
 					parameter DATA_BITS=8,
 					parameter DATA_INT=1,
 					parameter DATA_SIGN=1,
 					parameter DST_WIDTH = 48,
 					
+					localparam B_FRAC = B_BITS - B_INT,
 					localparam W_FRAC = W_BITS - W_INT,
 					localparam DATA_FRAC = DATA_BITS - DATA_INT
 					)
@@ -18,8 +25,8 @@ module PointAlignment #(
 					output [DST_WIDTH-1:0] out_bias
 					);
 	// after bias alignment mul result point pos. minus bias frac. part size
-	localparam AFTER_BIAS_BITS = (DATA_FRAC+W_FRAC)-W_FRAC;
-	localparam BEFORE_BIAS_BITS = DST_WIDTH - (DATA_FRAC+W_FRAC + W_INT);
+	localparam AFTER_BIAS_BITS = (DATA_FRAC+W_FRAC)-B_FRAC;
+	localparam BEFORE_BIAS_BITS = DST_WIDTH - (DATA_FRAC+W_FRAC + B_INT);
 	// pre fill depends on sign
 	wire pre_filler;
 	

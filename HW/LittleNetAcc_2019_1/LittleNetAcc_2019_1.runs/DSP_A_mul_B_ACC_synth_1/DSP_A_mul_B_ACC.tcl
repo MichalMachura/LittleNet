@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "/media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC.tcl"
+  variable script "/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC.tcl"
   variable category "vivado_synth"
 }
 
@@ -80,19 +80,19 @@ set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
 set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity info
-set_property webtalk.parent_dir /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.cache/wt [current_project]
-set_property parent.project_path /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.xpr [current_project]
+set_property webtalk.parent_dir /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.cache/wt [current_project]
+set_property parent.project_path /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.xpr [current_project]
 set_property XPM_LIBRARIES XPM_MEMORY [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property ip_repo_paths /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs [current_project]
+set_property ip_repo_paths /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs [current_project]
 update_ip_catalog
-set_property ip_output_repo /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.cache/ip [current_project]
+set_property ip_output_repo /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-read_ip -quiet /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_ACC/DSP_A_mul_B_ACC.xci
-set_property used_in_implementation false [get_files -all /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_ACC/DSP_A_mul_B_ACC_ooc.xdc]
+read_ip -quiet /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_ACC/DSP_A_mul_B_ACC.xci
+set_property used_in_implementation false [get_files -all /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_ACC/DSP_A_mul_B_ACC_ooc.xdc]
 
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -108,7 +108,7 @@ set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
 OPTRACE "Configure IP Cache" START { }
 
-set cached_ip [config_ip_cache -export -no_bom  -dir /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1 -new_name DSP_A_mul_B_ACC -ip [get_ips DSP_A_mul_B_ACC]]
+set cached_ip [config_ip_cache -export -no_bom  -dir /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1 -new_name DSP_A_mul_B_ACC -ip [get_ips DSP_A_mul_B_ACC]]
 
 OPTRACE "Configure IP Cache" END { }
 if { $cached_ip eq {} } {
@@ -163,25 +163,25 @@ create_report "DSP_A_mul_B_ACC_synth_1_synth_report_utilization_0" "report_utili
 OPTRACE "synth reports" END { }
 
 if { [catch {
-  write_verilog -force -mode synth_stub /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_stub.v
+  write_verilog -force -mode synth_stub /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_stub.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a Verilog synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_vhdl -force -mode synth_stub /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_stub.vhdl
+  write_vhdl -force -mode synth_stub /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_stub.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a VHDL synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_verilog -force -mode funcsim /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_sim_netlist.v
+  write_verilog -force -mode funcsim /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_sim_netlist.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the Verilog functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_vhdl -force -mode funcsim /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_sim_netlist.vhdl
+  write_vhdl -force -mode funcsim /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_sim_netlist.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the VHDL functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
@@ -192,37 +192,37 @@ if { [catch {
 
 }; # end if cached_ip 
 
-add_files /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_stub.v -of_objects [get_files /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_ACC/DSP_A_mul_B_ACC.xci]
+add_files /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_stub.v -of_objects [get_files /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_ACC/DSP_A_mul_B_ACC.xci]
 
-add_files /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_stub.vhdl -of_objects [get_files /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_ACC/DSP_A_mul_B_ACC.xci]
+add_files /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_stub.vhdl -of_objects [get_files /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_ACC/DSP_A_mul_B_ACC.xci]
 
-add_files /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_sim_netlist.v -of_objects [get_files /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_ACC/DSP_A_mul_B_ACC.xci]
+add_files /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_sim_netlist.v -of_objects [get_files /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_ACC/DSP_A_mul_B_ACC.xci]
 
-add_files /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_sim_netlist.vhdl -of_objects [get_files /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_ACC/DSP_A_mul_B_ACC.xci]
+add_files /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_sim_netlist.vhdl -of_objects [get_files /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_ACC/DSP_A_mul_B_ACC.xci]
 
-add_files /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC.dcp -of_objects [get_files /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_ACC/DSP_A_mul_B_ACC.xci]
+add_files /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC.dcp -of_objects [get_files /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/ip/DSP_A_mul_B_ACC/DSP_A_mul_B_ACC.xci]
 
-if {[file isdir /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_ACC]} {
+if {[file isdir /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_ACC]} {
   catch { 
-    file copy -force /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_sim_netlist.v /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_ACC
+    file copy -force /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_sim_netlist.v /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_ACC
   }
 }
 
-if {[file isdir /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_ACC]} {
+if {[file isdir /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_ACC]} {
   catch { 
-    file copy -force /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_sim_netlist.vhdl /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_ACC
+    file copy -force /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_sim_netlist.vhdl /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_ACC
   }
 }
 
-if {[file isdir /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_ACC]} {
+if {[file isdir /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_ACC]} {
   catch { 
-    file copy -force /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_stub.v /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_ACC
+    file copy -force /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_stub.v /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_ACC
   }
 }
 
-if {[file isdir /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_ACC]} {
+if {[file isdir /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_ACC]} {
   catch { 
-    file copy -force /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_stub.vhdl /media/michal/HDD_Linux_2/DAC_SDC_2021/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_ACC
+    file copy -force /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_stub.vhdl /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.ip_user_files/ip/DSP_A_mul_B_ACC
   }
 }
 file delete __synthesis_is_running__

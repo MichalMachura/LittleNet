@@ -1,11 +1,11 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2020.2 (lin64) Build 3064766 Wed Nov 18 09:12:47 MST 2020
-// Date        : Sun Jan  9 02:56:36 2022
+// Date        : Mon Jan 10 01:25:27 2022
 // Host        : michal-Lenovo-ideapad-700-17ISK running 64-bit Ubuntu 20.04.3 LTS
-// Command     : write_verilog -force -mode synth_stub
-//               /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.runs/DSP_A_mul_B_ACC_synth_1/DSP_A_mul_B_ACC_stub.v
-// Design      : DSP_A_mul_B_ACC
+// Command     : write_verilog -force -mode synth_stub -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix
+//               decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ DSP_BIAS_BN_stub.v
+// Design      : DSP_BIAS_BN
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xczu3eg-sbva484-1-i
 // --------------------------------------------------------------------------------
@@ -14,14 +14,13 @@
 // The synthesis directives are for Synopsys Synplify support to prevent IO buffer insertion.
 // Please paste the declaration into a Verilog source file or add the file as an additional source.
 (* x_core_info = "xbip_dsp48_macro_v3_0_18,Vivado 2020.2" *)
-module DSP_A_mul_B_ACC(CLK, CE, SCLR, SEL, A, B, C, P)
-/* synthesis syn_black_box black_box_pad_pin="CLK,CE,SCLR,SEL[1:0],A[26:0],B[17:0],C[47:0],P[47:0]" */;
+module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix(CLK, CE, A, B, C, D, P)
+/* synthesis syn_black_box black_box_pad_pin="CLK,CE,A[26:0],B[17:0],C[47:0],D[17:0],P[47:0]" */;
   input CLK;
   input CE;
-  input SCLR;
-  input [1:0]SEL;
   input [26:0]A;
   input [17:0]B;
   input [47:0]C;
+  input [17:0]D;
   output [47:0]P;
 endmodule
