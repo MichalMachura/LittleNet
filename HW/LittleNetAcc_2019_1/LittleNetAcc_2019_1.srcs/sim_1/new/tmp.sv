@@ -137,6 +137,14 @@ module Tmp_tb
 		  .output_data_validity(out_val)
 		 );
 	
+	integer f;
+	
+	initial 
+		begin
+		f = $fopen("file.sv","w");
+		$fwrite(f, "TEST\n");
+		$fclose(f);
+		end
 //	wire [127:0] rom_0_0_douta;
 //	wire rom_0_0_ena = 1;
 	

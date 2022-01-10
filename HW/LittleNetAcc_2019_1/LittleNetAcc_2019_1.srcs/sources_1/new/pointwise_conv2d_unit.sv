@@ -9,31 +9,31 @@ module PointwiseComputationUnit
 		 // input data format 
 		 parameter IN_DATA_BIT_WIDTH = 8,
 		 parameter IN_DATA_INT_WIDTH = 1,
-		 parameter IN_DATA_SIGN=1,
+		 parameter IN_DATA_SIGN = 1,
 		 // weight data format
 		 parameter WEIGHT_DATA_BIT_WIDTH = 8,
 		 parameter WEIGHT_DATA_INT_WIDTH = 1,
-		 parameter WEIGHT_DATA_SIGN=1,
+		 parameter WEIGHT_DATA_SIGN = 1,
 		 // bias data format
 		 parameter BIAS_DATA_BIT_WIDTH = 8,
 		 parameter BIAS_DATA_INT_WIDTH = 1,
-		 parameter BIAS_DATA_SIGN=1,
+		 parameter BIAS_DATA_SIGN = 1,
 		 // output data format
 		 parameter INTER_DATA_BIT_WIDTH = 8,
 		 parameter INTER_DATA_INT_WIDTH = 1,
-		 parameter INTER_DATA_SIGN=1,
+		 parameter INTER_DATA_SIGN = 1,
 		 // output data format
 		 parameter BN_W_DATA_BIT_WIDTH = 8,
 		 parameter BN_W_DATA_INT_WIDTH = 1,
-		 parameter BN_W_DATA_SIGN=1,
+		 parameter BN_W_DATA_SIGN = 1,
 		 // output data format
 		 parameter BN_B_DATA_BIT_WIDTH = 8,
 		 parameter BN_B_DATA_INT_WIDTH = 1,
-		 parameter BN_B_DATA_SIGN=1,
+		 parameter BN_B_DATA_SIGN = 1,
 		 // output data format
 		 parameter OUT_DATA_BIT_WIDTH = 8,
 		 parameter OUT_DATA_INT_WIDTH = 1,
-		 parameter OUT_DATA_SIGN=1,
+		 parameter OUT_DATA_SIGN = 1,
 		 
 		 localparam IN_DATA_FRAC = IN_DATA_BIT_WIDTH - IN_DATA_INT_WIDTH,
 		 localparam WEIGHT_DATA_FRAC = WEIGHT_DATA_BIT_WIDTH - WEIGHT_DATA_INT_WIDTH,
@@ -314,15 +314,31 @@ module PointwiseConv2dUnit
 		 // input data format 
 		 parameter IN_DATA_BIT_WIDTH = 8,
 		 parameter IN_DATA_INT_WIDTH = 1,
-		 parameter IN_DATA_SIGN=1,
+		 parameter IN_DATA_SIGN = 1,
 		 // weight data format
 		 parameter WEIGHT_DATA_BIT_WIDTH = 8,
 		 parameter WEIGHT_DATA_INT_WIDTH = 1,
-		 parameter WEIGHT_DATA_SIGN=1,
+		 parameter WEIGHT_DATA_SIGN = 1,
+		 // bias data format
+		 parameter BIAS_DATA_BIT_WIDTH = 8,
+		 parameter BIAS_DATA_INT_WIDTH = 1,
+		 parameter BIAS_DATA_SIGN = 1,
+		 // output data format
+		 parameter INTER_DATA_BIT_WIDTH = 8,
+		 parameter INTER_DATA_INT_WIDTH = 1,
+		 parameter INTER_DATA_SIGN = 1,
+		 // output data format
+		 parameter BN_W_DATA_BIT_WIDTH = 8,
+		 parameter BN_W_DATA_INT_WIDTH = 1,
+		 parameter BN_W_DATA_SIGN = 1,
+		 // output data format
+		 parameter BN_B_DATA_BIT_WIDTH = 8,
+		 parameter BN_B_DATA_INT_WIDTH = 1,
+		 parameter BN_B_DATA_SIGN = 1,
 		 // output data format
 		 parameter OUT_DATA_BIT_WIDTH = 8,
 		 parameter OUT_DATA_INT_WIDTH = 1,
-		 parameter OUT_DATA_SIGN=1,
+		 parameter OUT_DATA_SIGN = 1,
 		 // latency of data read
 		 parameter READ_MEMORY_LATENCY = 2,
 		 parameter READ_WEIGHT_MEMORY_LATENCY = 2,
@@ -336,6 +352,10 @@ module PointwiseConv2dUnit
 		 // fractional parts sizes
 		 localparam IN_DATA_FRAC = IN_DATA_BIT_WIDTH - IN_DATA_INT_WIDTH,
 		 localparam WEIGHT_DATA_FRAC = WEIGHT_DATA_BIT_WIDTH - WEIGHT_DATA_INT_WIDTH,
+		 localparam BIAS_DATA_FRAC = BIAS_DATA_BIT_WIDTH - BIAS_DATA_INT_WIDTH,
+		 localparam INTER_DATA_FRAC = INTER_DATA_BIT_WIDTH - INTER_DATA_INT_WIDTH,
+		 localparam BN_W_DATA_FRAC = BN_W_DATA_BIT_WIDTH - BN_W_DATA_INT_WIDTH,
+		 localparam BN_B_DATA_FRAC = BN_B_DATA_BIT_WIDTH - BN_B_DATA_INT_WIDTH,
 		 localparam OUT_DATA_FRAC = OUT_DATA_BIT_WIDTH - OUT_DATA_INT_WIDTH,
 		 // number of additional weights to load
 		 // like batch norm or just bias
@@ -520,15 +540,27 @@ module PointwiseConv2dUnit
 										.USE_BIAS(USE_BIAS),
 										.USE_BN(USE_BN),
 										.USE_RELU(USE_RELU),
-										.IN_DATA_BIT_WIDTH(IN_DATA_BIT_WIDTH),
-										.IN_DATA_INT_WIDTH(IN_DATA_INT_WIDTH),
-										.IN_DATA_SIGN(IN_DATA_SIGN),
-										.WEIGHT_DATA_BIT_WIDTH(WEIGHT_DATA_BIT_WIDTH),
-										.WEIGHT_DATA_INT_WIDTH(WEIGHT_DATA_INT_WIDTH),
-										.WEIGHT_DATA_SIGN(WEIGHT_DATA_SIGN),
-										.OUT_DATA_BIT_WIDTH(OUT_DATA_BIT_WIDTH),
-										.OUT_DATA_INT_WIDTH(OUT_DATA_INT_WIDTH),
-										.OUT_DATA_SIGN(OUT_DATA_SIGN)
+		 								.IN_DATA_BIT_WIDTH(IN_DATA_BIT_WIDTH),
+		 								.IN_DATA_INT_WIDTH(IN_DATA_INT_WIDTH),
+		 								.IN_DATA_SIGN(IN_DATA_SIGN),
+		 								.WEIGHT_DATA_BIT_WIDTH(WEIGHT_DATA_BIT_WIDTH),
+		 								.WEIGHT_DATA_INT_WIDTH(WEIGHT_DATA_INT_WIDTH),
+		 								.WEIGHT_DATA_SIGN(WEIGHT_DATA_SIGN),
+		 								.BIAS_DATA_BIT_WIDTH(BIAS_DATA_BIT_WIDTH),
+		 								.BIAS_DATA_INT_WIDTH(BIAS_DATA_INT_WIDTH),
+		 								.BIAS_DATA_SIGN(BIAS_DATA_SIGN),
+		 								.INTER_DATA_BIT_WIDTH(INTER_DATA_BIT_WIDTH),
+		 								.INTER_DATA_INT_WIDTH(INTER_DATA_INT_WIDTH),
+		 								.INTER_DATA_SIGN(INTER_DATA_SIGN),
+		 								.BN_W_DATA_BIT_WIDTH(BN_W_DATA_BIT_WIDTH),
+		 								.BN_W_DATA_INT_WIDTH(BN_W_DATA_INT_WIDTH),
+		 								.BN_W_DATA_SIGN(BN_W_DATA_SIGN),
+		 								.BN_B_DATA_BIT_WIDTH(BN_B_DATA_BIT_WIDTH),
+		 								.BN_B_DATA_INT_WIDTH(BN_B_DATA_INT_WIDTH),
+		 								.BN_B_DATA_SIGN(BN_B_DATA_SIGN),
+		 								.OUT_DATA_BIT_WIDTH(OUT_DATA_BIT_WIDTH),
+		 								.OUT_DATA_INT_WIDTH(OUT_DATA_INT_WIDTH),
+		 								.OUT_DATA_SIGN(OUT_DATA_SIGN)
 										)
 										pw_unit
 										(
@@ -556,7 +588,7 @@ module PointwiseConv2dUnit
 			ResettableDelayLine	#(
 								.WIDTH(1),
 								// delay of pw_comp_unit
-								.DELAY(4+(USE_BIAS+USE_BN)*4)
+								.DELAY(4+(USE_BN)*4)
 								)
 								delay_of_all_in_stream
 								(
@@ -566,7 +598,7 @@ module PointwiseConv2dUnit
 								.data_in(all_data_in_stream),
 								.data_out(delayed_all_data_in_stream)
 								);
-				
+			
 			MaxPool2dUnit 	#(
 					.DATA_BIT_WIDTH(OUT_DATA_BIT_WIDTH),
 					.DATA_SIGNED(OUT_DATA_SIGN),

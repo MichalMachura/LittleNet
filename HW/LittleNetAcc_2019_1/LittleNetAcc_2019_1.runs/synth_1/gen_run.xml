@@ -524,8 +524,11 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/component.xml">
-      <FileInfo SFType="IPXACT"/>
+    <File Path="$PSRCDIR/sources_1/imports/LittleNetAcc_2019_1.srcs/component.xml">
+      <FileInfo SFType="IPXACT">
+        <Attr Name="ImportPath" Val="$PSRCDIR/component.xml"/>
+        <Attr Name="ImportTime" Val="1639352519"/>
+      </FileInfo>
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
@@ -548,22 +551,22 @@
   <Strategy Version="1" Minor="2">
     <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2019"/>
     <Step Id="synth_design">
+      <Option Id="ResourceSharing">2</Option>
       <Option Id="KeepEquivalentRegisters">1</Option>
       <Option Id="ControlSetOptThreshold">0</Option>
-      <Option Id="ResourceSharing">2</Option>
     </Step>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_4_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_1_2"/>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_2_0"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_PW_1_1"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_PW_3_1"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_1_2"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_4_0"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_PW_4_2"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_2_0"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_PW_2_2"/>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_2_1"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_DW_4_1"/>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_3_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_2_1"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_PW_5_0"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_DW_1_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_3_0"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_DW_3_2"/>
 </GenRun>

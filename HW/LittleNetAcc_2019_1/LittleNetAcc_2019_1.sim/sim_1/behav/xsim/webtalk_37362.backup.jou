@@ -2,11 +2,11 @@
 # Webtalk v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:47 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Mon Jan 10 14:56:42 2022
-# Process ID: 39092
+# Start of session at: Mon Jan 10 14:52:39 2022
+# Process ID: 37362
 # Current directory: /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.sim/sim_1/behav/xsim
-# Command line: wbtcv -mode batch -source /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.sim/sim_1/behav/xsim/xsim.dir/CustomROM_tb_behav/webtalk/xsim_webtalk.tcl -notrace
+# Command line: wbtcv -mode batch -source /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.sim/sim_1/behav/xsim/xsim.dir/CustomROM_behav/webtalk/xsim_webtalk.tcl -notrace
 # Log file: /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.sim/sim_1/behav/xsim/webtalk.log
 # Journal file: /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.sim/sim_1/behav/xsim/webtalk.jou
 #-----------------------------------------------------------
-source /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.sim/sim_1/behav/xsim/xsim.dir/CustomROM_tb_behav/webtalk/xsim_webtalk.tcl -notrace
+source /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.sim/sim_1/behav/xsim/xsim.dir/CustomROM_behav/webtalk/xsim_webtalk.tcl -notrace

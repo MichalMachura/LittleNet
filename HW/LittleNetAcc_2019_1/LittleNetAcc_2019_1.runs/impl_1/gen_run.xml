@@ -549,8 +549,11 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/component.xml">
-      <FileInfo SFType="IPXACT"/>
+    <File Path="$PSRCDIR/sources_1/imports/LittleNetAcc_2019_1.srcs/component.xml">
+      <FileInfo SFType="IPXACT">
+        <Attr Name="ImportPath" Val="$PSRCDIR/component.xml"/>
+        <Attr Name="ImportTime" Val="1639352519"/>
+      </FileInfo>
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
@@ -583,17 +586,17 @@
     <Step Id="write_bitstream"/>
     <Step Id="write_device_image"/>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_4_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_1_2"/>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_2_0"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_PW_1_1"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_PW_3_1"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_1_2"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_4_0"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_PW_4_2"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_PW_2_0"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_PW_2_2"/>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_2_1"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_DW_4_1"/>
-  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_3_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_2_1"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_PW_5_0"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_DW_1_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="ROM_DW_3_0"/>
   <BlockFileSet Type="BlockSrcs" Name="ROM_DW_3_2"/>
 </GenRun>
