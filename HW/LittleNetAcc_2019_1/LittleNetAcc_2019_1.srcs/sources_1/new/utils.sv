@@ -632,6 +632,7 @@ module InputLayer
 		parameter GROUPS = 4,
 		parameter WRITE_MEMORY_LATENCY = 2,
 		
+		localparam ADDRESS_BITS_32 = 32,
 		localparam ADDRESS_BITS = $clog2((WIDTH*HEIGHT*CHANNELS)/GROUPS)
 		)
 		(
@@ -642,7 +643,7 @@ module InputLayer
 		input data_in_validity,
 		
 		output [GROUPS*BIT_WIDTH-1:0] data_out,
-		output [ADDRESS_BITS-1:0] data_out_address,
+		output [ADDRESS_BITS_32-1:0] data_out_address,
 		output data_out_validity,
 		
 		output last_data_received,
@@ -685,6 +686,8 @@ module InputLayer
 													intermediate_validity,
 													intermediate_validity};
 	
+	wire [ ADDRESS_BITS-1:0] local_out_address;
+	
 	MuxWriterUnit
 			#(
 			.BIT_WIDTH(BIT_WIDTH*GROUPS),
@@ -705,11 +708,12 @@ module InputLayer
 			.in_data(bgr),
 			.in_data_validity(packed_intermediate_validity),
 			.out_data_memory_in(data_out),
-			.out_data_memory_address(data_out_address),
+			.out_data_memory_address(local_out_address),
+			// .out_data_memory_address(data_out_address),
 			.out_data_memory_write_enable(data_out_validity),
 			.finished(last_data_received)
 			);
-	
+	assign data_out_address = {{32-ADDRESS_BITS{1'b0}}, local_out_address}
 	ResettableDelayLine	#(
 						.WIDTH(1),
 						.DELAY(WRITE_MEMORY_LATENCY)

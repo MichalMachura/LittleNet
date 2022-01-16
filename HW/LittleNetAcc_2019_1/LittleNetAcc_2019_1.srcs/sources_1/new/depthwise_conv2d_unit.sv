@@ -69,9 +69,11 @@ module DepthwiseConv2dUnit
 		 // input address size
 		 localparam INPUT_SIZE = IN_WIDTH*IN_HEIGHT*IN_CHANNELS,
 		 localparam IN_DATA_ADDRESS_BITS = $clog2(INPUT_SIZE),
+		 localparam IN_DATA_ADDRESS_BITS_32 = 32,
 		 // memory weights size
 		 localparam WEIGHTS_SIZE = (K_SIZE*K_SIZE+ADDITIONAL_WEIGHTS)*OUT_CHANNELS,
 		 localparam WEIGHTS_ADDRESS_BITS = $clog2(WEIGHTS_SIZE),
+		 localparam WEIGHTS_ADDRESS_BITS_32 = 32,
 		 // local weights registers size 
 		 localparam LOCAL_WEIGHTS_SIZE = K_SIZE*K_SIZE+ADDITIONAL_WEIGHTS,
 		 localparam LOCAL_WEIGHTS_CNTR_BITS = $clog2(LOCAL_WEIGHTS_SIZE),
@@ -83,6 +85,7 @@ module DepthwiseConv2dUnit
 		 // output==result memory size
 		 localparam OUT_SIZE = OUT_WIDTH*OUT_HEIGHT*OUT_CHANNELS,
 		 localparam OUT_ADDRESS_BITS = $clog2(OUT_SIZE/GROUPS),
+		 localparam OUT_ADDRESS_BITS_32 = 32,
 		 // LATENCY OF OPERATIONS
 		 localparam MUL_LATENCY = 4,
 		 localparam ADD_LATENCY = 2
@@ -96,17 +99,17 @@ module DepthwiseConv2dUnit
 		 
 		 // INPUT DATA MEMORY
 		 input [IN_DATA_BIT_WIDTH-1:0] in_data_memory_out,
-		 output [IN_DATA_ADDRESS_BITS-1:0] in_data_memory_address,
+		 output [IN_DATA_ADDRESS_BITS_32-1:0] in_data_memory_address,
 		 output in_data_memory_read_enable,
 		//  output in_data_memory_read_clk,
 		 // WEIGHTS MEMORY
 		 input [WEIGHT_DATA_BIT_WIDTH-1:0] weights_memory_out,
-		 output [WEIGHTS_ADDRESS_BITS-1:0] weights_memory_address,
+		 output [WEIGHTS_ADDRESS_BITS_32-1:0] weights_memory_address,
 		 output weights_memory_read_enable,
 		//  output weight_memory_write_clk
 		// OUTPUT DATA MEMORY
 		 output [OUT_DATA_BIT_WIDTH*GROUPS-1:0] out_data_memory_in,
-		 output [OUT_ADDRESS_BITS-1:0] out_data_memory_address,
+		 output [OUT_ADDRESS_BITS_32-1:0] out_data_memory_address,
 		 output out_data_memory_write_enable
 		//  output out_data_memory_write_clk
 		 );
@@ -208,7 +211,9 @@ module DepthwiseConv2dUnit
 	wire [WEIGHT_DATA_BIT_WIDTH-1:0] weights [LOCAL_WEIGHTS_SIZE];
 	wire loading_weight_module_enable;
 	assign loading_weight_module_enable = partially_enabled && !is_finished;
-	
+	wire [WEIGHTS_ADDRESS_BITS-1:0] local_weights_memory_address;
+	assign weights_memory_address = {{(WEIGHTS_ADDRESS_BITS_32-WEIGHTS_ADDRESS_BITS){1'b0}},
+									 local_weights_memory_address};
 	LoadingWeightsUnit #(
 						.BIT_WIDTH(WEIGHT_DATA_BIT_WIDTH),
 						.BATCH_SIZE(LOCAL_WEIGHTS_SIZE),
@@ -222,7 +227,7 @@ module DepthwiseConv2dUnit
 						.reset(reset),
 						.next_batch(next_weights_batch),
 						.weights_memory_out(weights_memory_out),
-						.weights_memory_address(weights_memory_address),
+						.weights_memory_address(local_weights_memory_address),
 						.weights_memory_read_enable(weights_memory_read_enable),
 						.enable(loading_weight_module_enable),
 						.weights(weights),
@@ -231,6 +236,9 @@ module DepthwiseConv2dUnit
 	
 	// SLIDING WINDOW 
 	wire [IN_DATA_BIT_WIDTH-1:0] kernel [K_SIZE*K_SIZE];
+	wire [IN_DATA_ADDRESS_BITS_32-1:0] local_in_data_memory_address;
+	assign in_data_memory_address = {{(IN_DATA_ADDRESS_BITS_32-IN_DATA_ADDRESS_BITS){1'b0}}, 
+									 local_in_data_memory_address};
 	
 	SlidingWindowUnit#(
 					  .IN_WIDTH(IN_WIDTH), 
@@ -248,12 +256,11 @@ module DepthwiseConv2dUnit
 					  .enable(processing_state),
 					  .reset(reset),
 					  .memory_out(in_data_memory_out),
-					  .memory_address(in_data_memory_address),
+					  .memory_address(local_in_data_memory_address),
 					  .memory_read_enable(in_data_memory_read_enable),
 					  .kernel(kernel),
 					  .kernel_validity(kernel_validity)
 					  );
-	
 	// CASCADE of SUM-MUL on DSP48
 	
 	localparam RESULT_SIGNED = WEIGHT_DATA_SIGN || IN_DATA_SIGN || USE_BIAS && BIAS_DATA_SIGN;
@@ -484,7 +491,7 @@ module DepthwiseConv2dUnit
 					.IN_WIDTH(48),
 					.IN_FRAC(INTER_DATA_FRAC+BN_W_DATA_FRAC),
 					// after bn were applied output quantization/reduction
-					.IN_SIGNED(INTER_DATA_SIGN || BN_W_DATA_SIGN || BN_B_DATA_SIGNED),
+					.IN_SIGNED(INTER_DATA_SIGN || BN_W_DATA_SIGN || BN_B_DATA_SIGN),
 					
 					.DST_WIDTH(OUT_DATA_BIT_WIDTH),
 					.DST_INT(OUT_DATA_INT_WIDTH),
@@ -538,6 +545,10 @@ module DepthwiseConv2dUnit
 				.data_out_validity(grouped_data_validity[0])
 				);
 	
+	wire [OUT_ADDRESS_BITS_32-1:0] local_out_data_memory_address;
+	assign out_data_memory_address = {{(OUT_ADDRESS_BITS_32-OUT_ADDRESS_BITS){1'b0}}, 
+									 local_out_data_memory_address};
+	
 	MuxWriterUnit
 		#(
 		.BIT_WIDTH(OUT_DATA_BIT_WIDTH*GROUPS),
@@ -559,7 +570,7 @@ module DepthwiseConv2dUnit
 		.in_data_validity(grouped_data_validity),
 		
 		.out_data_memory_in(out_data_memory_in),
-		.out_data_memory_address(out_data_memory_address),
+		.out_data_memory_address(local_out_data_memory_address),
 		.out_data_memory_write_enable(out_data_memory_write_enable),
 		
 		.finished(is_finished)

@@ -92,12 +92,12 @@ module SDP_RAM
 
       input sleep
       );
-localparam ADDRA_WIDTH = $clog2(BYTE_LEN / (WRITE_WIDTH / BYTE_SIZE));
-localparam ADDRB_WIDTH = $clog2(BYTE_LEN / (READ_WIDTH / BYTE_SIZE));
+   localparam ADDRA_WIDTH = $clog2(BYTE_LEN / (WRITE_WIDTH / BYTE_SIZE));
+   localparam ADDRB_WIDTH = $clog2(BYTE_LEN / (READ_WIDTH / BYTE_SIZE));
 
-wire sbiterrb,dbiterrb;
-wire [ADDRA_WIDTH-1:0] local_addra = addra[ADDRA_WIDTH-1:0];
-wire [ADDRB_WIDTH-1:0] local_addrb = addrb[ADDRB_WIDTH-1:0];
+   wire sbiterrb,dbiterrb;
+   wire [ADDRA_WIDTH-1:0] local_addra = addra[ADDRA_WIDTH-1:0];
+   wire [ADDRB_WIDTH-1:0] local_addrb = addrb[ADDRB_WIDTH-1:0];
 
    xpm_memory_sdpram #(
       .ADDR_WIDTH_A(ADDRA_WIDTH),               // DECIMAL

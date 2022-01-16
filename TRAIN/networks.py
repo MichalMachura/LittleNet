@@ -973,7 +973,7 @@ class LittleNet5(Sequential):
             PWConv2d(256,256, *intermediate_quant, bias=ub, use_bn=True, use_relu=True, device=device),
             
             # YoloLayer_v3(256, num_of_anchors, *output_quant, bias=True, kernel_size=(1,1), use_sigmoid=use_sigmoid, device=device, conv_class=StdConv2D),
-            PWConv2d(256,5*num_of_anchors, *intermediate_quant, bias=True, use_bn=False, use_relu=False, device=device)
+            PWConv2d(256,5*num_of_anchors, *output_quant, bias=True, use_bn=False, use_relu=False, device=device)
             ]
         if use_am:
             L.append(QuantAnchorMul(num_of_anchors, device, return_quant_tensor=True) )
@@ -1021,7 +1021,7 @@ class LittleNet6(Sequential):
             PWConv2d(256,256, *intermediate_quant, bias=ub, use_bn=True, use_relu=True, device=device),
             DWConv2d(256, *intermediate_quant, bias=ub, use_bn=True, use_relu=False, device=device),
             
-            PWConv2d(256,5*num_of_anchors, *intermediate_quant, bias=True, use_bn=False, use_relu=False, device=device)
+            PWConv2d(256,5*num_of_anchors, *output_quant, bias=True, use_bn=False, use_relu=False, device=device)
             ]
         if use_am:
             L.append(QuantAnchorMul(num_of_anchors, device, return_quant_tensor=True) )
@@ -1067,7 +1067,7 @@ class LittleNet7(Sequential):
             PWConv2d(512,256, *intermediate_quant, bias=True, use_bn=True, use_relu=True, device=device),
             DWConv2d(256, *intermediate_quant, intermediate_channels=1, bias=False, use_bn=True, use_relu=True, device=device),
             
-            PWConv2d(256,5*num_of_anchors, *intermediate_quant, bias=True, use_bn=False, use_relu=False, device=device)
+            PWConv2d(256,5*num_of_anchors, *output_quant, bias=True, use_bn=False, use_relu=False, device=device)
             ]
         if use_am:
             L.append(QuantAnchorMul(num_of_anchors, device, return_quant_tensor=True) )

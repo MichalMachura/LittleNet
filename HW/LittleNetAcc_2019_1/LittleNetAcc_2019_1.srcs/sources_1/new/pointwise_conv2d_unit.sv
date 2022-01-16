@@ -364,14 +364,17 @@ module PointwiseConv2dUnit
 		 // input address size
 		 localparam INPUT_SIZE = IN_WIDTH*IN_HEIGHT*IN_CHANNELS,
 		 localparam IN_DATA_ADDRESS_BITS = $clog2(INPUT_SIZE),
+		 localparam IN_DATA_ADDRESS_BITS_32 = 32,
 		 // memory weights size = kernel weights + BN_weights + bias
 		 // number of weights batches - weights / threads number
 		 localparam WEIGHTS_SIZE = (IN_CHANNELS+ADDITIONAL_WEIGHTS)*((OUT_CHANNELS-1)/PARALLELISM+1),
 		 localparam WEIGHTS_ADDRESS_BITS = $clog2(WEIGHTS_SIZE),
+		 localparam WEIGHTS_ADDRESS_BITS_32 = 32,
 		 // output==result memory size
 		 localparam OUT_SIZE = (OUT_WIDTH*OUT_HEIGHT*OUT_CHANNELS),
 		 localparam OUT_ADDRESS_BITS = USE_MAX_FINDER ? $clog2(7) // for max finder
-		 											  : $clog2(OUT_SIZE / GROUPS) // for std pw conv
+		 											  : $clog2(OUT_SIZE / GROUPS), // for std pw conv
+		 localparam OUT_ADDRESS_BITS_32 = 32
 		 )
 		 (
 		 input clk,
@@ -382,15 +385,15 @@ module PointwiseConv2dUnit
 		 
 		 // INPUT DATA MEMORY
 		 input [IN_DATA_BIT_WIDTH-1:0] in_data_memory_out,
-		 output [IN_DATA_ADDRESS_BITS-1:0] in_data_memory_address,
+		 output [IN_DATA_ADDRESS_BITS_32-1:0] in_data_memory_address,
 		 output in_data_memory_read_enable,
 		 // WEIGHTS MEMORY
 		 input [WEIGHT_DATA_BIT_WIDTH*PARALLELISM-1:0] weights_memory_out,
-		 output [WEIGHTS_ADDRESS_BITS-1:0] weights_memory_address,
+		 output [WEIGHTS_ADDRESS_BITS_32-1:0] weights_memory_address,
 		 output weights_memory_read_enable,
 		// OUTPUT DATA MEMORY
 		 output [OUT_DATA_BIT_WIDTH*GROUPS-1:0] out_data_memory_in,
-		 output [OUT_ADDRESS_BITS-1:0] out_data_memory_address,
+		 output [OUT_ADDRESS_BITS_32-1:0] out_data_memory_address,
 		 output out_data_memory_write_enable
 		 );
 	// reg fully_complete = 1;
@@ -424,6 +427,7 @@ module PointwiseConv2dUnit
 	wire point_data_validity;
 	wire end_of_point;
 	wire end_of_pass;
+	wire [IN_DATA_ADDRESS_BITS_32-1:0] local_in_data_memory_address;
 	
 	PointStreamerUnit  #(
 						.IN_WIDTH(IN_WIDTH),
@@ -442,10 +446,12 @@ module PointwiseConv2dUnit
 						.end_point(end_of_point),
 						.end_pass(end_of_pass),
 						
-						.in_data_memory_address(in_data_memory_address),
+						.in_data_memory_address(local_in_data_memory_address),
 						.in_data_memory_read_enable(in_data_memory_read_enable),
 						.in_data_memory_out(in_data_memory_out)
 						);
+	assign in_data_memory_address = {{(IN_DATA_ADDRESS_BITS_32-IN_DATA_ADDRESS_BITS){1'b0}}, 
+									 local_in_data_memory_address};
 	
 	// stream for weights
 	wire [WEIGHT_DATA_BIT_WIDTH*PARALLELISM-1:0] weights [1+ADDITIONAL_WEIGHTS];
@@ -454,6 +460,7 @@ module PointwiseConv2dUnit
 	wire next_filter;
 	wire end_of_cycle;
 	wire end_of_weights;
+	wire [WEIGHTS_ADDRESS_BITS_32-1:0] local_weights_memory_address;
 	CyclicStreamerUnit #(
 						.BIT_WIDTH(WEIGHT_DATA_BIT_WIDTH*PARALLELISM),
 						.CYCLE_LENGTH(IN_CHANNELS),
@@ -475,11 +482,12 @@ module PointwiseConv2dUnit
 						.end_of_cycle(end_of_cycle),
 						.end_of_data(end_of_weights),
 						
-						.data_memory_address(weights_memory_address),
+						.data_memory_address(local_weights_memory_address),
 						.data_memory_out(weights_memory_out),
 						.data_memory_read_enable(weights_memory_read_enable)
 						);
-	
+	assign weights_memory_address = {(WEIGHTS_ADDRESS_BITS_32-WEIGHTS_ADDRESS_BITS){{1'b0}}, 
+									 local_weights_memory_address};
 	// enabling control
 	wire delayed_data_validity;
 	wire [IN_DATA_BIT_WIDTH-1:0] delayed_data;
@@ -655,6 +663,7 @@ module PointwiseConv2dUnit
 		// for end
 	endgenerate
 	
+	wire [OUT_ADDRESS_BITS_32-1:0] local_out_data_memory_address
 	generate
 		if (!USE_MAX_FINDER)
 			begin
@@ -678,7 +687,7 @@ module PointwiseConv2dUnit
 							.in_data_validity(mux_in_data_validity),
 							
 							.out_data_memory_in(out_data_memory_in),
-							.out_data_memory_address(out_data_memory_address),
+							.out_data_memory_address(local_out_data_memory_address),
 							.out_data_memory_write_enable(out_data_memory_write_enable),
 							
 							.finished(fully_complete)
@@ -705,7 +714,7 @@ module PointwiseConv2dUnit
 							.data_in_validity(mux_in_data_validity),
 							
 							.out_data_memory_in(out_data_memory_in),
-							.out_data_memory_address(out_data_memory_address),
+							.out_data_memory_address(local_out_data_memory_address),
 							.out_data_memory_write_enable(out_data_memory_write_enable),
 							
 							.finished(fully_complete)
@@ -713,6 +722,7 @@ module PointwiseConv2dUnit
 			end
 	endgenerate
 	
-	
+	assign out_data_memory_address = {{(OUT_ADDRESS_BITS_32-OUT_ADDRESS_BITS){1'b0}},
+									  local_out_data_memory_address};
 endmodule // PointwiseConv2dUnit
 

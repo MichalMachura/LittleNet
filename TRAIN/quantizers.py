@@ -314,6 +314,15 @@ class ParametrizedFixedPointQuantizer(SM):
         
         return x
     
+    def get_repr(self):
+        bw = self.bit_width_impl()
+        signed = self.signed_impl()
+        bits= bw-signed
+        pow_frac = (2**(bits) - (1-signed) ) / self.scale_impl()
+        frac_part = torch.log2(pow_frac)
+        
+        return bw.to(int).item(), (bw - frac_part).to(int).item(), (signed > 0.5).to(bool).item()
+         
     @brevitas.jit.script_method
     def forward(self, x:torch.tensor):
         bw = self.bit_width_impl(x)
