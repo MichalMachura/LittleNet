@@ -312,7 +312,8 @@ class PWBlock(LayerBlock):
         .addra({rom_address}),
         .douta({rom_data})
         );
-    """
+
+"""
     
     def external_signals(self):
         suffix = self.get_suffix()
@@ -547,7 +548,8 @@ class DWBlock(LayerBlock):
         .addra({rom_address}),
         .douta({rom_data})
         );
-    """
+
+"""
     
     def external_signals(self):
         suffix = self.get_suffix()
@@ -652,7 +654,8 @@ class ILBlock(LayerBlock):
 		.finished({finished}),
 		.last_data_received({in_stream_last_data_received})
 		);
-    """
+
+"""
     
     def generate(self) -> str:
         T = ILBlock.TEMPL
@@ -713,8 +716,13 @@ class RAMBlock(LayerBlock):
         return signals
     
     TEMPL = """
-    wire {clk}, ena_{name}, enb_{name}, wena_{name}, sleep_{name} = 1'b0;
-    wire [32-1:0] addra_{name}, addrb_{name};
+    wire {clk}, 
+         ena_{name}, 
+         enb_{name}, 
+         wena_{name}, 
+         sleep_{name} = 1'b0;
+    wire [32-1:0] addra_{name}, 
+                  addrb_{name};
     wire [{WRITE_WIDTH}-1:0] dina_{name};
     wire [{READ_WIDTH}-1:0] doutb_{name};
     // ports
@@ -803,7 +811,8 @@ class RAMBlock(LayerBlock):
         .data_out_address(addra_{name}),
         .data_out_write_enable(wea_{name})
         );
-    """
+
+"""
     
     def ports_signals(self):
         signals = {
@@ -824,7 +833,7 @@ class RAMBlock(LayerBlock):
             signals['address'].append(p_write['address'])
             signals['address'].append(p_read['address'])
         
-        signals = {'formula_'+k:' ,'.join(v) for k,v in signals.items()}
+        signals = {'formula_'+k:(',\n'+' '*9).join(v) for k,v in signals.items()}
         
         return signals
     
@@ -884,20 +893,186 @@ class RAMBlock(LayerBlock):
         T = T.format(name=self.name,**signals, **self.config)
         return T
 
-class SharedMemoryBlocks(GenBlk):
+
+class SharedMemoryBlocks(LayerBlock):
     
-    def __init__(self, layers:List[LayerBlock]) -> None:
-        self.name = None
-        self.config = {}
+    def __init__(self, name, prev_blk:LayerBlock, layers:List[LayerBlock]) -> None:
+        config = self.extract_config(name, prev_blk, layers)
+        super().__init__(name,
+                         config['in_shape'],
+                         config['out_shape'],
+                         config['in_quant'],
+                         config['out_quant'],
+                         config
+                         )
+    
+    def extract_config(self,name:str, prev_blk:LayerBlock, layers:List[LayerBlock]):
+        sizes = []
+        for L in layers:
+            s = L.out_shape[0]*L.out_shape[1]*L.out_shape[2]*(8//L.out_quant[0])
+            sizes.append(s)
         
-    def extract_config(self,):
-        return {}
+        rams = []
+        if len(layers) == 1:
+            rams.append(RAMBlock('ram_block_0_'+name,sizes[0]))
+        elif len(layers) > 1:
+            s0 = max(sizes[0::2])    
+            s1 = max(sizes[1::2])    
+            rams.append(RAMBlock('ram_block_0_'+name,s0))
+            rams.append(RAMBlock('ram_block_1_'+name,s1))
+        
+        latency = 3
+        for L in layers:
+            L.config['read_latency'] = latency
+            L.config['write_latency'] = latency
+        
+        config = {
+                 'in_shape':prev_blk.out_shape,
+                 'in_quant':prev_blk.out_quant,
+                 'out_shape':layers[-1].out_shape,
+                 'out_quant':layers[-1].out_quant,
+                 'layers':layers,
+                 'rams':rams,
+                 'prev_blk':prev_blk,
+                 }
+        
+        return config
     
     def external_signals(self):
-        return {}
+        sx = self.get_suffix()
+        signals = {
+                  'clk':'clk'+sx,
+                  }
+        return signals
+    
+    def get_writers(self, ram_id):
+        return self.config['layers'][ram_id::2]
+    
+    def get_readers(self, ram_id):
+        return self.config['layers'][(1+ram_id)::2]
+    
+    def get_interface_to_prev(self, key_prefix=''):
+        sx = self.get_suffix()
+        signals = {
+                  key_prefix+'en':'prev_en'+sx,
+                  key_prefix+'data':'prev_data'+sx,
+                  key_prefix+'address':'prev_address'+sx,
+                  key_prefix+'reader_enabled':'prev_reader_enabled'+sx, # reader layer enabled
+                  }
+        return signals
+    
+    def get_interface_to_next(self, key_prefix=''):
+        sx = self.get_suffix()
+        signals = {
+                  key_prefix+'en':'next_en'+sx,
+                  key_prefix+'data':'next_data'+sx,
+                  key_prefix+'address':'next_address'+sx,
+                  key_prefix+'reader_enabled':'next_reader_enabled'+sx,
+                  }
+        return signals
         
+    TEMPL = """
+    // to/from previous block of double RAM
+    wire {clk};
+    wire {prev_en};
+    wire {prev_reader_enabled};
+    wire [8-1:0] {prev_data};
+    wire [32-1:0] {prev_address};
+    // to/from next block of double RAM
+    wire {next_en};
+    wire {next_reader_enabled};
+    wire [8-1:0] {next_data};
+    wire [32-1:0] {next_address};    
+"""
+    
     def generate(self) -> str:
-        return ''
+        # declare wires for nearest blocks connection
+        signals = self.get_interface_to_prev('prev_')
+        signals.update(self.get_interface_to_next('next_'))
+        signals.update(self.external_signals())
+        print("signals:\n",signals)
+        T = SharedMemoryBlocks.TEMPL.format(**signals)
+        
+        for j, r in enumerate(self.config['rams']):
+            T += '   // generate ram '+ str(j)+'\n'
+            r:RAMBlock = r
+            T += r.generate()
+            readers = self.get_readers(j)
+            writers = self.get_writers(j)
+            
+            readers += [None]*(r.config['ports']-len(readers)-1) # -1 for read from next block 
+            writers += [None]*(r.config['ports']-len(writers))
+            
+            for i, layer in enumerate(readers):
+                p_r = r.get_port_read(i)
+                layer_port_read = layer.get_memory_read()
+                if layer_port_read:
+                    T += '\n   // assignments for read port '+str(i)+'\n'
+                    T += assign(layer_port_read['data'], p_r['data'])
+                    T += assign(p_r['address'], layer_port_read['address'])
+                    T += assign(p_r['en'], layer_port_read['en'])
+                else:
+                    T += '\n   // zero assignments for read port '+str(i)+'\n'
+                    T += '   // no out data assignment'+'\n'
+                    T += assign(p_r['address'], "32'd0")
+                    T += assign(p_r['en'], "1'd0")
+                    
+            for i, layer in enumerate(writers):
+                p_w = r.get_port_write(i)
+                layer_port_write = layer.get_memory_write()
+                
+                if layer_port_write:
+                    T += '\n   // assignments for write port '+str(i)+'\n'
+                    T += assign(p_w['data'],layer_port_write['data'])
+                    T += assign(p_w['address'], layer_port_write['address'])
+                    T += assign(p_w['wen'], layer_port_write['wen'])
+                    T += assign(p_w['en'], layer_port_write['en'])
+                else:
+                    T += '\n   // zero assignments for write port '+str(i)+'\n'
+                    T += assign(p_w['data'],"32'd0")
+                    T += assign(p_w['address'], "32'd0")
+                    T += assign(p_w['wen'], "1'd0")
+                    T += assign(p_w['en'], "1'd0")
+        
+        # nearest blocks interaces
+        first_layer_interf = self.config['layers'][0].get_memory_read()
+        block_prev = self.get_interface_to_prev()
+        T += '\n   // assignments for first layer input\n'
+        T += assign(first_layer_interf['data'],block_prev['data'])
+        T += assign(block_prev['address'], first_layer_interf['address'])
+        T += assign(block_prev['en'], first_layer_interf['en'])
+        
+        last_ram_idx = (len(self.config['layers'])+1) % 2
+        last_ram : RAMBlock = self.config['rams'][last_ram_idx]
+        lr_interf = last_ram.get_port_read(last_ram.config['ports']-1)
+        block_next = self.get_interface_to_next()
+        T += '\n   // assignments for first layer input\n'
+        T += assign(block_next['data'],lr_interf['data'])
+        T += assign(lr_interf['address'], block_next['address'])
+        T += assign(lr_interf['en'], block_next['en'])
+        
+        T += '\n    // read and write selectors\n'
+        for j, r in enumerate(self.config['rams'][:-1]):
+            readers = self.get_readers(j)
+            writers = self.get_writers(j)
+            
+            # reade selector
+            r_sel = r.external_signals()['reader_select']
+            # assign 2nd layer enable or always 0 index
+            en = readers[-1].external_signals()['enable'] if len(readers) > 1 \
+                                                          else "1'b0" if j != last_ram_idx\
+                                                                      else lr_interf['reader_enabled']
+            T += assign(r_sel,en)
+            # write selector
+            w_sel = r.external_signals()['writer_select']
+            # assign 2nd layer enable or always 0 index
+            en = writers[-1].external_signals()['enable'] if len(writers) > 1 else "1'b0"  
+            T += assign(w_sel,en)    
+        
+        return T
+
+def assign(w,r):
+    return '    assign '+w+' = '+r+';\n'
 
 
 class LastBlock(GenBlk):
@@ -974,7 +1149,10 @@ def create_hw_from_sw(model:torch.nn.Module,
     
     # [print(i,L) for i,L in enumerate(layers_blocks)]
     
-    pass
+    sh = SharedMemoryBlocks('sh_block', layers_blocks[0], layers_blocks[1:5])
+    print("SHHH")
+    print(sh.config)
+    print(sh.generate())
 
 
 if __name__ == "__main__":
@@ -1020,8 +1198,8 @@ if __name__ == "__main__":
     model = LittleNet7(3,qin,(qw,None,qa,qb),(qw,None,qa,qb))
     create_hw_from_sw(model, (1,3,112,208))
     
-    ram = RAMBlock('ram_0', 2300)
-    print(ram.name)
-    print(ram.config)
-    print(ram.external_signals())
-    print(ram.generate())
+    # ram = RAMBlock('ram_0', 2300)
+    # print(ram.name)
+    # print(ram.config)
+    # print(ram.external_signals())
+    # print(ram.generate())
