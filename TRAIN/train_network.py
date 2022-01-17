@@ -197,7 +197,7 @@ if __name__ == '__main__':
     # get layers outputs
     with torch.no_grad():
         t = torch.rand(1,3,*image_shape[:2], device=device)
-        ans = net.multioutput_forward(t)[:-2]
+        ans = net.multioutput_forward(t)[:-1]
 
     layers_outputs = np.array([list(a.size()) for a in ans])
 

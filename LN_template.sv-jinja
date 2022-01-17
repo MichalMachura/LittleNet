@@ -1,0 +1,579 @@
+
+
+module LittleNetAcc 
+    (
+    input clk,
+    input reset,
+    
+    input [31:0] data_in,
+    input data_in_validity,
+    output write_possible,
+    
+    output output_data_ready,
+    output [7:0] output_data [7],
+    input output_was_read
+    );
+
+
+wire enable[{{ layers|len }}];
+wire reset[{{ layers|len }}];
+wire finished[{{ layers|len }}];
+wire sleep[{{ layers|len }}];
+wire [7:0] data_read[{{ layers|len }}];
+wire [31:0] data_read_address[{{ layers|len }}];
+wire [31:0] data_read_en[{{ layers|len }}];
+wire [31:0] data_write[{{ layers|len }}];
+wire [31:0] data_write_address[{{ layers|len }}];
+wire data_write_we[{{ layers|len }}];
+wire il_last_data_received;
+
+
+{% for i, L in layers | enumerate %}
+    {% if L["type"] == "InputLayer" %}
+    InputLayer
+		#(
+		.BIT_WIDTH({{ L["bit_width"] }}),
+		.WIDTH({{ L["width"] }}),
+		.HEIGHT({{ L["height"] }}),
+		.CHANNELS({{ L["channels"] }}),
+		.GROUPS({{ L["groups"] }}),
+		.WRITE_MEMORY_LATENCY({{ L["write_latency"] }})
+		)
+		{{L["name"]}}
+		(
+		.clk(clk),
+		.enable(enable[{{i}}]),
+		.reset(reset[{{i}}]),
+		.data_in(data_in),
+		.data_in_validity(data_in_validity),
+		.data_out(data_write[{{i}}]),
+		.data_out_address(data_write_address[{{i}}]),
+		.data_out_validity(data_write_we[{{i}}]),
+		.finished(finished[{{i}}]),
+		.last_data_received(il_last_data_received)
+		);
+    {% elif L["type"] == "PWConv2d" %}
+    wire [{{L['parallelism']}}*{{L['weight_bw']}}-1:0] data_weight_{{i}};
+    wire [31:0] data_weight_address_{{i}};
+    wire data_weight_en_{{i}};
+    
+    PointwiseConv2dUnit#(
+        .IN_WIDTH({{L["width"]}}),
+        .IN_HEIGHT({{L["height"]}}),
+        .IN_CHANNELS({{L["ch_in"]}}),
+        .OUT_CHANNELS({{L["ch_out"]}}),
+        .USE_BIAS({{L["use_bias"]}}),
+        .USE_BN({{L["use_bn"]}}),
+        .USE_RELU({{L["use_relu"]}}),
+        .USE_MAXPOOL({{L["use_mp"]}}),
+        .USE_MAXPOOL_CEIL_MODE({{L["ceil_mode"]}}),
+        .PARALLELISM({{L["parallelism"]}}),
+        .GROUPS({{L["groups"]}}),
+        .USE_MAX_FINDER({{L["use_maxfinder"]}}),
+        .ANCHORS({{L["anchors"]}}),
+        .IN_DATA_BIT_WIDTH({{L["in_bw"]}}),
+        .IN_DATA_INT_WIDTH({{L["in_int"]}}),
+        .IN_DATA_SIGN({{L["in_s"]}}),
+        .WEIGHT_DATA_BIT_WIDTH({{L["weight_bw"]}}),
+        .WEIGHT_DATA_INT_WIDTH({{L["weight_int"]}}),
+        .WEIGHT_DATA_SIGN({{L["weight_s"]}}),
+        .BIAS_DATA_BIT_WIDTH({{L["bias_bw"]}}),
+        .BIAS_DATA_INT_WIDTH({{L["bias_int"]}}),
+        .BIAS_DATA_SIGN({{L["bias_s"]}}),
+        .INTER_DATA_BIT_WIDTH({{L["inter_bw"]}}),
+        .INTER_DATA_INT_WIDTH({{L["inter_int"]}}),
+        .INTER_DATA_SIGN({{L["inter_s"]}}),
+        .BN_W_DATA_BIT_WIDTH({{L["bn_weight_bw"]}}),
+        .BN_W_DATA_INT_WIDTH({{L["bn_weight_int"]}}),
+        .BN_W_DATA_SIGN({{L["bn_weight_s"]}}),
+        .BN_B_DATA_BIT_WIDTH({{L["bn_bias_bw"]}}),
+        .BN_B_DATA_INT_WIDTH({{L["bn_bias_int"]}}),
+        .BN_B_DATA_SIGN({{L["bn_bias_s"]}}),
+        .OUT_DATA_BIT_WIDTH({{L["out_bw"]}}),
+        .OUT_DATA_INT_WIDTH({{L["out_int"]}}),
+        .OUT_DATA_SIGN({{L["out_s"]}}),
+        .READ_MEMORY_LATENCY({{L["read_latency"]}}),
+        .READ_WEIGHT_MEMORY_LATENCY({{L["read_weight_latency"]}}),
+        .WRITE_MEMORY_LATENCY({{L["write_latency"]}})
+        )
+        {{L['name']}}
+        (
+        .clk(clk),
+        .reset(reset[{{i}}]),
+        .enable(enable[{{i}}]),
+        .finished(finished[{{i}}]),
+        .in_data_memory_out(data_read[{{i}}]),
+        .in_data_memory_address(data_read_address[{{i}}]),
+        .in_data_memory_read_enable(data_read_en[{{i}}]),
+        .weights_memory_out(data_weight_{{i}}),
+        .weights_memory_address(data_weight_address_{{i}}),
+        .weights_memory_read_enable(data_weight_en_{{i}}),
+        .out_data_memory_in(data_write[{{i}}]),
+        .out_data_memory_address(data_write_address[{{i}}]),
+        .out_data_memory_write_enable(data_write_we[{{i}}])
+        );
+    ROM
+        #(
+        .LEN({{L["rom_len"]}}),
+        .DATA_WIDTH({{L['parallelism']}}*{{L['weight_bw']}}),
+        .init_file_name("rom_{{L['name']}}.mem"),
+        .LATENCY({{L['read_weight_latency']}}),
+        .USE_SLEEP({{(L["rom_type"] != "distributed") | int}}),
+        .PRIMITIVE_TYPE("{{L["rom_type"]}}")
+        )
+        rom_{{L["name"]}}
+        (
+        .clka(clk),
+        .sleep(sleep[{{i}}]),
+        .douta(data_weight_{{i}}),
+        .addra(data_weight_address_{{i}}),
+        .ena(data_weight_en_{{i}}),
+        );
+    {% elif L["type"] == "DWConv2d" %}
+    wire [{{L['weight_bw']}}-1:0] data_weight_{{i}};
+    wire [31:0] data_weight_address_{{i}};
+    wire data_weight_en_{{i}};
+    
+    DepthwiseConv2dUnit#(
+        .IN_WIDTH({{L["width"]}}),
+        .IN_HEIGHT({{L["height"]}}),
+        .IN_CHANNELS({{L["ch_in"]}}),
+        .CHANNEL_MUL({{L["ch_mul"]}}),
+        .PADDING_W({{L["padding_w"]}}),
+        .PADDING_H({{L["padding_h"]}}),
+        .USE_BIAS({{L["use_bias"]}}),
+        .USE_BN({{L["use_bn"]}}),
+        .USE_RELU({{L["use_relu"]}}),
+        .GROUPS({{L["groups"]}}),
+        .IN_DATA_BIT_WIDTH({{L["in_bw"]}}),
+        .IN_DATA_INT_WIDTH({{L["in_int"]}}),
+        .IN_DATA_SIGN({{L["in_s"]}}),
+        .WEIGHT_DATA_BIT_WIDTH({{L["weight_bw"]}}),
+        .WEIGHT_DATA_INT_WIDTH({{L["weight_int"]}}),
+        .WEIGHT_DATA_SIGN({{L["weight_s"]}}),
+        .BIAS_DATA_BIT_WIDTH({{L["bias_bw"]}}),
+        .BIAS_DATA_INT_WIDTH({{L["bias_int"]}}),
+        .BIAS_DATA_SIGN({{L["bias_s"]}}),
+        .INTER_DATA_BIT_WIDTH({{L["inter_bw"]}}),
+        .INTER_DATA_INT_WIDTH({{L["inter_int"]}}),
+        .INTER_DATA_SIGN({{L["inter_s"]}}),
+        .BN_W_DATA_BIT_WIDTH({{L["bn_weight_bw"]}}),
+        .BN_W_DATA_INT_WIDTH({{L["bn_weight_int"]}}),
+        .BN_W_DATA_SIGN({{L["bn_weight_s"]}}),
+        .BN_B_DATA_BIT_WIDTH({{L["bn_bias_bw"]}}),
+        .BN_B_DATA_INT_WIDTH({{L["bn_bias_int"]}}),
+        .BN_B_DATA_SIGN({{L["bn_bias_s"]}}),
+        .OUT_DATA_BIT_WIDTH({{L["out_bw"]}}),
+        .OUT_DATA_INT_WIDTH({{L["out_int"]}}),
+        .OUT_DATA_SIGN({{L["out_s"]}}),
+        .READ_MEMORY_LATENCY({{L["read_latency"]}}),
+        .READ_WEIGHT_MEMORY_LATENCY({{L["read_weight_latency"]}}),
+        .WRITE_MEMORY_LATENCY({{L["write_latency"]}})
+        )
+        {{L["name"]}}
+        (
+        .clk(clk),
+        .reset(reset[{{i}}]),
+        .enable(enable[{{i}}]),
+        .finished(finished[{{i}}]),
+        .in_data_memory_out(data_read[{{i}}]),
+        .in_data_memory_address(data_read_address[{{i}}]),
+        .in_data_memory_read_enable(data_read_en[{{i}}]),
+        .weights_memory_out(data_weight_{{i}}),
+        .weights_memory_address(data_weight_address_{{i}}),
+        .weights_memory_read_enable(data_weight_en_{{i}}),
+        .out_data_memory_in(data_write[{{i}}]),
+        .out_data_memory_address(data_write_address[{{i}}]),
+        .out_data_memory_write_enable(data_write_we[{{i}}])
+        );
+    ROM
+        #(
+        .LEN({{L["rom_len"]}}),
+        .DATA_WIDTH({{L['parallelism']}}*{{L['weight_bw']}}),
+        .init_file_name("rom_{{L['name']}}.mem"),
+        .LATENCY({{L['read_weight_latency']}}),
+        .USE_SLEEP({{(L["rom_type"] != "distributed") | int}}),
+        .PRIMITIVE_TYPE("{{L["rom_type"]}}")
+        )
+        rom_{{L["name"]}}
+        (
+        .clka(clk),
+        .sleep(sleep[{{i}}]),
+        .douta(data_weight_{{i}}),
+        .addra(data_weight_address_{{i}}),
+        .ena(data_weight_en_{{i}})
+        );
+    {% endif %}
+{% endfor %}
+
+// RAMS
+wire ena[{{ rams|len }}], 
+wire enb[{{ rams|len }}], 
+wire wea[{{ rams|len }}], 
+wire [31:0] addra[{{ rams|len }}]; 
+wire [31:0] addrb[{{ rams|len }}];
+wire [31:0] dina[{{ rams|len }}];
+wire [7:0] doutb[{{ rams|len }}];
+
+// ports read
+wire [0:0] port_read_select[{{ (rams|len)}}];
+wire [7:0] port_read_data[{{ (rams|len)*2}}];
+wire [7:0] port_read_address[{{ (rams|len)*2}}];
+wire port_read_en[{{ (rams|len)*2}}];
+
+// ports write
+wire [0:0] port_write_select[{{ (rams|len)}}];
+wire [7:0] port_write_data[{{ (rams|len)*2}}];
+wire [7:0] port_write_address[{{ (rams|len)*2}}];
+wire port_write_en[{{ (rams|len)*2}}];
+wire port_write_we[{{ (rams|len)*2}}];
+
+{% for i, R in rams|enumerate %}
+    SDP_RAM
+        #(
+        .BYTE_LEN({{R["BYTE_LEN"]}}),
+        .WRITE_WIDTH({{32}}),
+        .READ_WIDTH({{8}}),
+        .BYTE_SIZE({{8}}),
+        .READ_LATENCY({{2}}),
+        .USE_SLEEP({{0}})
+        )
+        {{R["name"]}}
+        (
+         .clka(clk),
+         .ena(ena[{{i}}]),
+         .dina(dina[{{i}}]),
+         .addra(addra[{{i}}]),
+         .wea(wena[{{i}}]),
+         
+         .clkb(clk),
+         .enb(enb[{{i}}]),
+         .doutb(doutb[{{i}}]),
+         .addrb(addrb[{{i}}]),
+         
+         .sleep(1'b0)
+        );
+    
+    MemoryReaderSelectorUnit
+        #(
+        .BIT_WIDTH(8),
+        .ADDRESS_BITS(32),
+        .SOURCES(2),
+        )
+        reader_selector_{{R["name"]}}
+        (
+        .clk(clk),
+        .select(port_read_select[{{i}}]),
+        .data_in_address(port_read_address[{{2*i}}:{{2*i+1}}]),
+        .data_in_read_enable(port_read_en[{{2*i}}:{{2*i+1}}]),
+        
+        .data_out_address(addrb[{{i}}]),
+        .data_out_read_enable(enb[{{i}}])
+        );
+    assign port_read_data[{{2*i}}] = doutb[{{i}}];
+    assign port_read_data[{{2*i+1}}] = doutb[{{i}}];
+    
+    // ram's port write activation 
+    assign ena[{{i}}] = port_write_en[{{2*i}}] | port_write_en[{{2*i}}];
+    
+    MemoryWriterSelectorUnit
+        #(
+        .BIT_WIDTH(32),
+        .ADDRESS_BITS(32),
+        .SOURCES(2),
+        )
+        writer_selector_{{R["name"]}}
+        (
+        .clk(clk),
+        .select(port_write_select[{{i}}]),
+        
+        .data_in(port_write_data[{{2*i}}:{{2*i+1}}]),
+        .data_in_address(port_write_address[{{2*i}}:{{2*i+1}}]),
+        .data_in_write_enable(port_write_we[{{2*i}}:{{2*i+1}}]),
+        
+        .data_out(dina[{{i}}]),
+        .data_out_address(addra[{{i}}]),
+        .data_out_write_enable(wea[{{i}}])
+        );
+
+{% endfor %}
+
+// OUTPUT MEMORY
+wire [7:0] registers_dina = data_write[{{(layers|len)-1}}];
+wire [31:0] registers_addra = data_write_address[{{(layers|len)-1}}];
+wire registers_we = data_write_we[{{(layers|len)-1}}];
+wire [7:0] registers_out[7];
+ShiftRegisters	#(
+                .WIDTH(8),
+                .LENGTH(7)
+                )
+                output_registers
+                (
+                .clk(clk),
+                .step(registers_we),
+                .data_in(registers_dina),
+                .registers_out(registers_out)
+                );
+
+assign write_possible = !il_last_data_received 
+                        && enable[0] 
+                        && !reset[0];
+assign output_data = registers_out;
+assign output_data_ready = finished[{{(layers|len)-1}}] 
+                           && enable[{{(layers|len)-1}}] 
+                           && !reset[{{(layers|len)-1}}];
+(* KEEP = "TRUE" *) reg enable_reg[4] = {1'b0,1'b0,1'b0,1'b0};
+(* KEEP = "TRUE" *) reg sleep_reg[4] = {1'b0,1'b0,1'b0,1'b0};
+(* KEEP = "TRUE" *) reg reset_reg[4] = {1'b1,1'b1,1'b1,1'b1};
+wire [3:0] finished_step;
+
+// registers assignments
+{% for i in range(4) %}
+// assign layers for state {{i}}
+{% for l in layers|for_state(i) %}
+assign enable[{{l}}] = enable_reg[{{i}}];
+assign reset[{{l}}] = reset_reg[{{i}}];
+assign sleep[{{l}}] = sleep_reg[{{i}}];
+{% endfor%}
+// assign finished step
+assign finished_step[{{i}}] = {{layers|
+                                for_state(i)|
+                                as_array_elems('finished[{}]', (layers|len)-1,'output_was_read')|
+                                join_elems(' && ','1')}};
+{% endfor%}
+
+// ram ports assignments
+{% for i,r in rams|enumerate %}
+    // read ports  
+    {% for port, layer_idx in r['layers_read']|enumerate %}
+    assign data_read[{{layer_idx}}] = port_read_data[{{2*i+port}}];
+    assign port_read_address[{{2*i+port}}] = data_read_address[{{layer_idx}}];
+    assign port_read_en[{{2*i+port}}] = data_read_en[{{layer_idx}}];
+    {% endfor%}
+    // read ports - unused 
+    {% for port in range(r['layers_read']|len,2) %}
+    assign port_read_address[{{2*i+port}}] = 32'd0;
+    assign port_read_en[{{2*i+port}}] = 1'b0;
+    {% endfor%}
+    // write ports  
+    {% for port, layer_idx in r['layers_write']|enumerate %}
+    assign data_write[{{layer_idx}}] = port_write_data[{{2*i+port}}];
+    assign port_write_address[{{2*i+port}}] = data_write_address[{{layer_idx}}];
+    assign port_write_en[{{2*i+port}}] = data_write_en[{{layer_idx}}];
+    assign port_write_we[{{2*i+port}}] = enable[{{layer_idx}}];
+    {% endfor%}
+    // write ports - unused 
+    {% for port in range(r['layers_write']|len,2) %}
+    assign port_write_data[{{2*i+port}}] = 32'd0;
+    assign port_write_address[{{2*i+port}}] = 32'd0;
+    assign port_write_en[{{2*i+port}}] = 1'b0;
+    assign port_write_we[{{2*i+port}}] = 1'b0;
+    {% endfor%}
+{% endfor%}
+
+(* KEEP = "TRUE" *)
+reg [3:0] state = 4'd13;
+
+localparam AWAKENING_TIME = 17;
+localparam AWAKENING_TIME_BITS = $clog2(AWAKENING_TIME);
+(* KEEP = "TRUE" *) reg [AWAKENING_TIME_BITS-1:0] awakening_cntr = 0;
+	
+always @(posedge clk)
+    begin
+    if (reset)
+        begin
+        // GO TO RESET ALL STATE
+        state <= 4'd13;
+        end
+    else
+        begin
+        case (state)
+        // initial step
+        4'd0:
+            begin
+            // turn off all resets
+            reset_reg <= 4'b0000;
+            // turn off all modules
+            enable_reg <= {{layers|len}}'d0;
+            // put sleep all modules
+            sleep_reg <= {{layers|len}}'d0;
+            // awake all rams
+            awakening_cntr <= 0;
+            // to first processing step
+            state <= 4'd1;
+            end
+            
+        // first processing step
+        4'd1:
+            begin
+            reset_reg[0] <= 1'b1;
+            sleep_reg[0] <= 1'b0;
+            // awakening of roms time
+            if (awakening_cntr == AWAKENING_TIME-1)
+                begin
+                awakening_cntr <= 0;
+                // go to enabling state
+                state <= 4'd2;
+                end
+            else
+                awakening_cntr <= awakening_cntr+1;
+            end
+        // turn off resets
+        4'd2:
+            begin
+            // put to sleep prev state layers
+            sleep_reg[3] <= 1'b1;
+            // stop resetting
+            reset_reg[0] <= 1'b0;
+            // turn on layers
+            enable_reg[0] <= 1'b1;
+            // to working state
+            state <= 4'd3;
+            end
+        4'd3:
+            begin
+            // turn off finished layers if finish work
+            if ( finished[0])
+                begin
+                enable_reg[0] <= 1'b0;
+                // next processing step
+                state <= 4'd4;
+                end
+            end
+            
+        // second processing step
+        4'd4:
+            begin
+            reset_reg[1] <= 1'b1;
+            sleep_reg[1] <= 1'b0;
+            // awakening of rams time
+            if (awakening_cntr == AWAKENING_TIME-1)
+                begin
+                awakening_cntr <= 0;
+                // go to enabling state
+                state <= 4'd5;
+                end
+            else
+                awakening_cntr <= awakening_cntr+1;
+            end
+        // turn off resets
+        4'd5:
+            begin
+            // put sleep prev layers
+            sleep_reg[0] <= 1'b1;
+            // stop resetting
+            reset_reg[1] <= 1'b0;
+            // turn on layers
+            enable_reg[1] <= 1'b1;
+            // to working state
+            state <= 4'd6;
+            end
+        4'd6:
+            begin
+            // turn off finished layers if finish work
+            if ( finished[1])
+                begin
+                enable_reg[1] <= 1'b0;
+                // next processing step
+                state <= 4'd7;
+                end
+            end
+        
+        // third processing step
+        4'd7:
+            begin
+            reset_reg[2] <= 1'b1;
+            sleep_reg[2] <= 1'b0;
+            // awakening of rams time
+            if (awakening_cntr == AWAKENING_TIME-1)
+                begin
+                awakening_cntr <= 0;
+                // go to enabling state
+                state <= 4'd8;
+                end
+            else
+                awakening_cntr <= awakening_cntr+1;
+            end
+        // turn off resets
+        4'd8:
+            begin
+            // put to sleep prev layers
+            sleep_reg[1] <= 1'b1;
+            // stop resetting
+            reset_reg[2] <= 1'b0;
+            // turn on
+            enable_reg[2] <= 1'b1;
+            // to working state
+            state <= 4'd9;
+            end
+        4'd9:
+            begin
+            // turn off finished layers if finish work
+            if (finished[2])
+                begin
+                enable_reg[2] <= 1'b0;
+                // next processing step
+                state <= 4'd10;
+                end
+            end
+        
+        // fourth processing step
+        4'd10:
+            begin
+            reset_reg[3] <= 1'b1;
+            sleep_reg[3] <= 1'b0;
+            // awakening of roms time
+            if (awakening_cntr == AWAKENING_TIME-1)
+                begin
+                awakening_cntr <= 0;
+                // go to enabling state
+                state <= 4'd11;
+                end
+            else
+                awakening_cntr <= awakening_cntr+1;
+            end
+        // turn off resets
+        4'd11:
+            begin
+            // put to sleep prev layers
+            sleep_reg[2] <= 1'b1;
+            // stop resetting
+            reset_reg[3] <= 1'b0;
+            // turn on
+            enable_reg[3] <= 1'b1;
+            // to working state
+            state <= 4'd12;
+            end
+        4'd12:
+            begin
+            // turn off finished layers if finish work
+            if (finished[3])
+                begin
+                enable_reg[3] <= 1'b0;
+                // next processing step
+                state <= 4'd1;
+                // OR reset all
+                // state <= 4'd13;
+                end
+            end
+        // RESET STEP
+        4'd13:
+            begin
+            // RESET ALL
+            // turn on all resets
+            reset_reg <= 4'b1111;
+            // disable all modules
+            enable_reg <= {{layers|len}}'d0;
+            
+            awakening_cntr <= 0;
+            // to init step
+            state <= 4'd0;
+            end
+        default:
+            begin
+            // to RESET ALL STEP
+            state <= 4'd13;
+            end
+        endcase
+    end
+endmodule
