@@ -667,6 +667,6 @@ if __name__ == "__main__":
     
     model = LittleNet7(3,qin,(qw,None,qa,qb),(qw,None,qa,qb))
     create_hw_from_sw(model, (1,3,112,208),
-                      rom_dir='./HW/LittleNetAcc_2019_1/custom_memory_inits',
+                      rom_dir='./HW/LittleNetAcc_2019_1/memories',
                       dst_file_path='./HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/little_net_acc.sv')
     
