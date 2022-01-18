@@ -32,7 +32,8 @@ module LittleNetAccAxi
 	wire [31:0] data_in;
 	ReceiveFromAxis #(
 					.BIT_WIDTH(32),
-					.DATA_SIZE((100*200*3) / 4),
+					// .DATA_SIZE((100*200*3) / 4), // old sizes
+					.DATA_SIZE((112*208*3) / 4),
 					.AXI_SAME_CLK(1)
 					)
 					receiver

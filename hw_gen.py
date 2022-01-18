@@ -8,6 +8,7 @@ import TRAIN
 from TRAIN import networks
 from TRAIN.networks import LittleNet7, PWConv2d, DWConv2d
 from TRAIN import quantizers 
+import numpy as np
 
 
 class LayerBlock:
@@ -99,7 +100,7 @@ class PWBlock(LayerBlock):
         rom_len = (in_shape[0]+use_bias+2*use_bn)*((out_ch-1)//parallelism+1)
         rom_width = parallelism*weight_fp[0]
         rom_size = rom_len*rom_width/8
-        rom_type = "distributed" if rom_size < 129 else "block"
+        rom_type = "distributed" if rom_size < 256 else "block"
         
         config = {
             'in_shape':in_shape,
@@ -114,41 +115,41 @@ class PWBlock(LayerBlock):
             
             'in_bw':in_quant[0],
             'in_int':in_quant[1],
-            'in_s':in_quant[2],
+            'in_s':in_quant[2]*1,
             
             'weight':weight,
             'weight_q':weight_quantizer,
             'weight_bw':weight_fp[0],
             'weight_int':weight_fp[1],
-            'weight_s':weight_fp[2],
+            'weight_s':weight_fp[2]*1,
             
             'bias':bias,
             'bias_q':bias_quantizer,
             'bias_bw':bias_fp[0],
             'bias_int':bias_fp[1],
-            'bias_s':bias_fp[2],
+            'bias_s':bias_fp[2]*1,
             
             'inter_q':inter_quantizer,
             'inter_bw':inter_fp[0],
             'inter_int':inter_fp[1],
-            'inter_s':inter_fp[2],
+            'inter_s':inter_fp[2]*1,
             
             'bn_weight':bn_w,
             'bn_weight_q':bn_w_quantizer,
             'bn_weight_bw':bn_w_fp[0],
             'bn_weight_int':bn_w_fp[1],
-            'bn_weight_s':bn_w_fp[2],
+            'bn_weight_s':bn_w_fp[2]*1,
             
             'bn_bias':bn_b,
             'bn_bias_q':bn_b_quantizer,
             'bn_bias_bw':bn_b_fp[0],
             'bn_bias_int':bn_b_fp[1],
-            'bn_bias_s':bn_b_fp[2],
+            'bn_bias_s':bn_b_fp[2]*1,
             
             'out_q': out_quantizer,
             'out_bw':out_fp[0],
             'out_int':out_fp[1],
-            'out_s':out_fp[2],
+            'out_s':out_fp[2]*1,
             
             'use_bias': use_bias*1,
             'use_bn': use_bn*1,
@@ -170,7 +171,91 @@ class PWBlock(LayerBlock):
         return config
     
     def generate(self, path:str, order:torch.tensor) -> torch.tensor:
-        return order
+        nof = self.out_shape[0] # num of filters
+        now = self.in_shape[0] # num of weights in filter
+        indeces_nof = torch.arange(0,nof)
+        indeces_now = torch.arange(0,now)
+        
+        w = self.config['weight'].reshape(nof,-1)
+        w_q = self.config['weight_q']
+        w_s = self.config['weight_s']
+        # change weights order
+        w[:,indeces_now] = w[:,order]
+        qt = w_q(w)
+        t = (qt[0]/qt[1]).to(torch.int8 if w_s else torch.uint8).to(torch.uint8)
+        
+        if self.config['use_bias']:
+            b = self.config['bias'].reshape(nof,1)
+            b_q = self.config['bias_q']
+            b_s = self.config['bias_s']
+            qb = b_q(b)
+            b = (qb[0]/qb[1]).to(torch.int8 if b_s else torch.uint8).to(torch.uint8)
+            t = torch.cat([b, t],dim=1)
+        if self.config['use_bn']:
+            bn_w = self.config['bn_weight'].reshape(nof,1)
+            bn_w_q = self.config['bn_weight_q']
+            bn_w_s = self.config['bn_weight_s']
+            qbn_w = bn_w_q(bn_w)
+            bn_w = (qbn_w[0]/qbn_w[1]).to(torch.int8 if bn_w_s else torch.uint8).to(torch.uint8)
+            t = torch.cat([bn_w, t],dim=1)
+        if self.config['use_bn']:
+            bn_b = self.config['bn_bias'].reshape(nof,1)
+            bn_b_q = self.config['bn_bias_q']
+            bn_b_s = self.config['bn_bias_s']
+            qbn_b = bn_b_q(bn_b)
+            bn_b = (qbn_b[0]/qbn_b[1]).to(torch.int8 if bn_b_s else torch.uint8).to(torch.uint8)
+            t = torch.cat([bn_b, t],dim=1)
+        
+        p = self.config['parallelism']
+        t_p = parallelize_weights(t.numpy(),parallelism=p)
+        
+        s = array_to_str(t_p,parallelism=p,sep='\n',width=2,f='%02x')
+        
+        # save to file
+        with open(os.path.join(path,'rom_'+self.name+'.mem'),'w') as f:
+            f.write(s)
+            print("Saved memory file under:",
+                  os.path.join(path,'rom_'+self.name+'.mem'))
+        
+        out_order = indeces_nof 
+        return out_order
+
+
+def array_to_str(a, parallelism=1, sep='\n', width=8, f='b'):
+    pixels = a.flatten().tolist()
+    s = ''
+    for i,v in enumerate(pixels):
+        # s += format(v, f).zfill(bit_width)
+        s += (f % v).zfill(width)
+        if ((i+1)%parallelism) == 0:
+            s += sep
+    
+    return s
+
+
+def parallelize_weights(w, parallelism):
+    # each row is a filter/out_channel
+    out_channels = w.shape[0]
+    ch_per_thread = (out_channels -1) // parallelism +1
+    filled_out_channels = ch_per_thread*parallelism
+    
+    filled_w = np.zeros((filled_out_channels, w.shape[1]), dtype=w.dtype)
+    # beginning as original weights, rest as zeros
+    filled_w[:w.shape[0],:] = w
+    
+    parallel_parts = []
+    for p in range(parallelism):
+        f_beg = p*ch_per_thread
+        f_end = (p+1)*ch_per_thread
+        f_w = filled_w[f_beg:f_end,:]
+        parallel_parts.append(f_w.reshape((-1,1)))
+    
+    parallelized = np.concatenate(parallel_parts, axis=1)
+    parallelized_chpth = parallelized.reshape((ch_per_thread,-1))
+    parallelized = parallelized.reshape((-1,parallelism))
+
+    return parallelized
+
 
 class DWBlock(LayerBlock):
     
@@ -233,7 +318,7 @@ class DWBlock(LayerBlock):
         rom_len = out_ch*(k_size[0]*k_size[1] + 2*use_bn + use_bias)
         rom_width = weight_fp[0]
         rom_size = rom_len*rom_width/8
-        rom_type = "distributed" if rom_size < 129 else "block"
+        rom_type = "distributed" if rom_size < 256 else "block"
         
         config = {
             'in_shape':in_shape,
@@ -250,41 +335,41 @@ class DWBlock(LayerBlock):
             
             'in_bw':in_quant[0],
             'in_int':in_quant[1],
-            'in_s':in_quant[2],
+            'in_s':in_quant[2]*1,
             
             'weight':weight,
             'weight_q':weight_quantizer,
             'weight_bw':weight_fp[0],
             'weight_int':weight_fp[1],
-            'weight_s':weight_fp[2],
+            'weight_s':weight_fp[2]*1,
             
             'bias':bias,
             'bias_q':bias_quantizer,
             'bias_bw':bias_fp[0],
             'bias_int':bias_fp[1],
-            'bias_s':bias_fp[2],
+            'bias_s':bias_fp[2]*1,
             
             'inter_q':inter_quantizer,
             'inter_bw':inter_fp[0],
             'inter_int':inter_fp[1],
-            'inter_s':inter_fp[2],
+            'inter_s':inter_fp[2]*1,
             
             'bn_weight':bn_w,
             'bn_weight_q':bn_w_quantizer,
             'bn_weight_bw':bn_w_fp[0],
             'bn_weight_int':bn_w_fp[1],
-            'bn_weight_s':bn_w_fp[2],
+            'bn_weight_s':bn_w_fp[2]*1,
             
             'bn_bias':bn_b,
             'bn_bias_q':bn_b_quantizer,
             'bn_bias_bw':bn_b_fp[0],
             'bn_bias_int':bn_b_fp[1],
-            'bn_bias_s':bn_b_fp[2],
+            'bn_bias_s':bn_b_fp[2]*1,
             
             'out_q': out_quantizer,
             'out_bw':out_fp[0],
             'out_int':out_fp[1],
-            'out_s':out_fp[2],
+            'out_s':out_fp[2]*1,
             
             'use_bias': use_bias*1,
             'use_bn': use_bn*1,
@@ -302,7 +387,64 @@ class DWBlock(LayerBlock):
         return config
     
     def generate(self, path:str, order:torch.tensor) -> torch.tensor:
-        return order
+        nof = self.out_shape[0] # num of filters
+        now = 9 # num of weights in filter
+        indeces_nof = torch.arange(0,nof)
+        indeces_now = torch.arange(0,now)
+        
+        w = self.config['weight'].reshape(nof,-1)
+        w_q = self.config['weight_q']
+        w_s = self.config['weight_s']
+        # inverse weights order
+        w[:,indeces_now] = torch.tensor(w.numpy()[:,::-1].copy())
+        qt = w_q(w)
+        t = (qt[0]/qt[1]).to(torch.int8 if w_s else torch.uint8).to(torch.uint8)
+        
+        if self.config['use_bias']:
+            b = self.config['bias'].reshape(nof,1)
+            b_q = self.config['bias_q']
+            b_s = self.config['bias_s']
+            qb = b_q(b)
+            b = (qb[0]/qb[1]).to(torch.int8 if b_s else torch.uint8).to(torch.uint8)
+            t = torch.cat([b, t],dim=1)
+        if self.config['use_bn']:
+            bn_w = self.config['bn_weight'].reshape(nof,1)
+            bn_w_q = self.config['bn_weight_q']
+            bn_w_s = self.config['bn_weight_s']
+            qbn_w = bn_w_q(bn_w)
+            bn_w = (qbn_w[0]/qbn_w[1]).to(torch.int8 if bn_w_s else torch.uint8).to(torch.uint8)
+            t = torch.cat([bn_w, t],dim=1)
+        if self.config['use_bn']:
+            bn_b = self.config['bn_bias'].reshape(nof,1)
+            bn_b_q = self.config['bn_bias_q']
+            bn_b_s = self.config['bn_bias_s']
+            qbn_b = bn_b_q(bn_b)
+            bn_b = (qbn_b[0]/qbn_b[1]).to(torch.int8 if bn_b_s else torch.uint8).to(torch.uint8)
+            t = torch.cat([bn_b, t],dim=1)
+        
+        ch_mul = self.config['ch_mul']
+        mul_order = torch.cat([order.reshape(-1,1)*ch_mul+i for i in range(ch_mul)],
+                              dim=1).reshape(-1)
+        # change filters order to corelated with input channels order
+        t[indeces_nof,:] = t[mul_order,:]
+        
+        # reorder filters, because of multi-dw 
+        ind_mul = indeces_nof*ch_mul
+        out_order = ind_mul // nof + ind_mul % nof
+        t[indeces_nof,:] = t[out_order,:]
+        
+        p = 1
+        t_p = parallelize_weights(t.numpy(),parallelism=p)
+        
+        s = array_to_str(t_p,parallelism=p,sep='\n',width=2,f='%02x')
+        
+        # save to file
+        with open(os.path.join(path,'rom_'+self.name+'.mem'),'w') as f:
+            f.write(s)
+            print("Saved memory file under:",
+                  os.path.join(path,'rom_'+self.name+'.mem'))
+        
+        return out_order
 
 
 class ILBlock(LayerBlock):
@@ -330,6 +472,7 @@ class ILBlock(LayerBlock):
 
     def generate(self, path:str, order:torch.tensor) -> torch.tensor:
         return torch.arange(0,self.out_shape[0])
+
 
 # jinja filters
 def layers_for_state(layers, state:int):
@@ -423,11 +566,11 @@ def get_layers_config(model:torch.nn.Module, input_shape:tuple):
         t = L(t)[0]
         
         if isinstance(L, qnn.QuantIdentity):
-            prev = ILBlock("il_"+str(i), in_shape, L)
+            prev = ILBlock("layer_"+str(i)+"_il", in_shape, L)
         elif isinstance(L, PWConv2d):
-            prev = PWBlock("pw_"+str(i),prev, L)    
+            prev = PWBlock("layer_"+str(i)+"_pw",prev, L)    
         elif isinstance(L, DWConv2d):
-            prev = DWBlock("dw_"+str(i),prev,  L)
+            prev = DWBlock("layer_"+str(i)+"_dw",prev,  L)
         else:
             raise RuntimeError("Unsupported type")
         
@@ -451,6 +594,7 @@ def create_hw_from_sw(model:torch.nn.Module,
                       rom_dir='./',
                       dst_file_path='./LN.sv',
                       ):
+    model = model.eval()
     layers_blocks, layers_configs = get_layers_config(model, input_shape)
     
     rams = get_rams_config(layers_blocks)
@@ -473,12 +617,13 @@ def create_hw_from_sw(model:torch.nn.Module,
     with open(dst_file_path,'w') as f:
         f.write(LN_acc)
     
-    # create files with memories
-    order = torch.arange(0,3, dtype=torch.long)
-    path = rom_dir
-    for L in layers_blocks:
-        L:LayerBlock = L
-        order = L.generate(order, path)
+    with torch.no_grad():
+        # create files with memories
+        order = torch.arange(0,3, dtype=torch.long)
+        path = rom_dir
+        for L in layers_blocks:
+            L:LayerBlock = L
+            order = L.generate(path, order)
 
 if __name__ == "__main__":
 
@@ -521,5 +666,7 @@ if __name__ == "__main__":
                                           dst='act')
     
     model = LittleNet7(3,qin,(qw,None,qa,qb),(qw,None,qa,qb))
-    create_hw_from_sw(model, (1,3,112,208))
+    create_hw_from_sw(model, (1,3,112,208),
+                      rom_dir='./HW/LittleNetAcc_2019_1/custom_memory_inits',
+                      dst_file_path='./HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/little_net_acc.sv')
     

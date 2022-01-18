@@ -16,7 +16,7 @@ module LittleNetAcc
 
 
 wire enable[{{ layers|len }}];
-wire reset[{{ layers|len }}];
+wire rst[{{ layers|len }}];
 wire finished[{{ layers|len }}];
 wire sleep[{{ layers|len }}];
 wire [7:0] data_read[{{ layers|len }}];
@@ -43,7 +43,7 @@ wire il_last_data_received;
 		(
 		.clk(clk),
 		.enable(enable[{{i}}]),
-		.reset(reset[{{i}}]),
+		.reset(rst[{{i}}]),
 		.data_in(data_in),
 		.data_in_validity(data_in_validity),
 		.data_out(data_write[{{i}}]),
@@ -99,7 +99,7 @@ wire il_last_data_received;
         {{L['name']}}
         (
         .clk(clk),
-        .reset(reset[{{i}}]),
+        .reset(rst[{{i}}]),
         .enable(enable[{{i}}]),
         .finished(finished[{{i}}]),
         .in_data_memory_out(data_read[{{i}}]),
@@ -127,7 +127,7 @@ wire il_last_data_received;
         .sleep(sleep[{{i}}]),
         .douta(data_weight_{{i}}),
         .addra(data_weight_address_{{i}}),
-        .ena(data_weight_en_{{i}}),
+        .ena(data_weight_en_{{i}})
         );
     {% elif L["type"] == "DWConv2d" %}
     wire [{{L['weight_bw']}}-1:0] data_weight_{{i}};
@@ -173,7 +173,7 @@ wire il_last_data_received;
         {{L["name"]}}
         (
         .clk(clk),
-        .reset(reset[{{i}}]),
+        .reset(rst[{{i}}]),
         .enable(enable[{{i}}]),
         .finished(finished[{{i}}]),
         .in_data_memory_out(data_read[{{i}}]),
@@ -189,7 +189,7 @@ wire il_last_data_received;
     ROM
         #(
         .LEN({{L["rom_len"]}}),
-        .DATA_WIDTH({{L['parallelism']}}*{{L['weight_bw']}}),
+        .DATA_WIDTH({{L['weight_bw']}}),
         .init_file_name("rom_{{L['name']}}.mem"),
         .LATENCY({{L['read_weight_latency']}}),
         .USE_SLEEP({{(L["rom_type"] != "distributed") | int}}),
@@ -207,9 +207,9 @@ wire il_last_data_received;
 {% endfor %}
 
 // RAMS
-wire ena[{{ rams|len }}], 
-wire enb[{{ rams|len }}], 
-wire wea[{{ rams|len }}], 
+wire ena[{{ rams|len }}]; 
+wire enb[{{ rams|len }}]; 
+wire wea[{{ rams|len }}]; 
 wire [31:0] addra[{{ rams|len }}]; 
 wire [31:0] addrb[{{ rams|len }}];
 wire [31:0] dina[{{ rams|len }}];
@@ -244,7 +244,7 @@ wire port_write_we[{{ (rams|len)*2}}];
          .ena(ena[{{i}}]),
          .dina(dina[{{i}}]),
          .addra(addra[{{i}}]),
-         .wea(wena[{{i}}]),
+         .wea(wea[{{i}}]),
          
          .clkb(clk),
          .enb(enb[{{i}}]),
@@ -258,7 +258,7 @@ wire port_write_we[{{ (rams|len)*2}}];
         #(
         .BIT_WIDTH(8),
         .ADDRESS_BITS(32),
-        .SOURCES(2),
+        .SOURCES(2)
         )
         reader_selector_{{R["name"]}}
         (
@@ -280,7 +280,7 @@ wire port_write_we[{{ (rams|len)*2}}];
         #(
         .BIT_WIDTH(32),
         .ADDRESS_BITS(32),
-        .SOURCES(2),
+        .SOURCES(2)
         )
         writer_selector_{{R["name"]}}
         (
@@ -317,14 +317,14 @@ ShiftRegisters	#(
 
 assign write_possible = !il_last_data_received 
                         && enable[0] 
-                        && !reset[0];
+                        && !rst[0];
 assign output_data = registers_out;
 assign output_data_ready = finished[{{(layers|len)-1}}] 
                            && enable[{{(layers|len)-1}}] 
-                           && !reset[{{(layers|len)-1}}];
+                           && !rst[{{(layers|len)-1}}];
 (* KEEP = "TRUE" *) reg enable_reg[4] = {1'b0,1'b0,1'b0,1'b0};
 (* KEEP = "TRUE" *) reg sleep_reg[4] = {1'b0,1'b0,1'b0,1'b0};
-(* KEEP = "TRUE" *) reg reset_reg[4] = {1'b1,1'b1,1'b1,1'b1};
+(* KEEP = "TRUE" *) reg rst_reg[4] = {1'b1,1'b1,1'b1,1'b1};
 wire [3:0] finished_step;
 
 // registers assignments
@@ -332,7 +332,7 @@ wire [3:0] finished_step;
 // assign layers for state {{i}}
 {% for l in layers|for_state(i) %}
 assign enable[{{l}}] = enable_reg[{{i}}];
-assign reset[{{l}}] = reset_reg[{{i}}];
+assign rst[{{l}}] = rst_reg[{{i}}];
 assign sleep[{{l}}] = sleep_reg[{{i}}];
 {% endfor%}
 // assign finished step
@@ -359,15 +359,15 @@ assign finished_step[{{i}}] = {{layers|
     {% for port, layer_idx in r['layers_write']|enumerate %}
     assign data_write[{{layer_idx}}] = port_write_data[{{2*i+port}}];
     assign port_write_address[{{2*i+port}}] = data_write_address[{{layer_idx}}];
-    assign port_write_en[{{2*i+port}}] = data_write_en[{{layer_idx}}];
-    assign port_write_we[{{2*i+port}}] = enable[{{layer_idx}}];
+    assign port_write_we[{{2*i+port}}] = data_write_we[{{layer_idx}}];
+    assign port_write_en[{{2*i+port}}] = enable[{{layer_idx}}];
     {% endfor%}
     // write ports - unused 
     {% for port in range(r['layers_write']|len,2) %}
     assign port_write_data[{{2*i+port}}] = 32'd0;
     assign port_write_address[{{2*i+port}}] = 32'd0;
-    assign port_write_en[{{2*i+port}}] = 1'b0;
     assign port_write_we[{{2*i+port}}] = 1'b0;
+    assign port_write_en[{{2*i+port}}] = 1'b0;
     {% endfor%}
 {% endfor%}
 
@@ -392,11 +392,11 @@ always @(posedge clk)
         4'd0:
             begin
             // turn off all resets
-            reset_reg <= 4'b0000;
+            rst_reg <= {1'b0,1'b0,1'b0,1'b0};
             // turn off all modules
-            enable_reg <= {{layers|len}}'d0;
+            enable_reg <= {1'b0,1'b0,1'b0,1'b0};
             // put sleep all modules
-            sleep_reg <= {{layers|len}}'d0;
+            sleep_reg <= {1'b1,1'b1,1'b1,1'b1};
             // awake all rams
             awakening_cntr <= 0;
             // to first processing step
@@ -406,7 +406,7 @@ always @(posedge clk)
         // first processing step
         4'd1:
             begin
-            reset_reg[0] <= 1'b1;
+            rst_reg[0] <= 1'b1;
             sleep_reg[0] <= 1'b0;
             // awakening of roms time
             if (awakening_cntr == AWAKENING_TIME-1)
@@ -424,7 +424,7 @@ always @(posedge clk)
             // put to sleep prev state layers
             sleep_reg[3] <= 1'b1;
             // stop resetting
-            reset_reg[0] <= 1'b0;
+            rst_reg[0] <= 1'b0;
             // turn on layers
             enable_reg[0] <= 1'b1;
             // to working state
@@ -444,7 +444,7 @@ always @(posedge clk)
         // second processing step
         4'd4:
             begin
-            reset_reg[1] <= 1'b1;
+            rst_reg[1] <= 1'b1;
             sleep_reg[1] <= 1'b0;
             // awakening of rams time
             if (awakening_cntr == AWAKENING_TIME-1)
@@ -462,7 +462,7 @@ always @(posedge clk)
             // put sleep prev layers
             sleep_reg[0] <= 1'b1;
             // stop resetting
-            reset_reg[1] <= 1'b0;
+            rst_reg[1] <= 1'b0;
             // turn on layers
             enable_reg[1] <= 1'b1;
             // to working state
@@ -482,7 +482,7 @@ always @(posedge clk)
         // third processing step
         4'd7:
             begin
-            reset_reg[2] <= 1'b1;
+            rst_reg[2] <= 1'b1;
             sleep_reg[2] <= 1'b0;
             // awakening of rams time
             if (awakening_cntr == AWAKENING_TIME-1)
@@ -500,7 +500,7 @@ always @(posedge clk)
             // put to sleep prev layers
             sleep_reg[1] <= 1'b1;
             // stop resetting
-            reset_reg[2] <= 1'b0;
+            rst_reg[2] <= 1'b0;
             // turn on
             enable_reg[2] <= 1'b1;
             // to working state
@@ -520,7 +520,7 @@ always @(posedge clk)
         // fourth processing step
         4'd10:
             begin
-            reset_reg[3] <= 1'b1;
+            rst_reg[3] <= 1'b1;
             sleep_reg[3] <= 1'b0;
             // awakening of roms time
             if (awakening_cntr == AWAKENING_TIME-1)
@@ -538,7 +538,7 @@ always @(posedge clk)
             // put to sleep prev layers
             sleep_reg[2] <= 1'b1;
             // stop resetting
-            reset_reg[3] <= 1'b0;
+            rst_reg[3] <= 1'b0;
             // turn on
             enable_reg[3] <= 1'b1;
             // to working state
@@ -561,9 +561,9 @@ always @(posedge clk)
             begin
             // RESET ALL
             // turn on all resets
-            reset_reg <= 4'b1111;
+            rst_reg <= {1'b1,1'b1,1'b1,1'b1};
             // disable all modules
-            enable_reg <= {{layers|len}}'d0;
+            enable_reg <= {1'b0,1'b0,1'b0,1'b0};
             
             awakening_cntr <= 0;
             // to init step
@@ -575,5 +575,6 @@ always @(posedge clk)
             state <= 4'd13;
             end
         endcase
+        end
     end
 endmodule
