@@ -301,6 +301,7 @@ class DWConv2d(BaseLayer):
                  in_channels,  
                  quantizer_w,
                  quantizer_in,
+                 quantizer_inter,
                  quantizer_out,
                  quantizer_bias,
                  return_quant_tensor=True,
@@ -350,7 +351,7 @@ class DWConv2d(BaseLayer):
         if use_bn:
             # quant before batch norm
             if SeparableConv2D.QUANT_BEFORE_BN:
-                quant_dw_bn = QuantIdentity(act_quant=quantizer_out, return_quant_tensor=True)
+                quant_dw_bn = QuantIdentity(act_quant=quantizer_inter, return_quant_tensor=True)
                 self.layers.append(quant_dw_bn)
                 self.add_module('quant_dw_bn', quant_dw_bn)
 
@@ -369,6 +370,7 @@ class PWConv2d(BaseLayer):
                  out_channels, 
                  quantizer_w,
                  quantizer_in,
+                 quantizer_inter,
                  quantizer_out,
                  quantizer_bias,
                  return_quant_tensor=True,
@@ -411,7 +413,7 @@ class PWConv2d(BaseLayer):
         if use_bn:
             # quant before batch norm
             if SeparableConv2D.QUANT_BEFORE_BN:
-                quant_pw_bn = QuantIdentity(act_quant=quantizer_out, return_quant_tensor=True)
+                quant_pw_bn = QuantIdentity(act_quant=quantizer_inter, return_quant_tensor=True)
                 self.layers.append(quant_pw_bn)
                 self.add_module('quant_pw_bn', quant_pw_bn)
                 
@@ -656,83 +658,6 @@ class ResidualBlock(torch.nn.Module):
         return x_sum
 
 
-def YoloLayer_v3(in_channels,  
-                    num_of_anchors,
-                    quantizer_w,
-                    quantizer_in,
-                    quantizer_out,
-                    quantizer_bias,
-                    return_quant_tensor=True,
-                    bias=True,
-                    kernel_size=(3,3),
-                    padding=(0,0),
-                    stride=(1, 1),
-                    use_sigmoid=True,
-                    sigm_output_range=3,
-                    device='cpu',
-                    conv_class=SeparableConv2D):
-    class YoloLayer_Local(conv_class):
-
-        def __init__(self, 
-                    in_channels,  
-                    num_of_anchors,
-                    quantizer_w,
-                    quantizer_in,
-                    quantizer_out,
-                    quantizer_bias,
-                    return_quant_tensor=True,
-                    bias=True,
-                    kernel_size=(3,3),
-                    padding=(0,0),
-                    stride=(1,1),
-                    use_sigmoid=True,
-                    sigm_output_range=3,
-                    device='cpu'):
-            super().__init__(in_channels,
-                            5*num_of_anchors, # [validity, dx,dy, w, h]*num_of_anchors
-                            quantizer_w,
-                            quantizer_in,
-                            quantizer_out,
-                            quantizer_bias,
-                            return_quant_tensor,
-                            bias,
-                            kernel_size,
-                            padding,
-                            stride,
-                            device=device)
-
-            self.num_of_anchors = num_of_anchors
-            self.use_sigmoid = use_sigmoid
-            self.sigm_output_range = sigm_output_range
-
-        def forward(self, x):
-            x = super().forward(x)
-
-            if self.use_sigmoid:
-                if isinstance(x, brevitas.quant_tensor.QuantTensor):
-                    x = x.tensor
-                    
-                idx = self.sigm_output_range*self.num_of_anchors
-                x[:,:idx,:,:] = torch.sigmoid(x[:,:idx,:,:])
-
-            return x
-    
-    return YoloLayer_Local(in_channels,  
-                            num_of_anchors,
-                            quantizer_w,
-                            quantizer_in,
-                            quantizer_out,
-                            quantizer_bias,
-                            return_quant_tensor,
-                            bias,
-                            kernel_size,
-                            padding,
-                            stride,
-                            use_sigmoid,
-                            sigm_output_range,
-                            device)
-
-
 class AnchorMul(torch.nn.Module):
 
     def __init__(self, num_of_anchors, device=torch.device('cpu')):
@@ -755,7 +680,13 @@ class AnchorMul(torch.nn.Module):
 class QuantAnchorMul(QuantWrapper):
     def __init__(self, num_of_anchors, device=torch.device('cpu'),return_quant_tensor=True):
         super().__init__(AnchorMul(num_of_anchors, device),return_quant_tensor=True )
-        
+
+def align_quantizers(q:tuple):
+    if len(q) == 4:
+        return q[:3]+q[2:]
+    else:
+        return q
+
 ###############################################
 ## Architectures
 ###############################################
@@ -770,6 +701,8 @@ class SkyNet(Sequential):
         :param intermediate_quant: quantizers classes tuple(w,in,out,bias)
         :param output_quant: quantizers classes tuple(w,in,out,bias)
         """
+        intermediate_quant = align_quantizers(intermediate_quant)        
+        output_quant = align_quantizers(output_quant)        
         
         L = [
             brevitas.nn.QuantIdentity(input_quant, True),
@@ -943,6 +876,9 @@ class LittleNet5(Sequential):
         :param output_quant: quantizers classes tuple(w,in,out,bias)
         """
         ub = use_bias
+        intermediate_quant = align_quantizers(intermediate_quant)        
+        output_quant = align_quantizers(output_quant)        
+        
         L = [
             brevitas.nn.QuantIdentity(input_quant, True),
             # SeparableConv2D(3, 16, *intermediate_quant, intermediate_channels=5, bias=False, use_bn=True, use_relu=True, device=device),
@@ -992,6 +928,9 @@ class LittleNet6(Sequential):
         :param output_quant: quantizers classes tuple(w,in,out,bias)
         """
         ub = use_bias
+        intermediate_quant = align_quantizers(intermediate_quant)        
+        output_quant = align_quantizers(output_quant)        
+        
         L = [
             brevitas.nn.QuantIdentity(input_quant, True),
      
@@ -1040,6 +979,9 @@ class LittleNet7(Sequential):
         :param output_quant: quantizers classes tuple(w,in,out,bias)
         """
         ub = use_bias
+        intermediate_quant = align_quantizers(intermediate_quant)        
+        output_quant = align_quantizers(output_quant)        
+        
         L = [
             brevitas.nn.QuantIdentity(input_quant, True),
       

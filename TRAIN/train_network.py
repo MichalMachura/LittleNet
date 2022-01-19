@@ -72,18 +72,28 @@ if __name__ == '__main__':
     
     if args.USE_QUANT:
         qwi8 = quant.generalized_auto_fxp(bit_width=8, frac_part=6, signed=0.1, 
-                                    max_bit_width=8, min_bit_width=8, round_mode='floor',
-                                    trainable_signed=False, trainable_bit_width=False,
-                                    trainable_scale=False, dst='act')
-        qw8 = quant.generalized_auto_fxp(bit_width=7,frac_part=5, signed=0.7,
-                                        min_bit_width=4, max_bit_width=8, dst='weight',)
-        qb8 = quant.generalized_auto_fxp(bit_width=7,frac_part=5, signed=0.7,
-                                        min_bit_width=4, max_bit_width=8, dst='bias',)
-        qa = quant.generalized_auto_fxp(bit_width=5,frac_part=2, signed=0.7,
-                                        min_bit_width=2, max_bit_width=8, dst='act',)
+                                        max_bit_width=8, min_bit_width=8, round_mode='floor',
+                                        trainable_signed=False, trainable_bit_width=False,
+                                        trainable_scale=False, dst='act')
+        qw8 = quant.generalized_auto_fxp(bit_width=8,frac_part=5, signed=0.9,
+                                        min_bit_width=4, max_bit_width=8, 
+                                        trainable_signed=False, trainable_bit_width=False,
+                                        dst='weight',)
+        qb8 = quant.generalized_auto_fxp(bit_width=8,frac_part=5, signed=0.9,
+                                        min_bit_width=4, max_bit_width=8, 
+                                        trainable_signed=False, trainable_bit_width=False,
+                                        dst='bias',)
+        qa = quant.generalized_auto_fxp(bit_width=8,frac_part=4, signed=0.9,
+                                        min_bit_width=2, max_bit_width=8, 
+                                        trainable_signed=False, trainable_bit_width=False,
+                                        dst='act',)
         quant_input = qwi8
-        quant_medium = (qw8,None,qa,qb8)
-        quant_out = (qw8,None,qa,qb8)
+        quant_medium = (qw8,
+                        None,
+                        qa, # inter quant - before bn
+                        qa,# out quant - afeter 
+                        qb8)
+        quant_out = (qw8,None,qa,qa,qb8)
     else:
         quant_input = None
         quant_medium = (None,None,None,None)
