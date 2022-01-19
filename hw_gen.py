@@ -100,7 +100,7 @@ class PWBlock(LayerBlock):
         rom_len = (in_shape[0]+use_bias+2*use_bn)*((out_ch-1)//parallelism+1)
         rom_width = parallelism*weight_fp[0]
         rom_size = rom_len*rom_width/8
-        rom_type = "distributed" if rom_size < 256 else "block"
+        rom_type = "auto" if rom_size < 256 else "block"
         
         config = {
             'in_shape':in_shape,
@@ -318,7 +318,7 @@ class DWBlock(LayerBlock):
         rom_len = out_ch*(k_size[0]*k_size[1] + 2*use_bn + use_bias)
         rom_width = weight_fp[0]
         rom_size = rom_len*rom_width/8
-        rom_type = "distributed" if rom_size < 256 else "block"
+        rom_type = "auto" if rom_size < 256 else "block"
         
         config = {
             'in_shape':in_shape,
@@ -667,6 +667,6 @@ if __name__ == "__main__":
     
     model = LittleNet7(3,qin,(qw,None,qa,qb),(qw,None,qa,qb))
     create_hw_from_sw(model, (1,3,112,208),
-                      rom_dir='./HW/LittleNetAcc_2019_1/memories',
-                      dst_file_path='./HW/LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/little_net_acc.sv')
+                      rom_dir='./HW/LittleNetAcc/LittleNetAcc.srcs/sources_1/imports/memories',
+                      dst_file_path='./HW/LittleNetAcc/LittleNetAcc.srcs/sources_1/imports/new/little_net_acc.sv')
     

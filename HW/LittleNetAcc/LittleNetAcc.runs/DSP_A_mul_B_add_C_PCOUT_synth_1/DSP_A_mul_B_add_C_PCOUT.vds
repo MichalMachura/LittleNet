@@ -1,0 +1,270 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:47 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Tue Jan 18 21:43:37 2022
+# Process ID: 105514
+# Current directory: /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/DSP_A_mul_B_add_C_PCOUT_synth_1
+# Command line: vivado -log DSP_A_mul_B_add_C_PCOUT.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source DSP_A_mul_B_add_C_PCOUT.tcl
+# Log file: /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/DSP_A_mul_B_add_C_PCOUT_synth_1/DSP_A_mul_B_add_C_PCOUT.vds
+# Journal file: /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/DSP_A_mul_B_add_C_PCOUT_synth_1/vivado.jou
+#-----------------------------------------------------------
+source DSP_A_mul_B_add_C_PCOUT.tcl -notrace
+Command: synth_design -top DSP_A_mul_B_add_C_PCOUT -part xczu3eg-sbva484-1-i -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xczu3eg'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xczu3eg'
+INFO: [Device 21-403] Loading part xczu3eg-sbva484-1-i
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 105650
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 2458.945 ; gain = 29.906 ; free physical = 4388 ; free virtual = 9167
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'DSP_A_mul_B_add_C_PCOUT' [/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.gen/sources_1/ip/DSP_A_mul_B_add_C_PCOUT/synth/DSP_A_mul_B_add_C_PCOUT.vhd:71]
+	Parameter C_VERBOSITY bound to: 0 - type: integer 
+	Parameter C_MODEL_TYPE bound to: 0 - type: integer 
+	Parameter C_XDEVICEFAMILY bound to: zynquplus - type: string 
+	Parameter C_HAS_CE bound to: 1 - type: integer 
+	Parameter C_HAS_INDEP_CE bound to: 0 - type: integer 
+	Parameter C_HAS_CED bound to: 0 - type: integer 
+	Parameter C_HAS_CEA bound to: 0 - type: integer 
+	Parameter C_HAS_CEB bound to: 0 - type: integer 
+	Parameter C_HAS_CEC bound to: 0 - type: integer 
+	Parameter C_HAS_CECONCAT bound to: 0 - type: integer 
+	Parameter C_HAS_CEM bound to: 0 - type: integer 
+	Parameter C_HAS_CEP bound to: 0 - type: integer 
+	Parameter C_HAS_CESEL bound to: 0 - type: integer 
+	Parameter C_HAS_SCLR bound to: 0 - type: integer 
+	Parameter C_HAS_INDEP_SCLR bound to: 0 - type: integer 
+	Parameter C_HAS_SCLRD bound to: 0 - type: integer 
+	Parameter C_HAS_SCLRA bound to: 0 - type: integer 
+	Parameter C_HAS_SCLRB bound to: 0 - type: integer 
+	Parameter C_HAS_SCLRC bound to: 0 - type: integer 
+	Parameter C_HAS_SCLRM bound to: 0 - type: integer 
+	Parameter C_HAS_SCLRP bound to: 0 - type: integer 
+	Parameter C_HAS_SCLRCONCAT bound to: 0 - type: integer 
+	Parameter C_HAS_SCLRSEL bound to: 0 - type: integer 
+	Parameter C_HAS_CARRYCASCIN bound to: 0 - type: integer 
+	Parameter C_HAS_CARRYIN bound to: 0 - type: integer 
+	Parameter C_HAS_ACIN bound to: 0 - type: integer 
+	Parameter C_HAS_BCIN bound to: 0 - type: integer 
+	Parameter C_HAS_PCIN bound to: 0 - type: integer 
+	Parameter C_HAS_A bound to: 1 - type: integer 
+	Parameter C_HAS_B bound to: 1 - type: integer 
+	Parameter C_HAS_D bound to: 0 - type: integer 
+	Parameter C_HAS_CONCAT bound to: 0 - type: integer 
+	Parameter C_HAS_C bound to: 1 - type: integer 
+	Parameter C_SQUARE_FCN bound to: 0 - type: integer 
+	Parameter C_A_WIDTH bound to: 27 - type: integer 
+	Parameter C_B_WIDTH bound to: 18 - type: integer 
+	Parameter C_C_WIDTH bound to: 48 - type: integer 
+	Parameter C_D_WIDTH bound to: 18 - type: integer 
+	Parameter C_CONCAT_WIDTH bound to: 48 - type: integer 
+	Parameter C_P_MSB bound to: 47 - type: integer 
+	Parameter C_P_LSB bound to: 0 - type: integer 
+	Parameter C_SEL_WIDTH bound to: 0 - type: integer 
+	Parameter C_HAS_ACOUT bound to: 0 - type: integer 
+	Parameter C_HAS_BCOUT bound to: 0 - type: integer 
+	Parameter C_HAS_CARRYCASCOUT bound to: 0 - type: integer 
+	Parameter C_HAS_CARRYOUT bound to: 0 - type: integer 
+	Parameter C_HAS_PCOUT bound to: 1 - type: integer 
+	Parameter C_CONSTANT_1 bound to: 1 - type: integer 
+	Parameter C_LATENCY bound to: 124 - type: integer 
+	Parameter C_OPMODES bound to: 000100111000010100000000 - type: string 
+	Parameter C_REG_CONFIG bound to: 00000000000011100011100011000100 - type: string 
+	Parameter C_TEST_CORE bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'dsp_macro_v1_0_1' declared at '/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.gen/sources_1/ip/DSP_A_mul_B_add_C_PCOUT/hdl/dsp_macro_v1_0_rfs.vhd:5245' bound to instance 'U0' of component 'dsp_macro_v1_0_1' [/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.gen/sources_1/ip/DSP_A_mul_B_add_C_PCOUT/synth/DSP_A_mul_B_add_C_PCOUT.vhd:217]
+INFO: [Synth 8-256] done synthesizing module 'DSP_A_mul_B_add_C_PCOUT' (6#1) [/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.gen/sources_1/ip/DSP_A_mul_B_add_C_PCOUT/synth/DSP_A_mul_B_add_C_PCOUT.vhd:71]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2513.883 ; gain = 84.844 ; free physical = 5165 ; free virtual = 9945
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 2530.727 ; gain = 101.688 ; free physical = 5163 ; free virtual = 9943
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 2530.727 ; gain = 101.688 ; free physical = 5163 ; free virtual = 9943
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2541.633 ; gain = 0.000 ; free physical = 5154 ; free virtual = 9934
+INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.gen/sources_1/ip/DSP_A_mul_B_add_C_PCOUT/DSP_A_mul_B_add_C_PCOUT_ooc.xdc] for cell 'U0'
+Finished Parsing XDC File [/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.gen/sources_1/ip/DSP_A_mul_B_add_C_PCOUT/DSP_A_mul_B_add_C_PCOUT_ooc.xdc] for cell 'U0'
+Parsing XDC File [/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/DSP_A_mul_B_add_C_PCOUT_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/DSP_A_mul_B_add_C_PCOUT_synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2642.477 ; gain = 0.000 ; free physical = 5028 ; free virtual = 9808
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 1 instances were transformed.
+  DSP48E2 => DSP48E2 (DSP_ALU, DSP_A_B_DATA, DSP_C_DATA, DSP_MULTIPLIER, DSP_M_DATA, DSP_OUTPUT, DSP_PREADD, DSP_PREADD_DATA): 1 instance 
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.03 . Memory (MB): peak = 2642.477 ; gain = 0.000 ; free physical = 5027 ; free virtual = 9808
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 2642.477 ; gain = 213.438 ; free physical = 5045 ; free virtual = 9825
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xczu3eg-sbva484-1-i
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 2642.477 ; gain = 213.438 ; free physical = 5045 ; free virtual = 9825
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property KEEP_HIERARCHY = SOFT for U0. (constraint file  /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/DSP_A_mul_B_add_C_PCOUT_synth_1/dont_touch.xdc, line 9).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 2642.477 ; gain = 213.438 ; free physical = 5048 ; free virtual = 9828
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:16 ; elapsed = 00:00:20 . Memory (MB): peak = 2642.477 ; gain = 213.438 ; free physical = 5033 ; free virtual = 9814
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 360 (col length:72)
+BRAMs: 432 (col length: RAMB18 72 RAMB36 36)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:21 . Memory (MB): peak = 2642.477 ; gain = 213.438 ; free physical = 4984 ; free virtual = 9768
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:34 ; elapsed = 00:00:48 . Memory (MB): peak = 3072.945 ; gain = 643.906 ; free physical = 4391 ; free virtual = 9176
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:34 ; elapsed = 00:00:48 . Memory (MB): peak = 3073.945 ; gain = 644.906 ; free physical = 4390 ; free virtual = 9174
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:34 ; elapsed = 00:00:49 . Memory (MB): peak = 3092.977 ; gain = 663.938 ; free physical = 4388 ; free virtual = 9172
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:37 ; elapsed = 00:00:51 . Memory (MB): peak = 3098.914 ; gain = 669.875 ; free physical = 4387 ; free virtual = 9171
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:37 ; elapsed = 00:00:51 . Memory (MB): peak = 3098.914 ; gain = 669.875 ; free physical = 4387 ; free virtual = 9171
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:37 ; elapsed = 00:00:51 . Memory (MB): peak = 3098.914 ; gain = 669.875 ; free physical = 4387 ; free virtual = 9171
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:37 ; elapsed = 00:00:51 . Memory (MB): peak = 3098.914 ; gain = 669.875 ; free physical = 4387 ; free virtual = 9171
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:37 ; elapsed = 00:00:51 . Memory (MB): peak = 3098.914 ; gain = 669.875 ; free physical = 4387 ; free virtual = 9171
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:37 ; elapsed = 00:00:51 . Memory (MB): peak = 3098.914 ; gain = 669.875 ; free physical = 4386 ; free virtual = 9171
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+----------------+------+
+|      |Cell            |Count |
++------+----------------+------+
+|1     |DSP_ALU         |     1|
+|2     |DSP_A_B_DATA    |     1|
+|3     |DSP_C_DATA      |     1|
+|4     |DSP_MULTIPLIER  |     1|
+|5     |DSP_M_DATA      |     1|
+|6     |DSP_OUTPUT      |     1|
+|7     |DSP_PREADD      |     1|
+|8     |DSP_PREADD_DATA |     1|
+|9     |LUT3            |    49|
+|10    |FDRE            |   146|
++------+----------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:37 ; elapsed = 00:00:51 . Memory (MB): peak = 3098.914 ; gain = 669.875 ; free physical = 4386 ; free virtual = 9171
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:31 ; elapsed = 00:00:44 . Memory (MB): peak = 3098.914 ; gain = 558.125 ; free physical = 4429 ; free virtual = 9214
+Synthesis Optimization Complete : Time (s): cpu = 00:00:37 ; elapsed = 00:00:51 . Memory (MB): peak = 3098.922 ; gain = 669.875 ; free physical = 4429 ; free virtual = 9214
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 3098.922 ; gain = 0.000 ; free physical = 4424 ; free virtual = 9208
+INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3120.695 ; gain = 0.000 ; free physical = 4456 ; free virtual = 9240
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 1 instances were transformed.
+  DSP48E2 => DSP48E2 (DSP_ALU, DSP_A_B_DATA, DSP_C_DATA, DSP_MULTIPLIER, DSP_M_DATA, DSP_OUTPUT, DSP_PREADD, DSP_PREADD_DATA): 1 instance 
+
+INFO: [Common 17-83] Releasing license: Synthesis
+20 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:50 ; elapsed = 00:01:03 . Memory (MB): peak = 3120.695 ; gain = 793.656 ; free physical = 4614 ; free virtual = 9399
+INFO: [Common 17-1381] The checkpoint '/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/DSP_A_mul_B_add_C_PCOUT_synth_1/DSP_A_mul_B_add_C_PCOUT.dcp' has been generated.
+WARNING: [Common 17-576] 'use_project_ipc' is deprecated. This option is deprecated and no longer used.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP DSP_A_mul_B_add_C_PCOUT, cache-ID = 1b1cdf1eb4555279
+INFO: [Coretcl 2-1174] Renamed 10 cell refs.
+INFO: [Common 17-1381] The checkpoint '/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/DSP_A_mul_B_add_C_PCOUT_synth_1/DSP_A_mul_B_add_C_PCOUT.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file DSP_A_mul_B_add_C_PCOUT_utilization_synth.rpt -pb DSP_A_mul_B_add_C_PCOUT_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Jan 18 21:44:56 2022...

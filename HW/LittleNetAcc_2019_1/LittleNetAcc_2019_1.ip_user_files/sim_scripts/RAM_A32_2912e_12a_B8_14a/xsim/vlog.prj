@@ -1,6 +1,0 @@
-verilog xil_defaultlib  \
-"../../../ip/RAM_A32_2912e_12a_B8_14a/sim/RAM_A32_2912e_12a_B8_14a.v" \
-
-verilog xil_defaultlib "glbl.v"
-
-nosort

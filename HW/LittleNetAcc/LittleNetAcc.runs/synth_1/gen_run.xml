@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="synth_1" LaunchPart="xczu3eg-sbva484-1-i" LaunchTime="1642539951">
+  <File Type="VDS-TIMING-PB" Name="LittleNetAccAxi_timing_summary_synth.pb"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="LittleNetAccAxi_timing_summary_synth.rpt"/>
+  <File Type="RDS-DCP" Name="LittleNetAccAxi.dcp"/>
+  <File Type="RDS-UTIL-PB" Name="LittleNetAccAxi_utilization_synth.pb"/>
+  <File Type="RDS-UTIL" Name="LittleNetAccAxi_utilization_synth.rpt"/>
+  <File Type="RDS-PROPCONSTRS" Name="LittleNetAccAxi_drc_synth.rpt"/>
+  <File Type="RDS-RDS" Name="LittleNetAccAxi.vds"/>
+  <File Type="REPORTS-TCL" Name="LittleNetAccAxi_reports.tcl"/>
+  <File Type="PA-TCL" Name="LittleNetAccAxi.tcl"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/imports/new/MemoWrappers.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/MemoWrappers.sv"/>
+        <Attr Name="ImportTime" Val="1642535542"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/delay_line.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/delay_line.sv"/>
+        <Attr Name="ImportTime" Val="1639352520"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/depthwise_conv2d_unit.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/depthwise_conv2d_unit.sv"/>
+        <Attr Name="ImportTime" Val="1642072393"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/little_net_acc.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/little_net_acc.sv"/>
+        <Attr Name="ImportTime" Val="1642535079"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/maxpool2d_unit.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/maxpool2d_unit.sv"/>
+        <Attr Name="ImportTime" Val="1639352520"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/mux_writer_unit.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/mux_writer_unit.sv"/>
+        <Attr Name="ImportTime" Val="1639352520"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/pointwise_conv2d_unit.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/pointwise_conv2d_unit.sv"/>
+        <Attr Name="ImportTime" Val="1642533923"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/shift_reg.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/shift_reg.sv"/>
+        <Attr Name="ImportTime" Val="1639352520"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/sliding_window_unit.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/sliding_window_unit.sv"/>
+        <Attr Name="ImportTime" Val="1639352520"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/streamer_unit.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/streamer_unit.sv"/>
+        <Attr Name="ImportTime" Val="1639352520"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/utils.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/utils.sv"/>
+        <Attr Name="ImportTime" Val="1642532779"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/weights_loading_unit.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/weights_loading_unit.sv"/>
+        <Attr Name="ImportTime" Val="1639352520"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/packaged_littlenet.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/packaged_littlenet.sv"/>
+        <Attr Name="ImportTime" Val="1642513766"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/ln_debug.sv">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/ln_debug.sv"/>
+        <Attr Name="ImportTime" Val="1639352520"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/new/memory_prototype.sv">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/LittleNetAcc_2019_1.srcs/sources_1/new/memory_prototype.sv"/>
+        <Attr Name="ImportTime" Val="1639352520"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_14_pw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_14_pw.mem"/>
+        <Attr Name="ImportTime" Val="1642535079"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_10_dw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_10_dw.mem"/>
+        <Attr Name="ImportTime" Val="1642535079"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_12_dw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_12_dw.mem"/>
+        <Attr Name="ImportTime" Val="1642535079"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_13_dw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_13_dw.mem"/>
+        <Attr Name="ImportTime" Val="1642535079"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_16_dw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_16_dw.mem"/>
+        <Attr Name="ImportTime" Val="1642535079"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_18_dw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_18_dw.mem"/>
+        <Attr Name="ImportTime" Val="1642535080"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_15_dw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_15_dw.mem"/>
+        <Attr Name="ImportTime" Val="1642535079"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_1_dw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_1_dw.mem"/>
+        <Attr Name="ImportTime" Val="1642535079"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_4_dw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_4_dw.mem"/>
+        <Attr Name="ImportTime" Val="1642535079"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_3_dw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_3_dw.mem"/>
+        <Attr Name="ImportTime" Val="1642535079"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_2_pw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_2_pw.mem"/>
+        <Attr Name="ImportTime" Val="1642535079"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_5_pw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_5_pw.mem"/>
+        <Attr Name="ImportTime" Val="1642535079"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_6_dw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_6_dw.mem"/>
+        <Attr Name="ImportTime" Val="1642535079"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_7_dw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_7_dw.mem"/>
+        <Attr Name="ImportTime" Val="1642535079"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_9_dw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_9_dw.mem"/>
+        <Attr Name="ImportTime" Val="1642535079"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_8_pw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_8_pw.mem"/>
+        <Attr Name="ImportTime" Val="1642535079"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_11_pw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_11_pw.mem"/>
+        <Attr Name="ImportTime" Val="1642535079"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_19_pw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_19_pw.mem"/>
+        <Attr Name="ImportTime" Val="1642535080"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/memories/rom_layer_17_pw.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../LittleNetAcc_2019_1/memories/rom_layer_17_pw.mem"/>
+        <Attr Name="ImportTime" Val="1642535080"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="LittleNetAccAxi"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1">
+    <Filter Type="Utils"/>
+    <Config>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020">
+      <Desc>Vivado Synthesis Defaults</Desc>
+    </StratHandle>
+    <Step Id="synth_design"/>
+  </Strategy>
+  <BlockFileSet Type="BlockSrcs" Name="DSP_STREAMER"/>
+  <BlockFileSet Type="BlockSrcs" Name="DSP_A_mul_B_PCOUT"/>
+  <BlockFileSet Type="BlockSrcs" Name="DSP_A_mul_B_add_PCIN"/>
+  <BlockFileSet Type="BlockSrcs" Name="DSP_A_mul_B_add_PCIN_PCOUT"/>
+  <BlockFileSet Type="BlockSrcs" Name="DSP_A_mul_B_add_C_PCOUT"/>
+  <BlockFileSet Type="BlockSrcs" Name="DSP_A_mul_B_add_C"/>
+  <BlockFileSet Type="BlockSrcs" Name="DSP_A_mul_B_ACC"/>
+</GenRun>

@@ -1,4 +1,0 @@
-vhdl xil_defaultlib  \
-"../../../ip/DSP_STREAMER/sim/DSP_STREAMER.vhd" \
-
-nosort

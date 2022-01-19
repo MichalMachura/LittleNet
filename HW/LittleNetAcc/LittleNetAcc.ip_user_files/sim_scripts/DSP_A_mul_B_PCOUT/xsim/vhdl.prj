@@ -1,0 +1,4 @@
+vhdl xil_defaultlib  \
+"../../../../LittleNetAcc.gen/sources_1/ip/DSP_A_mul_B_PCOUT/sim/DSP_A_mul_B_PCOUT.vhd" \
+
+nosort

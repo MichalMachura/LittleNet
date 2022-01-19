@@ -118,8 +118,8 @@ wire il_last_data_received;
         .DATA_WIDTH({{L['parallelism']}}*{{L['weight_bw']}}),
         .init_file_name("rom_{{L['name']}}.mem"),
         .LATENCY({{L['read_weight_latency']}}),
-        .USE_SLEEP({{(L["rom_type"] != "distributed") | int}}),
-        .PRIMITIVE_TYPE("{{L["rom_type"]}}")
+        .USE_SLEEP({{(L["rom_type"] != "auto") | int}}),
+        .MEMO_TYPE("{{L["rom_type"]}}")
         )
         rom_{{L["name"]}}
         (
@@ -192,8 +192,8 @@ wire il_last_data_received;
         .DATA_WIDTH({{L['weight_bw']}}),
         .init_file_name("rom_{{L['name']}}.mem"),
         .LATENCY({{L['read_weight_latency']}}),
-        .USE_SLEEP({{(L["rom_type"] != "distributed") | int}}),
-        .PRIMITIVE_TYPE("{{L["rom_type"]}}")
+        .USE_SLEEP({{(L["rom_type"] != "auto") | int}}),
+        .MEMO_TYPE("{{L["rom_type"]}}")
         )
         rom_{{L["name"]}}
         (
@@ -218,13 +218,13 @@ wire [7:0] doutb[{{ rams|len }}];
 // ports read
 wire [0:0] port_read_select[{{ (rams|len)}}];
 wire [7:0] port_read_data[{{ (rams|len)*2}}];
-wire [7:0] port_read_address[{{ (rams|len)*2}}];
+wire [31:0] port_read_address[{{ (rams|len)*2}}];
 wire port_read_en[{{ (rams|len)*2}}];
 
 // ports write
 wire [0:0] port_write_select[{{ (rams|len)}}];
-wire [7:0] port_write_data[{{ (rams|len)*2}}];
-wire [7:0] port_write_address[{{ (rams|len)*2}}];
+wire [31:0] port_write_data[{{ (rams|len)*2}}];
+wire [31:0] port_write_address[{{ (rams|len)*2}}];
 wire port_write_en[{{ (rams|len)*2}}];
 wire port_write_we[{{ (rams|len)*2}}];
 

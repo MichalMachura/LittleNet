@@ -1,0 +1,651 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:47 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Tue Jan 18 22:11:27 2022
+# Process ID: 110924
+# Current directory: /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/impl_1
+# Command line: vivado -log LittleNetAccAxi.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source LittleNetAccAxi.tcl -notrace
+# Log file: /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/impl_1/LittleNetAccAxi.vdi
+# Journal file: /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/impl_1/vivado.jou
+#-----------------------------------------------------------
+source LittleNetAccAxi.tcl -notrace
+Command: link_design -top LittleNetAccAxi -part xczu3eg-sbva484-1-i
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+INFO: [Device 21-403] Loading part xczu3eg-sbva484-1-i
+INFO: [Project 1-454] Reading design checkpoint '/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.gen/sources_1/ip/DSP_A_mul_B_add_C/DSP_A_mul_B_add_C.dcp' for cell 'ln/layer_10_dw/dsp_bn'
+INFO: [Project 1-454] Reading design checkpoint '/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.gen/sources_1/ip/DSP_A_mul_B_add_C_PCOUT/DSP_A_mul_B_add_C_PCOUT.dcp' for cell 'ln/layer_10_dw/genblk1[0].dsp_first_bias'
+INFO: [Project 1-454] Reading design checkpoint '/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.gen/sources_1/ip/DSP_A_mul_B_add_PCIN_PCOUT/DSP_A_mul_B_add_PCIN_PCOUT.dcp' for cell 'ln/layer_10_dw/genblk1[1].dsp_intermediate'
+INFO: [Project 1-454] Reading design checkpoint '/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.gen/sources_1/ip/DSP_A_mul_B_add_PCIN/DSP_A_mul_B_add_PCIN.dcp' for cell 'ln/layer_10_dw/genblk1[8].dsp_last'
+INFO: [Project 1-454] Reading design checkpoint '/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.gen/sources_1/ip/DSP_STREAMER/DSP_STREAMER.dcp' for cell 'ln/layer_11_pw/data_point_streamer/address_computer'
+INFO: [Project 1-454] Reading design checkpoint '/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.gen/sources_1/ip/DSP_A_mul_B_ACC/DSP_A_mul_B_ACC.dcp' for cell 'ln/layer_11_pw/genblk1[0].pw_unit/accumulator'
+INFO: [Project 1-454] Reading design checkpoint '/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.gen/sources_1/ip/DSP_A_mul_B_PCOUT/DSP_A_mul_B_PCOUT.dcp' for cell 'ln/layer_18_dw/genblk1[0].dsp_first_no_bias'
+Netlist sorting complete. Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 2467.074 ; gain = 0.000 ; free physical = 7931 ; free virtual = 11970
+INFO: [Netlist 29-17] Analyzing 1282 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 2 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2020.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Project 1-1715] 1 XPM XDC files have been applied to the design.
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2742.633 ; gain = 0.000 ; free physical = 7737 ; free virtual = 11777
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 354 instances were transformed.
+  DSP48E2 => DSP48E2 (DSP_ALU, DSP_A_B_DATA, DSP_C_DATA, DSP_MULTIPLIER, DSP_M_DATA, DSP_OUTPUT, DSP_PREADD, DSP_PREADD_DATA): 316 instances
+  IBUF => IBUF (IBUFCTRL, INBUF): 38 instances
+
+15 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+link_design completed successfully
+link_design: Time (s): cpu = 00:00:36 ; elapsed = 00:00:45 . Memory (MB): peak = 2742.633 ; gain = 465.277 ; free physical = 7739 ; free virtual = 11779
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xczu3eg'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xczu3eg'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Project 1-461] DRC finished with 0 Errors
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:01 . Memory (MB): peak = 2860.164 ; gain = 117.531 ; free physical = 7729 ; free virtual = 11769
+
+Starting Cache Timing Information Task
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Ending Cache Timing Information Task | Checksum: 11109e8df
+
+Time (s): cpu = 00:00:42 ; elapsed = 00:00:13 . Memory (MB): peak = 3376.383 ; gain = 516.219 ; free physical = 7246 ; free virtual = 11286
+
+Starting Logic Optimization Task
+
+Phase 1 Retarget
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Opt 31-49] Retargeted 0 cell(s).
+Phase 1 Retarget | Checksum: ce80d508
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:04 . Memory (MB): peak = 3560.195 ; gain = 1.000 ; free physical = 7462 ; free virtual = 11503
+INFO: [Opt 31-389] Phase Retarget created 130 cells and removed 228 cells
+
+Phase 2 Constant propagation
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Phase 2 Constant propagation | Checksum: 10618e94a
+
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:09 . Memory (MB): peak = 3560.195 ; gain = 1.000 ; free physical = 7449 ; free virtual = 11490
+INFO: [Opt 31-389] Phase Constant propagation created 0 cells and removed 33854 cells
+
+Phase 3 Sweep
+Phase 3 Sweep | Checksum: 111d1cf96
+
+Time (s): cpu = 00:00:31 ; elapsed = 00:00:23 . Memory (MB): peak = 3560.195 ; gain = 1.000 ; free physical = 7518 ; free virtual = 11559
+INFO: [Opt 31-389] Phase Sweep created 0 cells and removed 46713 cells
+
+Phase 4 BUFG optimization
+INFO: [Opt 31-1077] Phase BUFG optimization inserted 0 global clock buffer(s) for CLOCK_LOW_FANOUT.
+Phase 4 BUFG optimization | Checksum: 111d1cf96
+
+Time (s): cpu = 00:00:32 ; elapsed = 00:00:23 . Memory (MB): peak = 3560.195 ; gain = 1.000 ; free physical = 7518 ; free virtual = 11559
+INFO: [Opt 31-662] Phase BUFG optimization created 0 cells of which 0 are BUFGs and removed 0 cells.
+
+Phase 5 Shift Register Optimization
+INFO: [Opt 31-1064] SRL Remap converted 0 SRLs to 0 registers and converted 0 registers of register chains to 0 SRLs
+Phase 5 Shift Register Optimization | Checksum: 111d1cf96
+
+Time (s): cpu = 00:00:32 ; elapsed = 00:00:23 . Memory (MB): peak = 3560.195 ; gain = 1.000 ; free physical = 7518 ; free virtual = 11559
+INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
+
+Phase 6 Post Processing Netlist
+Phase 6 Post Processing Netlist | Checksum: 111d1cf96
+
+Time (s): cpu = 00:00:32 ; elapsed = 00:00:23 . Memory (MB): peak = 3560.195 ; gain = 1.000 ; free physical = 7518 ; free virtual = 11559
+INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
+Opt_design Change Summary
+=========================
+
+
+-------------------------------------------------------------------------------------------------------------------------
+|  Phase                        |  #Cells created  |  #Cells Removed  |  #Constrained objects preventing optimizations  |
+-------------------------------------------------------------------------------------------------------------------------
+|  Retarget                     |             130  |             228  |                                              0  |
+|  Constant propagation         |               0  |           33854  |                                              0  |
+|  Sweep                        |               0  |           46713  |                                              0  |
+|  BUFG optimization            |               0  |               0  |                                              0  |
+|  Shift Register Optimization  |               0  |               0  |                                              0  |
+|  Post Processing Netlist      |               0  |               0  |                                              0  |
+-------------------------------------------------------------------------------------------------------------------------
+
+
+
+Starting Connectivity Check Task
+
+Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3560.195 ; gain = 0.000 ; free physical = 7519 ; free virtual = 11560
+Ending Logic Optimization Task | Checksum: 193e1d9fd
+
+Time (s): cpu = 00:00:33 ; elapsed = 00:00:24 . Memory (MB): peak = 3560.195 ; gain = 1.000 ; free physical = 7519 ; free virtual = 11560
+
+Starting Power Optimization Task
+INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
+INFO: [Pwropt 34-9] Applying IDT optimizations ...
+INFO: [Pwropt 34-10] Applying ODC optimizations ...
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+WARNING: [Power 33-232] No user defined clocks were found in the design! Power estimation will be inaccurate until this is corrected.
+Resolution: Please specify clocks using create_clock/create_generated_clock for sequential elements. For pure combinatorial circuits, please specify a virtual clock, otherwise the vectorless estimation might be inaccurate
+Running Vector-less Activity Propagation...
+
+Finished Running Vector-less Activity Propagation
+CRITICAL WARNING: [Power 33-333] The Vccint supply current exceeds the maximum limit of the selected package.  See the PCB design user guide for limit values.
+
+
+Starting PowerOpt Patch Enables Task
+INFO: [Pwropt 34-162] WRITE_MODE attribute of 0 BRAM(s) out of a total of 37 has been updated to save power. Run report_power_opt to get a complete listing of the BRAMs updated.
+INFO: [Pwropt 34-201] Structural ODC has moved 0 WE to EN ports
+Number of BRAM Ports augmented: 0 newly gated: 27 Total Ports: 74
+Ending PowerOpt Patch Enables Task | Checksum: 188acfbd6
+
+Time (s): cpu = 00:00:00.25 ; elapsed = 00:00:00.27 . Memory (MB): peak = 3739.695 ; gain = 0.000 ; free physical = 7214 ; free virtual = 11275
+Ending Power Optimization Task | Checksum: 188acfbd6
+
+Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 3739.695 ; gain = 179.500 ; free physical = 7225 ; free virtual = 11286
+
+Starting Final Cleanup Task
+
+Starting Logic Optimization Task
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Ending Logic Optimization Task | Checksum: 14d796dbb
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:02 . Memory (MB): peak = 3739.695 ; gain = 0.000 ; free physical = 7197 ; free virtual = 11270
+Ending Final Cleanup Task | Checksum: 14d796dbb
+
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 3739.695 ; gain = 0.000 ; free physical = 7197 ; free virtual = 11271
+
+Starting Netlist Obfuscation Task
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3739.695 ; gain = 0.000 ; free physical = 7197 ; free virtual = 11271
+Ending Netlist Obfuscation Task | Checksum: 14d796dbb
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3739.695 ; gain = 0.000 ; free physical = 7197 ; free virtual = 11271
+INFO: [Common 17-83] Releasing license: Implementation
+39 Infos, 1 Warnings, 1 Critical Warnings and 0 Errors encountered.
+opt_design completed successfully
+opt_design: Time (s): cpu = 00:01:57 ; elapsed = 00:01:17 . Memory (MB): peak = 3739.695 ; gain = 997.062 ; free physical = 7198 ; free virtual = 11272
+INFO: [Timing 38-480] Writing timing data to binary archive.
+INFO: [Common 17-1381] The checkpoint '/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/impl_1/LittleNetAccAxi_opt.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_drc -file LittleNetAccAxi_drc_opted.rpt -pb LittleNetAccAxi_drc_opted.pb -rpx LittleNetAccAxi_drc_opted.rpx
+Command: report_drc -file LittleNetAccAxi_drc_opted.rpt -pb LittleNetAccAxi_drc_opted.pb -rpx LittleNetAccAxi_drc_opted.rpx
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Coretcl 2-168] The results of DRC are in file /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/impl_1/LittleNetAccAxi_drc_opted.rpt.
+report_drc completed successfully
+report_drc: Time (s): cpu = 00:00:30 ; elapsed = 00:00:24 . Memory (MB): peak = 4364.852 ; gain = 625.156 ; free physical = 6502 ; free virtual = 10779
+Command: place_design
+Attempting to get a license for feature 'Implementation' and/or device 'xczu3eg'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xczu3eg'
+WARNING: [Vivado_Tcl 4-1400] -ultrathreads option currently only supported on multi-SLR devices. Continuing placement in regular mode.
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+Running DRC as a precondition to command place_design
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+Starting Placer Task
+INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 8 CPUs
+
+Phase 1 Placer Initialization
+
+Phase 1.1 Placer Initialization Netlist Sorting
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6499 ; free virtual = 10776
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: b1c60f74
+
+Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.06 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6499 ; free virtual = 10776
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6514 ; free virtual = 10776
+
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 8bba3acb
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6518 ; free virtual = 10780
+
+Phase 1.3 Build Placer Netlist Model
+Phase 1.3 Build Placer Netlist Model | Checksum: d31c327c
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6494 ; free virtual = 10756
+
+Phase 1.4 Constrain Clocks/Macros
+Phase 1.4 Constrain Clocks/Macros | Checksum: d31c327c
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6494 ; free virtual = 10756
+Phase 1 Placer Initialization | Checksum: d31c327c
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6494 ; free virtual = 10756
+
+Phase 2 Global Placement
+
+Phase 2.1 Floorplanning
+
+Phase 2.1.1 Partition Driven Placement
+
+Phase 2.1.1.1 PBP: Partition Driven Placement
+Phase 2.1.1.1 PBP: Partition Driven Placement | Checksum: 174e8d1e6
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:03 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6490 ; free virtual = 10752
+
+Phase 2.1.1.2 PBP: Clock Region Placement
+Phase 2.1.1.2 PBP: Clock Region Placement | Checksum: 96f0bcf5
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:04 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6488 ; free virtual = 10750
+
+Phase 2.1.1.3 PBP: Discrete Incremental
+Phase 2.1.1.3 PBP: Discrete Incremental | Checksum: ec16b8e6
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:04 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6488 ; free virtual = 10750
+
+Phase 2.1.1.4 PBP: Compute Congestion
+Phase 2.1.1.4 PBP: Compute Congestion | Checksum: ec16b8e6
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:04 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6480 ; free virtual = 10742
+
+Phase 2.1.1.5 PBP: Macro Placement
+Phase 2.1.1.5 PBP: Macro Placement | Checksum: 14f1fc5e3
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:04 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6479 ; free virtual = 10742
+
+Phase 2.1.1.6 PBP: Add part constraints
+Phase 2.1.1.6 PBP: Add part constraints | Checksum: 14f1fc5e3
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:04 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6479 ; free virtual = 10742
+Phase 2.1.1 Partition Driven Placement | Checksum: 14f1fc5e3
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:04 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6480 ; free virtual = 10742
+Phase 2.1 Floorplanning | Checksum: 14f1fc5e3
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:04 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6480 ; free virtual = 10742
+
+Phase 2.2 Update Timing before SLR Path Opt
+Phase 2.2 Update Timing before SLR Path Opt | Checksum: 14f1fc5e3
+
+Time (s): cpu = 00:00:07 ; elapsed = 00:00:04 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6480 ; free virtual = 10742
+
+Phase 2.3 Global Placement Core
+WARNING: [Place 46-29] place_design is not in timing mode. Skip physical synthesis in placer
+Phase 2.3 Global Placement Core | Checksum: b5240014
+
+Time (s): cpu = 00:00:43 ; elapsed = 00:00:11 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6389 ; free virtual = 10669
+Phase 2 Global Placement | Checksum: b5240014
+
+Time (s): cpu = 00:00:43 ; elapsed = 00:00:12 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6389 ; free virtual = 10669
+
+Phase 3 Detail Placement
+
+Phase 3.1 Commit Multi Column Macros
+Phase 3.1 Commit Multi Column Macros | Checksum: b5240014
+
+Time (s): cpu = 00:00:43 ; elapsed = 00:00:12 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6383 ; free virtual = 10672
+
+Phase 3.2 Commit Most Macros & LUTRAMs
+Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 12dcac53a
+
+Time (s): cpu = 00:00:44 ; elapsed = 00:00:12 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6383 ; free virtual = 10672
+
+Phase 3.3 Small Shape DP
+
+Phase 3.3.1 Small Shape Clustering
+Phase 3.3.1 Small Shape Clustering | Checksum: 19f7063c0
+
+Time (s): cpu = 00:00:44 ; elapsed = 00:00:12 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6381 ; free virtual = 10670
+
+Phase 3.3.2 Flow Legalize Slice Clusters
+Phase 3.3.2 Flow Legalize Slice Clusters | Checksum: 14b59d2f2
+
+Time (s): cpu = 00:00:45 ; elapsed = 00:00:13 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6374 ; free virtual = 10664
+
+Phase 3.3.3 Slice Area Swap
+Phase 3.3.3 Slice Area Swap | Checksum: cdff18f5
+
+Time (s): cpu = 00:00:45 ; elapsed = 00:00:13 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6367 ; free virtual = 10656
+Phase 3.3 Small Shape DP | Checksum: fe3590fc
+
+Time (s): cpu = 00:00:46 ; elapsed = 00:00:13 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6376 ; free virtual = 10666
+
+Phase 3.4 Re-assign LUT pins
+Phase 3.4 Re-assign LUT pins | Checksum: fe3590fc
+
+Time (s): cpu = 00:00:47 ; elapsed = 00:00:14 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6376 ; free virtual = 10666
+
+Phase 3.5 Pipeline Register Optimization
+Phase 3.5 Pipeline Register Optimization | Checksum: 19a950175
+
+Time (s): cpu = 00:00:47 ; elapsed = 00:00:14 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6376 ; free virtual = 10666
+Phase 3 Detail Placement | Checksum: 19a950175
+
+Time (s): cpu = 00:00:47 ; elapsed = 00:00:14 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6376 ; free virtual = 10666
+
+Phase 4 Post Placement Optimization and Clean-Up
+
+Phase 4.1 Post Commit Optimization
+Phase 4.1 Post Commit Optimization | Checksum: 19a950175
+
+Time (s): cpu = 00:00:47 ; elapsed = 00:00:14 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6373 ; free virtual = 10663
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6386 ; free virtual = 10666
+
+Phase 4.2 Post Placement Cleanup
+Phase 4.2 Post Placement Cleanup | Checksum: 292cc64fd
+
+Time (s): cpu = 00:00:48 ; elapsed = 00:00:15 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6385 ; free virtual = 10664
+
+Phase 4.3 Placer Reporting
+
+Phase 4.3.1 Print Estimated Congestion
+INFO: [Place 30-612] Post-Placement Estimated Congestion 
+ ________________________________________________________________________
+|           | Global Congestion | Long Congestion   | Short Congestion  |
+| Direction | Region Size       | Region Size       | Region Size       |
+|___________|___________________|___________________|___________________|
+|      North|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+|      South|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+|       East|                1x1|                1x1|                4x4|
+|___________|___________________|___________________|___________________|
+|       West|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+
+Phase 4.3.1 Print Estimated Congestion | Checksum: 292cc64fd
+
+Time (s): cpu = 00:00:48 ; elapsed = 00:00:15 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6385 ; free virtual = 10664
+Phase 4.3 Placer Reporting | Checksum: 292cc64fd
+
+Time (s): cpu = 00:00:48 ; elapsed = 00:00:15 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6385 ; free virtual = 10665
+
+Phase 4.4 Final Placement Cleanup
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6385 ; free virtual = 10665
+
+Time (s): cpu = 00:00:48 ; elapsed = 00:00:15 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6385 ; free virtual = 10665
+Phase 4 Post Placement Optimization and Clean-Up | Checksum: 33d70124c
+
+Time (s): cpu = 00:00:48 ; elapsed = 00:00:15 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6385 ; free virtual = 10665
+Ending Placer Task | Checksum: 24622f2d8
+
+Time (s): cpu = 00:00:48 ; elapsed = 00:00:15 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6385 ; free virtual = 10665
+INFO: [Common 17-83] Releasing license: Implementation
+56 Infos, 3 Warnings, 1 Critical Warnings and 0 Errors encountered.
+place_design completed successfully
+place_design: Time (s): cpu = 00:00:52 ; elapsed = 00:00:17 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6418 ; free virtual = 10697
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.67 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6381 ; free virtual = 10683
+INFO: [Common 17-1381] The checkpoint '/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/impl_1/LittleNetAccAxi_placed.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_io -file LittleNetAccAxi_io_placed.rpt
+report_io: Time (s): cpu = 00:00:00.12 ; elapsed = 00:00:00.21 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6425 ; free virtual = 10742
+INFO: [runtcl-4] Executing : report_utilization -file LittleNetAccAxi_utilization_placed.rpt -pb LittleNetAccAxi_utilization_placed.pb
+INFO: [runtcl-4] Executing : report_control_sets -verbose -file LittleNetAccAxi_control_sets_placed.rpt
+report_control_sets: Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.16 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6434 ; free virtual = 10752
+Command: phys_opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xczu3eg'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xczu3eg'
+INFO: [Vivado_Tcl 4-235] No timing constraint found. The netlist was not modified.
+INFO: [Common 17-83] Releasing license: Implementation
+64 Infos, 3 Warnings, 1 Critical Warnings and 0 Errors encountered.
+phys_opt_design completed successfully
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.52 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6427 ; free virtual = 10746
+INFO: [Common 17-1381] The checkpoint '/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/impl_1/LittleNetAccAxi_physopt.dcp' has been generated.
+Command: route_design
+Attempting to get a license for feature 'Implementation' and/or device 'xczu3eg'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xczu3eg'
+Running DRC as a precondition to command route_design
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+
+Starting Routing Task
+INFO: [Route 35-254] Multithreading enabled for route_design using a maximum of 8 CPUs
+Checksum: PlaceDB: 80eae963 ConstDB: 0 ShapeSum: cd00a5ed RouteDB: f8376388
+
+Phase 1 Build RT Design
+Nodegraph reading from file.  Time (s): cpu = 00:00:00.48 ; elapsed = 00:00:02 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6360 ; free virtual = 10682
+Phase 1 Build RT Design | Checksum: c0589104
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6359 ; free virtual = 10671
+Post Restoration Checksum: NetGraph: 525fd2ad NumContArr: 36fd007c Constraints: b1483365 Timing: 0
+
+Phase 2 Router Initialization
+INFO: [Route 35-64] No timing constraints were detected. The router will operate in resource-optimization mode.
+
+Phase 2.1 Fix Topology Constraints
+Phase 2.1 Fix Topology Constraints | Checksum: 13aa5068e
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6317 ; free virtual = 10629
+
+Phase 2.2 Pre Route Cleanup
+Phase 2.2 Pre Route Cleanup | Checksum: 13aa5068e
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6317 ; free virtual = 10629
+
+Phase 2.3 Global Clock Net Routing
+ Number of Nodes with overlaps = 0
+Phase 2.3 Global Clock Net Routing | Checksum: 1a62232bb
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6307 ; free virtual = 10619
+Phase 2 Router Initialization | Checksum: 1a62232bb
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6307 ; free virtual = 10619
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0 %
+  Global Horizontal Routing Utilization  = 0 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 8578
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 8250
+  Number of Partially Routed Nets     = 328
+  Number of Node Overlaps             = 0
+
+
+Phase 3 Initial Routing
+
+Phase 3.1 Global Routing
+Phase 3.1 Global Routing | Checksum: 1a62232bb
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6314 ; free virtual = 10621
+Phase 3 Initial Routing | Checksum: 233f7b1f4
+
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6292 ; free virtual = 10599
+
+Phase 4 Rip-up And Reroute
+
+Phase 4.1 Global Iteration 0
+ Number of Nodes with overlaps = 596
+ Number of Nodes with overlaps = 16
+ Number of Nodes with overlaps = 0
+Phase 4.1 Global Iteration 0 | Checksum: 76fa273c
+
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:09 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6300 ; free virtual = 10612
+Phase 4 Rip-up And Reroute | Checksum: 76fa273c
+
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:09 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6300 ; free virtual = 10612
+
+Phase 5 Delay and Skew Optimization
+Phase 5 Delay and Skew Optimization | Checksum: f494c978
+
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:09 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6301 ; free virtual = 10613
+
+Phase 6 Post Hold Fix
+
+Phase 6.1 Hold Fix Iter
+Phase 6.1 Hold Fix Iter | Checksum: f494c978
+
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:09 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6301 ; free virtual = 10613
+Phase 6 Post Hold Fix | Checksum: f494c978
+
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:09 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6301 ; free virtual = 10613
+
+Phase 7 Route finalize
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0.934022 %
+  Global Horizontal Routing Utilization  = 1.35876 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 0
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 0
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Congestion Report
+North Dir 1x1 Area, Max Cong = 51.1737%, No Congested Regions.
+South Dir 1x1 Area, Max Cong = 34.1232%, No Congested Regions.
+East Dir 1x1 Area, Max Cong = 51.9231%, No Congested Regions.
+West Dir 1x1 Area, Max Cong = 54.8077%, No Congested Regions.
+
+------------------------------
+Reporting congestion hotspots
+------------------------------
+Direction: North
+----------------
+Congested clusters found at Level 0
+Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
+Direction: South
+----------------
+Congested clusters found at Level 0
+Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
+Direction: East
+----------------
+Congested clusters found at Level 0
+Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
+Direction: West
+----------------
+Congested clusters found at Level 0
+Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
+
+Phase 7 Route finalize | Checksum: f494c978
+
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:09 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6301 ; free virtual = 10614
+
+Phase 8 Verifying routed nets
+
+ Verification completed successfully
+Phase 8 Verifying routed nets | Checksum: f494c978
+
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:09 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6300 ; free virtual = 10612
+
+Phase 9 Depositing Routes
+Phase 9 Depositing Routes | Checksum: f494c978
+
+Time (s): cpu = 00:00:21 ; elapsed = 00:00:10 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6300 ; free virtual = 10612
+INFO: [Route 35-16] Router Completed Successfully
+
+Time (s): cpu = 00:00:21 ; elapsed = 00:00:10 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6355 ; free virtual = 10668
+
+Routing Is Done.
+INFO: [Common 17-83] Releasing license: Implementation
+74 Infos, 3 Warnings, 1 Critical Warnings and 0 Errors encountered.
+route_design completed successfully
+route_design: Time (s): cpu = 00:00:25 ; elapsed = 00:00:11 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6355 ; free virtual = 10668
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.57 . Memory (MB): peak = 4364.852 ; gain = 0.000 ; free physical = 6308 ; free virtual = 10651
+INFO: [Common 17-1381] The checkpoint '/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/impl_1/LittleNetAccAxi_routed.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_drc -file LittleNetAccAxi_drc_routed.rpt -pb LittleNetAccAxi_drc_routed.pb -rpx LittleNetAccAxi_drc_routed.rpx
+Command: report_drc -file LittleNetAccAxi_drc_routed.rpt -pb LittleNetAccAxi_drc_routed.pb -rpx LittleNetAccAxi_drc_routed.rpx
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Coretcl 2-168] The results of DRC are in file /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/impl_1/LittleNetAccAxi_drc_routed.rpt.
+report_drc completed successfully
+INFO: [runtcl-4] Executing : report_methodology -file LittleNetAccAxi_methodology_drc_routed.rpt -pb LittleNetAccAxi_methodology_drc_routed.pb -rpx LittleNetAccAxi_methodology_drc_routed.rpx
+Command: report_methodology -file LittleNetAccAxi_methodology_drc_routed.rpt -pb LittleNetAccAxi_methodology_drc_routed.pb -rpx LittleNetAccAxi_methodology_drc_routed.rpx
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [DRC 23-133] Running Methodology with 8 threads
+INFO: [Coretcl 2-1520] The results of Report Methodology are in file /media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/LittleNetAcc.runs/impl_1/LittleNetAccAxi_methodology_drc_routed.rpt.
+report_methodology completed successfully
+INFO: [runtcl-4] Executing : report_power -file LittleNetAccAxi_power_routed.rpt -pb LittleNetAccAxi_power_summary_routed.pb -rpx LittleNetAccAxi_power_routed.rpx
+Command: report_power -file LittleNetAccAxi_power_routed.rpt -pb LittleNetAccAxi_power_summary_routed.pb -rpx LittleNetAccAxi_power_routed.rpx
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+WARNING: [Power 33-232] No user defined clocks were found in the design! Power estimation will be inaccurate until this is corrected.
+Resolution: Please specify clocks using create_clock/create_generated_clock for sequential elements. For pure combinatorial circuits, please specify a virtual clock, otherwise the vectorless estimation might be inaccurate
+Running Vector-less Activity Propagation...
+
+Finished Running Vector-less Activity Propagation
+WARNING: [Power 33-332] Found switching activity that implies high-fanout reset nets being asserted for excessive periods of time which may result in inaccurate power analysis.
+Resolution: To review and fix problems, please run Power Constraints Advisor in the GUI from Tools > Power Constraints Advisor or run report_power with the -advisory option to generate a text report.
+86 Infos, 5 Warnings, 1 Critical Warnings and 0 Errors encountered.
+report_power completed successfully
+report_power: Time (s): cpu = 00:00:12 ; elapsed = 00:00:07 . Memory (MB): peak = 4381.863 ; gain = 0.000 ; free physical = 6298 ; free virtual = 10613
+INFO: [runtcl-4] Executing : report_route_status -file LittleNetAccAxi_route_status.rpt -pb LittleNetAccAxi_route_status.pb
+INFO: [runtcl-4] Executing : report_timing_summary -max_paths 10 -file LittleNetAccAxi_timing_summary_routed.rpt -pb LittleNetAccAxi_timing_summary_routed.pb -rpx LittleNetAccAxi_timing_summary_routed.rpx -warn_on_violation 
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Temperature grade: I, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+WARNING: [Timing 38-313] There are no user specified timing constraints. Timing constraints are needed for proper timing analysis.
+INFO: [runtcl-4] Executing : report_incremental_reuse -file LittleNetAccAxi_incremental_reuse_routed.rpt
+INFO: [Vivado_Tcl 4-1062] Incremental flow is disabled. No incremental reuse Info to report.
+INFO: [runtcl-4] Executing : report_clock_utilization -file LittleNetAccAxi_clock_utilization_routed.rpt
+INFO: [runtcl-4] Executing : report_bus_skew -warn_on_violation -file LittleNetAccAxi_bus_skew_routed.rpt -pb LittleNetAccAxi_bus_skew_routed.pb -rpx LittleNetAccAxi_bus_skew_routed.rpx
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Temperature grade: I, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+WARNING: [Memdata 28-231] The XPM memory array ln/rom_layer_19_pw/inside_ROM_blk/xpm_memory_base_inst is configured as a ROM with synthesis optimization enabled. This configuration is currently not suported by updatemem and therefore you cannot update the bitstream with new ROM data. If you have a new .mem file you must rerun synthesis to initialize the BRAMs. Or you can set the MEMORY_OPTIMIZATION parameter to false and rerun synthesis.
+WARNING: [Memdata 28-231] The XPM memory array ln/rom_layer_18_dw/inside_ROM_blk/xpm_memory_base_inst is configured as a ROM with synthesis optimization enabled. This configuration is currently not suported by updatemem and therefore you cannot update the bitstream with new ROM data. If you have a new .mem file you must rerun synthesis to initialize the BRAMs. Or you can set the MEMORY_OPTIMIZATION parameter to false and rerun synthesis.
+WARNING: [Memdata 28-231] The XPM memory array ln/rom_layer_17_pw/inside_ROM_blk/xpm_memory_base_inst is configured as a ROM with synthesis optimization enabled. This configuration is currently not suported by updatemem and therefore you cannot update the bitstream with new ROM data. If you have a new .mem file you must rerun synthesis to initialize the BRAMs. Or you can set the MEMORY_OPTIMIZATION parameter to false and rerun synthesis.
+Command: write_bitstream -force LittleNetAccAxi.bit
+Attempting to get a license for feature 'Implementation' and/or device 'xczu3eg'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xczu3eg'
+Running DRC as a precondition to command write_bitstream
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [DRC 23-27] Running DRC with 8 threads
+ERROR: [DRC NSTD-1] Unspecified I/O Standard: 45 out of 45 logical ports use I/O standard (IOSTANDARD) value 'DEFAULT', instead of a user assigned specific value. This may cause I/O contention or incompatibility with the board power or connectivity affecting performance, signal integrity or in extreme cases cause damage to the device or the components to which it is connected. To correct this violation, specify all I/O standards. This design will fail to generate a bitstream unless all logical ports have a user specified I/O standard value defined. To allow bitstream creation with unspecified I/O standard values (not recommended), use this command: set_property SEVERITY {Warning} [get_drc_checks NSTD-1].  NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for write_bitstream step for the implementation run. Problem ports: m_axis_tdata[31:0], m_axis_tkeep[3:0], s_axis_tvalid, s_axis_tready, m_axis_tlast, m_axis_tready, m_axis_tvalid, reset, clk, m_axis_clk, and s_axis_clk.
+ERROR: [DRC UCIO-1] Unconstrained Logical Port: 45 out of 45 logical ports have no user assigned specific location constraint (LOC). This may cause I/O contention or incompatibility with the board power or connectivity affecting performance, signal integrity or in extreme cases cause damage to the device or the components to which it is connected. To correct this violation, specify all pin locations. This design will fail to generate a bitstream unless all logical ports have a user specified site LOC constraint defined.  To allow bitstream creation with unspecified pin locations (not recommended), use this command: set_property SEVERITY {Warning} [get_drc_checks UCIO-1].  NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for write_bitstream step for the implementation run.  Problem ports: m_axis_tdata[31:0], m_axis_tkeep[3:0], s_axis_tvalid, s_axis_tready, m_axis_tlast, m_axis_tready, m_axis_tvalid, reset, clk, m_axis_clk, and s_axis_clk.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[0].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[10].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[11].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[12].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[13].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[14].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[15].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[16].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[17].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[1].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[2].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[3].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[4].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[5].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[6].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[7].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[8].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_17_pw/genblk1[9].pw_unit/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_18_dw/dsp_bn/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_18_dw/genblk1[0].dsp_first_no_bias/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_18_dw/genblk1[1].dsp_intermediate/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_18_dw/genblk1[2].dsp_intermediate/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_18_dw/genblk1[3].dsp_intermediate/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_18_dw/genblk1[4].dsp_intermediate/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_18_dw/genblk1[5].dsp_intermediate/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_18_dw/genblk1[6].dsp_intermediate/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_18_dw/genblk1[7].dsp_intermediate/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_18_dw/genblk1[8].dsp_last/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_19_pw/data_point_streamer/address_computer/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_19_pw/genblk1[0].pw_unit/accumulator/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_19_pw/genblk1[1].pw_unit/accumulator/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_19_pw/genblk1[2].pw_unit/accumulator/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_19_pw/genblk1[3].pw_unit/accumulator/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [DRC AVAL-155] enum_AMULTSEL_BMULTSEL_enum_DREG_ADREG_0_connects_CED_CEAD_RSTD_GND: ln/layer_19_pw/genblk1[4].pw_unit/accumulator/U0/i_synth/i_synth_option.i_synth_model/opt_8series.i_uniwrap/i_primitive: DSP48E2 is not using the D port (AMULTSEL = A and BMULTSEL = B). For improved power characteristics, set DREG and ADREG to '1', tie CED, CEAD, and RSTD to logic '0'.
+INFO: [Vivado 12-3199] DRC finished with 2 Errors, 34 Advisories
+INFO: [Vivado 12-3200] Please refer to the DRC report (report_drc) for more information.
+ERROR: [Vivado 12-1345] Error(s) found during DRC. Bitgen not run.
+INFO: [Common 17-83] Releasing license: Implementation
+43 Infos, 3 Warnings, 0 Critical Warnings and 3 Errors encountered.
+write_bitstream failed
+ERROR: [Common 17-39] 'write_bitstream' failed due to earlier errors.
+
+INFO: [Common 17-206] Exiting Vivado at Tue Jan 18 22:15:29 2022...

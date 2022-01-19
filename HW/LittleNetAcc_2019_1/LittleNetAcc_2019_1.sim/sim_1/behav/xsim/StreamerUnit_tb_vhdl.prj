@@ -1,6 +1,0 @@
-# compile vhdl design source files
-vhdl xil_defaultlib  \
-"../../../../LittleNet_ACC.gen/sources_1/ip/DSP_STREAMER/sim/DSP_STREAMER.vhd" \
-
-# Do not sort compile order
-nosort
