@@ -346,7 +346,7 @@ class Transformer:
 
 class BaseGenerator(clb.BaseCallback):
 
-    MAX_NUMBER_OF_THREADS = 36
+    MAX_NUMBER_OF_THREADS = 30
 
 
     def __init__(self, batch_size):

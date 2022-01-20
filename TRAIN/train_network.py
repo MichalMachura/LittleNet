@@ -21,6 +21,8 @@ if __name__ == '__main__':
     parser.add_argument('--USE_QUANT', type=int, required=True)
     parser.add_argument('--BN_QUANT', type=int, required=True)
     parser.add_argument('--MODEL_TYPE', required=True)
+    parser.add_argument('--BATCH_SIZE', type=int, default=10)
+    
     # get args
     args = parser.parse_args()
     # type of model / it's history
@@ -291,7 +293,8 @@ if __name__ == '__main__':
     # HERE IS MAIN CROSS-VALIDATION LOOP
     epochs_limit = 350
     
-    multiplier = 10
+    multiplier = 7 if args.USE_QUANT else 10
+    multiplier = args.BATCH_SIZE
     train_generator.batch_size = 48*multiplier
     val_generator.batch_size = 48*multiplier
     test_generator.batch_size = 48*multiplier
