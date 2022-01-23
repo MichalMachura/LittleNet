@@ -13,7 +13,7 @@ class BaseMetric:
         if Types.is_device(device):
             self.device = device
         for k,v in self.__dict__.items():
-            if type(v) is torch.Tensor:
+            if type(v) is torch.tensor:
                 v.to(device)
 
     def __call__(self, y_predict, y_ref):
@@ -22,6 +22,7 @@ class BaseMetric:
 
 class CONSTANTS:
     CIOU_SWITCH = True
+    OLD_TORCH = False
 
 
 def iou_based_metric(bbox1, bbox2, border_width=1, mode='iou', eps=1e-7):
@@ -43,8 +44,13 @@ def iou_based_metric(bbox1, bbox2, border_width=1, mode='iou', eps=1e-7):
     if mode not in ['iou', 'giou', 'diou', 'ciou', 'gciou', 'gdciou']:
         raise Exception("Mode '{}' not is not supported!".format(mode))
     
-    LT = torch.maximum(bbox1[:,:2], bbox2[:,:2])
-    RB = torch.minimum(bbox1[:,-2:],bbox2[:,-2:])
+    if CONSTANTS.OLD_TORCH:
+        LT = torch.max(bbox1[:,:2], bbox2[:,:2])
+        RB = torch.min(bbox1[:,-2:],bbox2[:,-2:])
+    else:
+        LT = torch.maximum(bbox1[:,:2], bbox2[:,:2])
+        RB = torch.minimum(bbox1[:,-2:],bbox2[:,-2:])
+    
     # calculate width and height of intersection
     WH = RB - LT + border_width
     # negative values of wh mean that intersection is not met.
@@ -63,8 +69,13 @@ def iou_based_metric(bbox1, bbox2, border_width=1, mode='iou', eps=1e-7):
 
     if mode != 'iou':
         # compute the smallest box with both boxes A and B
-        C_LT = torch.minimum(bbox1[:,:2], bbox2[:,:2])
-        C_RB = torch.maximum(bbox1[:,-2:],bbox2[:,-2:])
+        if CONSTANTS.OLD_TORCH:
+            C_LT = torch.min(bbox1[:,:2], bbox2[:,:2])
+            C_RB = torch.max(bbox1[:,-2:],bbox2[:,-2:])
+        else:
+            C_LT = torch.minimum(bbox1[:,:2], bbox2[:,:2])
+            C_RB = torch.maximum(bbox1[:,-2:],bbox2[:,-2:])
+        
         C_WH = C_RB - C_LT + border_width
 
     # init with 0, when needed values will be changed

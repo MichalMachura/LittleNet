@@ -444,7 +444,7 @@ class DWBlock(LayerBlock):
             print("Saved memory file under:",
                   os.path.join(path,'rom_'+self.name+'.mem'))
         
-        return out_order
+        return out_order[mul_order] # apply also input order
 
 
 class ILBlock(LayerBlock):

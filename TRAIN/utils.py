@@ -1,4 +1,3 @@
-from torch.functional import Tensor
 from data_types import Types
 import numpy as np
 import numpy.random as rnd
