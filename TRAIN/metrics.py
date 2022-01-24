@@ -13,7 +13,7 @@ class BaseMetric:
         if Types.is_device(device):
             self.device = device
         for k,v in self.__dict__.items():
-            if type(v) is torch.tensor:
+            if type(v) is torch.Tensor:
                 v.to(device)
 
     def __call__(self, y_predict, y_ref):
