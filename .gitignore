@@ -1,2 +1,4 @@
 DATASETS
 __pycache__
+*.jpg
+*.png

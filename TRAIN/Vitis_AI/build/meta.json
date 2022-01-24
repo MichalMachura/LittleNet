@@ -2,13 +2,7 @@
     "lib": "libvart-dpu-runner.so",
     "filename": "LN7_VAI.xmodel",
     "kernel": [
-        "subgraph_Sequential__16_conv_bias",
-        "subgraph_Sequential__1_conv_bias",
-        "subgraph_Sequential__4_conv_bias",
-        "subgraph_Sequential__10_conv_bias",
-        "subgraph_Sequential__7_conv_bias",
-        "subgraph_Sequential__0_0_weight",
-        "subgraph_Sequential__13_conv_bias"
+        "subgraph_Sequential__0_sub_dw_0_conv_bias"
     ],
     "target": "DPUCZDX8G_CUSTOMIZED"
 }
