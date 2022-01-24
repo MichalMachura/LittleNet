@@ -51,7 +51,7 @@ def set_pos_dict(dict_of_lists, pos, dict_values, filler=None):
 
 
 def dict_values_from_items(dict_values):
-    return {k:v.item() if isinstance(v,torch.tensor) else v for k,v in dict_values.items()}
+    return {k:v.item() if isinstance(v,torch.Tensor) else v for k,v in dict_values.items()}
 
 
 def dict_add(d1, d2):
