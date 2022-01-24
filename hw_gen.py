@@ -456,8 +456,10 @@ class ILBlock(LayerBlock):
         super().__init__(name, 
                          input_shape[-3:], 
                          input_shape[-3:], 
-                         (8,8,False),
-                         q_out.get_repr())
+                         (8,0,False),
+                        #  q_out.get_repr()
+                         (8,0,False)
+                         )
         self.config = self.extract_config(m)
     
     def extract_config(self, m:qnn.QuantIdentity):
@@ -573,7 +575,7 @@ def get_layers_config(model:torch.nn.Module, input_shape:tuple):
             prev = DWBlock("layer_"+str(i)+"_dw",prev,  L)
         else:
             raise RuntimeError("Unsupported type")
-        
+
         layers_blocks.append(prev)
 
     # yolo layer config    
@@ -626,7 +628,16 @@ def create_hw_from_sw(model:torch.nn.Module,
             order = L.generate(path, order)
 
 if __name__ == "__main__":
-
+    
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--weights', required=True)
+    parser.add_argument('--rom_dir', default='./HW/LittleNetAcc/LittleNetAcc.srcs/sources_1/imports/memories')
+    parser.add_argument('--dst_sv_file', default='./HW/LittleNetAcc/LittleNetAcc.srcs/sources_1/imports/new/little_net_acc.sv')
+    
+    args = parser.parse_args()
+    sd = torch.load(args.weights)
+    
     networks.SeparableConv2D.QUANT_BEFORE_BN = True
 
     qin = quantizers.generalized_auto_fxp(8,8,0.1,
@@ -666,7 +677,10 @@ if __name__ == "__main__":
                                           dst='act')
     
     model = LittleNet7(3,qin,(qw,None,qa,qb),(qw,None,qa,qb))
+    
+    model.load_state_dict(sd)
+    
     create_hw_from_sw(model, (1,3,112,208),
-                      rom_dir='./HW/LittleNetAcc/LittleNetAcc.srcs/sources_1/imports/memories',
-                      dst_file_path='./HW/LittleNetAcc/LittleNetAcc.srcs/sources_1/imports/new/little_net_acc.sv')
+                      rom_dir=args.rom_dir,
+                      dst_file_path=args.dst_sv_file)
     
