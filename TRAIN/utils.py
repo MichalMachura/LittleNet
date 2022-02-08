@@ -449,13 +449,13 @@ def shb_params(width,
         i = 0
         while True:
             # check multiplication of shb
-            if width <= (2*byte)*2**i:
+            if width <= (2*byte)*i:
                 break
             i += 1
         
-        bram_width = (2*byte)*2**i
+        bram_width = (2*byte)*i
         bram_len = shb_len
-        bram_blk = i+1
+        bram_blk = i
    
     return bram_width, bram_len, bram_blk
     

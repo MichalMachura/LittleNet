@@ -86,6 +86,7 @@ if __name__ == '__main__':
                                         trainable_signed=False, trainable_bit_width=False,
                                         dst='bias',)
         qa = quant.generalized_auto_fxp(bit_width=8,frac_part=4, signed=0.9,
+                                        round_mode='floor',
                                         min_bit_width=2, max_bit_width=8, 
                                         trainable_signed=False, trainable_bit_width=False,
                                         dst='act',)

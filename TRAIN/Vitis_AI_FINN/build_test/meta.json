@@ -1,0 +1,8 @@
+{
+    "lib": "libvart-dpu-runner.so",
+    "filename": "FINN_VAI.xmodel",
+    "kernel": [
+        "subgraph_Sequential__0_bias"
+    ],
+    "target": "DPUCZDX8G_CUSTOMIZED"
+}

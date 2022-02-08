@@ -594,7 +594,8 @@ class YoloDataGenerator(BaseGenerator):
 
     NUMBER_OF_THREADS = BaseGenerator.MAX_NUMBER_OF_THREADS if BaseGenerator.MAX_NUMBER_OF_THREADS < 3 \
                                                            else BaseGenerator.MAX_NUMBER_OF_THREADS-1
-            
+    NAIVE_RESIZE = False
+
     def __init__(self,
                 path_to_dataset,
                 input_shape,
@@ -723,11 +724,15 @@ class YoloDataGenerator(BaseGenerator):
                     # if resize is necessary
                     if H_in != H_dst or W_in != W_dst:
                         # resize image 
-                        # th_img = cv.resize(th_img, (W_dst, H_dst), interpolation=cv.INTER_LINEAR)
-                        th_img, W_new, H_new = resize(th_img, 
-                                                      W_dst, 
-                                                      H_dst, 
-                                                      INTER=cv.INTER_LINEAR)
+                        if YoloDataGenerator.NAIVE_RESIZE:
+                            th_img = cv.resize(th_img, (W_dst, H_dst), interpolation=cv.INTER_LINEAR)
+                            W_new = W_dst
+                            H_new = H_dst
+                        else:
+                            th_img, W_new, H_new = resize(th_img, 
+                                                            W_dst, 
+                                                            H_dst, 
+                                                            INTER=cv.INTER_LINEAR)
                         # rescale bbox
                         th_bbox[0::2] *= W_new/W_in 
                         th_bbox[1::2] *= H_new/H_in

@@ -31,7 +31,7 @@ module PointAlignment #(
 	wire pre_filler;
 	
 	generate
-		if (W_SIGN)
+		if (B_SIGN)
 			// pre filler is MSB - sign bit
 			assign pre_filler = in_bias[W_BITS-1];
 		else
@@ -228,325 +228,6 @@ endmodule // GrouperUnit
 
 
 
-module MaxFinderUnit
-		#(
-		parameter BIT_WIDTH = 8,
-		parameter SIGNED = 1,
-		parameter WIDTH = 13,
-		parameter HEIGHT = 7,
-		parameter ANCHORS_NUM = 3,
-		parameter WRITE_MEMORY_LATENCY = 2,
-		parameter PARALLELISM = 1,
-		// number of elements to describe maximum == anchor idx, Xc,Xy,W,H, pos_row, pos_col
-		// or 
-		// Xc,Yc,W,H pos 3 bytes
-		localparam DESCRIPTION_SIZE = 7,
-		localparam CHANNELS = ANCHORS_NUM*DESCRIPTION_SIZE,
-		localparam ADDR_BITS = $clog2(DESCRIPTION_SIZE),
-		localparam COL_CNTR_BITS = $clog2(WIDTH),
-		localparam ROW_CNTR_BITS = $clog2(HEIGHT),
-		localparam ANCHOR_CNTR_BITS = $clog2(ANCHORS_NUM)
-		)
-		(
-		input clk,
-		input enable,
-		input reset,
-		
-		input [BIT_WIDTH-1:0] data_in [PARALLELISM],
-		input data_in_validity [PARALLELISM],
-		
-		output [BIT_WIDTH-1:0] out_data_memory_in,
-		output [ADDR_BITS-1:0] out_data_memory_address,
-		output out_data_memory_write_enable,
-		
-		output finished
-		);
-	localparam [BIT_WIDTH-1:0] CURRENT_MAX_INIT = {SIGNED ? 1'b1 : 1'b0, {(BIT_WIDTH-1){1'b0}}};
-	
-	generate
-	if (PARALLELISM == 1)
-		begin
-			reg [BIT_WIDTH-1:0] current_max = CURRENT_MAX_INIT;
-			reg [COL_CNTR_BITS-1:0] counter_col = 0, max_pos_col = 0;
-			reg [ROW_CNTR_BITS-1:0] counter_row = 0, max_pos_row;
-			reg [ANCHOR_CNTR_BITS-1:0] counter_anchor = 0, max_pos_anchor = 0;
-			
-			reg [BIT_WIDTH-1:0] out_data = 0;
-			reg [ADDR_BITS-1:0] out_data_address = 0; // == counter of point description
-			reg out_data_validity = 0;
-			
-			reg search_mode = 1;
-			wire is_greater;
-			
-			if (SIGNED)
-				begin
-				// convert to signed wires
-				wire signed [BIT_WIDTH-1:0] current_max_signed = current_max;
-				wire signed [BIT_WIDTH-1:0] data_in_signed = data_in[0];
-				
-				assign is_greater = data_in_signed > current_max_signed;
-				end
-			else
-				assign is_greater = data_in[0] > current_max;
-			
-			
-			wire last_anchor = counter_anchor == ANCHORS_NUM-1;
-			wire last_col = counter_col == WIDTH-1;
-			wire last_row = counter_row == HEIGHT-1;
-			
-			reg data_stream_is_finished = 1;
-			reg fully_is_finished = 1;
-			
-			always @(posedge clk)
-				begin
-				if (reset)
-					begin
-					current_max <= CURRENT_MAX_INIT;
-					counter_anchor <= 0;
-					counter_col <= 0;
-					counter_row <= 0;
-					max_pos_anchor <= 0;
-					max_pos_col <= 0;
-					max_pos_row <= 0;
-					search_mode <= 1;
-					out_data <= 0;
-					out_data_address <= 0;
-					out_data_validity <= 0;
-					data_stream_is_finished <= 0;
-					fully_is_finished <= 0;
-					end
-				else if (enable)
-					begin
-					if (search_mode)
-						begin
-						// first data is index of anchor
-						out_data <= {{(BIT_WIDTH-ANCHOR_CNTR_BITS){1'b0}}, max_pos_anchor};
-						out_data_validity <= last_anchor && last_col && last_row && data_in_validity[0];
-						end
-					else if (!data_stream_is_finished)
-						begin
-						out_data <= data_in[0];
-						out_data_validity <= counter_anchor == max_pos_anchor
-											&& counter_col == max_pos_col
-											&& counter_row == max_pos_row
-											&& data_in_validity[0];
-						end
-					else if (data_stream_is_finished && !fully_is_finished)
-						begin
-						out_data_validity <= 1;
-						out_data_address <= out_data_address+1;
-						
-						if ( out_data_address == 5)
-							begin
-							out_data <= {{(BIT_WIDTH-ROW_CNTR_BITS){1'b0}},max_pos_row};
-							end
-						else if ( out_data_address == 6)
-							begin
-							out_data <= {{(BIT_WIDTH-COL_CNTR_BITS){1'b0}},max_pos_col};
-							// sending data is completed
-							fully_is_finished <= 1;
-							end
-						end
-					else 
-						out_data_validity <= 0;
-					
-					// if (out_data_validity)
-					// 	begin
-					// 	out_data_address <= out_data_address+1;
-					// 	end
-					
-					if (data_in_validity[0] && !data_stream_is_finished)
-						begin
-						// counters update
-						if (last_col)
-							begin
-							counter_col <= 0;
-							if (last_row)
-								begin
-								counter_row <= 0;
-								if (last_anchor)
-									begin
-									counter_anchor <= 0;
-									// next group == next address
-									if (out_data_address == 4) // anchor, xc,yc,w,h are send
-										data_stream_is_finished <= 1;
-									else
-										begin
-										// next mode is just taking the values from found maximum
-										search_mode <= 0;
-										end
-									out_data_address <= out_data_address+1;
-									end
-								else
-									counter_anchor <= counter_anchor+1;
-								end
-							else
-								counter_row <= counter_row+1;
-							end
-						else
-							counter_col <= counter_col+1;
-						
-						if (search_mode)
-							begin
-							if (is_greater)
-								begin
-								current_max <= data_in[0];
-								max_pos_anchor <= counter_anchor;
-								max_pos_col <= counter_col;
-								max_pos_row <= counter_row;
-								end
-							end
-						end
-					end
-				end
-			// always end
-			
-			assign out_data_memory_in = out_data;
-			assign out_data_memory_address = out_data_address;
-			assign out_data_memory_write_enable = out_data_validity && enable && !reset;
-			
-			// delay fully_is_finished by write latency
-			ResettableDelayLine	#(
-								.WIDTH(1),
-								.DELAY(WRITE_MEMORY_LATENCY)
-								)
-								delay_of_is_finished
-								(
-								.clk(clk),
-								.enable(enable),
-								.reset(reset),
-								
-								.data_in(fully_is_finished),
-								.data_out(finished)
-								);
-		end
-	else if (PARALLELISM == 5)
-		begin
-		localparam POS_SIZE = WIDTH*HEIGHT*ANCHORS_NUM;
-		localparam POS_BITS = $clog2(POS_SIZE);
-		reg [POS_BITS-1:0] pos_cntr = 0;
-		reg [POS_BITS-1:0] pos_max = 0;
-		reg [BIT_WIDTH-1:0] current_max[PARALLELISM] = {CURRENT_MAX_INIT,0,0,0,0};
-		reg search_mode = 1;
-		reg is_finished = 0;
-		reg [BIT_WIDTH-1:0] out_data = 0;
-		reg [ADDR_BITS-1:0] out_address = -1;
-		reg out_data_validity = 0;
-		reg [ADDR_BITS-1:0] send_cntr = 0;
-		
-		// compare validity channel values
-		wire is_greater;
-		if (SIGNED)
-			begin
-			// convert to signed wires
-			wire signed [BIT_WIDTH-1:0] current_max_signed = current_max[0];
-			wire signed [BIT_WIDTH-1:0] data_in_signed = data_in[0];
-			
-			assign is_greater = data_in_signed > current_max_signed;
-			end
-		else
-			assign is_greater = data_in[0] > current_max[0];
-		
-		// wires for data to be send
-		wire [BIT_WIDTH-1:0] local_memory [DESCRIPTION_SIZE];
-		
-		assign local_memory[0] = current_max[1];
-		assign local_memory[1] = current_max[2];
-		assign local_memory[2] = current_max[3];
-		assign local_memory[3] = current_max[4];
-		wire [3*BIT_WIDTH-1:0] wider_pos;
-		assign wider_pos[POS_BITS-1:0] = pos_max;
-		assign wider_pos[3*BIT_WIDTH-1:POS_BITS] = 0;
-		// next 3 bytes are for position
-		assign local_memory[4] = wider_pos[23:16];
-		assign local_memory[5] = wider_pos[15:8];
-		assign local_memory[6] = wider_pos[7:0];
-		
-		always @(posedge clk)
-			begin
-			if (reset)
-				begin
-				pos_cntr <= 0;
-				pos_max <= 0;
-				// current_max <= {CURRENT_MAX_INIT,0,0,0,0};
-				current_max[0] <= CURRENT_MAX_INIT; // only value of validity is needed to be updated
-				search_mode <= 1;
-				is_finished <= 0;
-				out_data_validity <= 0;
-				out_address <= -1;
-				send_cntr <= 0;
-				end
-			else
-				begin
-				// max search state
-				if (search_mode)
-					begin
-					if (data_in_validity[0])
-						begin
-						// update maximum
-						// new max or new run
-						if(is_greater || pos_cntr == 0)
-							begin
-							pos_max <= pos_cntr;
-							current_max <= data_in;
-							end
-						// position counter
-						if (pos_cntr == POS_SIZE-1)
-							search_mode <= 0;
-						else
-							pos_cntr <= pos_cntr+1;
-						end
-					end
-				// sending state
-				else if (!is_finished)
-					begin
-					if(send_cntr == DESCRIPTION_SIZE-1)
-						is_finished <= 1;
-					else
-						send_cntr <= send_cntr+1;
-					
-					out_data <= local_memory[send_cntr];
-					out_address <= out_address+1;
-					out_data_validity <= 1;
-					end
-				else
-					begin
-					out_data_validity <= 0;
-					end
-				end
-			end
-		// always end
-		
-		
-		assign out_data_memory_in = out_data;
-		assign out_data_memory_address = out_address;
-		assign out_data_memory_write_enable = out_data_validity;
-		
-		// delay fully_is_finished by write latency
-		ResettableDelayLine	#(
-							.WIDTH(1),
-							.DELAY(WRITE_MEMORY_LATENCY)
-							)
-							delay_of_is_finished
-							(
-							.clk(clk),
-							.enable(enable),
-							.reset(reset),
-							
-							.data_in(is_finished),
-							.data_out(finished)
-							);
-		end
-	else
-		begin
-		$fatal("Parallelism for MaxFinderUnit must be 1 or 5.");
-		end
-	endgenerate
-	
-endmodule // MaxFinder
-
-
-
 module MemoryWriterSelectorUnit
 		#(
 		parameter BIT_WIDTH = 8,
@@ -622,119 +303,7 @@ module MemoryReaderSelectorUnit
 	
 endmodule // MemoryWriterSelectorUnit
 
-
-module InputLayer
-		#(
-		parameter BIT_WIDTH = 8,
-		parameter WIDTH = 200,
-		parameter HEIGHT = 100,
-		parameter CHANNELS = 3,
-		parameter GROUPS = 4,
-		parameter WRITE_MEMORY_LATENCY = 2,
-		
-		localparam ADDRESS_BITS_32 = 32,
-		localparam ADDRESS_BITS = $clog2((WIDTH*HEIGHT*CHANNELS)/GROUPS)
-		)
-		(
-		input clk,
-		input enable,
-		input reset,
-		input [GROUPS*BIT_WIDTH-1:0] data_in,
-		input data_in_validity,
-		
-		output [GROUPS*BIT_WIDTH-1:0] data_out,
-		output [ADDRESS_BITS_32-1:0] data_out_address,
-		output data_out_validity,
-		
-		output last_data_received,
-		output finished
-		);
-	wire [BIT_WIDTH*GROUPS*CHANNELS-1:0] intermediate_data;
-	wire intermediate_validity;
-	
-	GrouperUnit	#(
-				.BIT_WIDTH(BIT_WIDTH*GROUPS),
-				.GROUPS(CHANNELS),
-				.ENDIANNESS(0) // little endian - oldest at the lowest bytes
-				// oldest data (smaller address) at the right
-				)
-				gu
-				(
-				.clk(clk),
-				.enable(enable),
-				.reset(reset),
-				.data_in(data_in),
-				.data_in_validity(data_in_validity),
-				.data_out(intermediate_data),
-				.data_out_validity(intermediate_validity)
-				);
-	
-	wire [BIT_WIDTH*GROUPS-1:0] bgr [CHANNELS];
-	genvar gen_byte;
-	generate
-		for(gen_byte = 0; gen_byte < GROUPS*CHANNELS; gen_byte = gen_byte+1)
-			begin
-			localparam CH = gen_byte % CHANNELS;
-			// localparam IDX = gen_byte % GROUPS;
-			localparam IDX = gen_byte / CHANNELS;
-			assign bgr[CH][(IDX+1)*BIT_WIDTH-1:IDX*BIT_WIDTH] = intermediate_data[(gen_byte+1)*BIT_WIDTH-1:gen_byte*BIT_WIDTH];
-			end
-		// for end
-	endgenerate
-	
-	wire packed_intermediate_validity [CHANNELS] = {intermediate_validity,
-													intermediate_validity,
-													intermediate_validity};
-	
-	wire [ ADDRESS_BITS-1:0] local_out_address;
-	
-	MuxWriterUnit
-			#(
-			.BIT_WIDTH(BIT_WIDTH*GROUPS),
-			.WIDTH(WIDTH),
-			.HEIGHT(HEIGHT),
-			.CHANNELS(CHANNELS),
-			.GROUPS(GROUPS),
-			.PARALLELISM(CHANNELS),
-			.REGISTER_FOR_EACH(1),
-			// set to 0 to get last written address
-			.WRITE_MEMORY_LATENCY(0)
-			)
-			mwu
-			(
-			.clk(clk),
-			.enable(enable),
-			.reset(reset),
-			.in_data(bgr),
-			.in_data_validity(packed_intermediate_validity),
-			.out_data_memory_in(data_out),
-			.out_data_memory_address(local_out_address),
-			// .out_data_memory_address(data_out_address),
-			.out_data_memory_write_enable(data_out_validity),
-			.finished(last_data_received)
-			);
-	assign data_out_address = {{32-ADDRESS_BITS{1'b0}}, local_out_address};
-	ResettableDelayLine	#(
-						.WIDTH(1),
-						.DELAY(WRITE_MEMORY_LATENCY)
-						)
-						delay_of_finish
-						(
-						.clk(clk),
-						.enable(enable),
-						.reset(reset),
-						
-						.data_in(last_data_received),
-						.data_out(finished)
-						);
-	
-endmodule // InputLayer
-
-
-
 // AXIS INTERFACES
-
-
 
 module ReceiveFromAxis
 		#(
@@ -1125,3 +694,57 @@ module SaveToFile
 	
 endmodule // SaveToFile
 
+module WriteFile 
+	#(
+	parameter NAME = "ram_0"
+	) 
+	(
+	input clk,
+	input ena,
+	input wea,
+	input [31:0] addra,
+	input [31:0] dina,
+	
+	input [3:0] state
+	);
+	
+reg [31:0] cycle_cntr = 0;
+reg prev_ena = 0;
+
+integer file;
+reg opened = 0;
+
+initial 
+begin
+forever 
+	begin
+	@(negedge clk);
+	
+	if (!prev_ena && ena && !opened)
+		begin
+		file = $fopen($sformatf("%s_state_%0d_cycle_%0d.ram_write.txt",NAME, state, cycle_cntr), "w");
+		opened = 1'b1;
+		cycle_cntr = cycle_cntr+1;
+		end
+	
+	if (prev_ena && !ena && opened)
+		begin
+		$fclose(file);
+		opened = 1'b0;
+		end
+	
+	if(opened && ena && wea)
+		begin
+		$fdisplay(file,"%0d, %0d",{addra,2'd0},dina[7:0]);
+		$fdisplay(file,"%0d, %0d",{addra,2'd1},dina[15:8]);
+		$fdisplay(file,"%0d, %0d",{addra,2'd2},dina[23:16]);
+		$fdisplay(file,"%0d, %0d",{addra,2'd3},dina[31:24]);
+		end
+	end	
+end
+
+always @(posedge clk) 
+begin
+	prev_ena <= ena;
+end
+endmodule

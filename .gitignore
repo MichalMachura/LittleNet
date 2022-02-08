@@ -2,3 +2,6 @@ DATASETS
 __pycache__
 *.jpg
 *.png
+tmp/
+ref/
+*.ipynb_checkpoints

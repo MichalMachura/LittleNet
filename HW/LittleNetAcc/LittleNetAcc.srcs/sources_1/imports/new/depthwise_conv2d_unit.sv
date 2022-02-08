@@ -214,6 +214,7 @@ module DepthwiseConv2dUnit
 	wire [WEIGHTS_ADDRESS_BITS-1:0] local_weights_memory_address;
 	assign weights_memory_address = {{(WEIGHTS_ADDRESS_BITS_32-WEIGHTS_ADDRESS_BITS){1'b0}},
 									 local_weights_memory_address};
+	(* dont_touch = "true" *)
 	LoadingWeightsUnit #(
 						.BIT_WIDTH(WEIGHT_DATA_BIT_WIDTH),
 						.BATCH_SIZE(LOCAL_WEIGHTS_SIZE),
@@ -236,10 +237,10 @@ module DepthwiseConv2dUnit
 	
 	// SLIDING WINDOW 
 	wire [IN_DATA_BIT_WIDTH-1:0] kernel [K_SIZE*K_SIZE];
-	wire [IN_DATA_ADDRESS_BITS_32-1:0] local_in_data_memory_address;
+	wire [IN_DATA_ADDRESS_BITS-1:0] local_in_data_memory_address;
 	assign in_data_memory_address = {{(IN_DATA_ADDRESS_BITS_32-IN_DATA_ADDRESS_BITS){1'b0}}, 
 									 local_in_data_memory_address};
-	
+	(* dont_touch = "true" *)
 	SlidingWindowUnit#(
 					  .IN_WIDTH(IN_WIDTH), 
 					  .IN_HEIGHT(IN_HEIGHT), 
@@ -334,6 +335,7 @@ module DepthwiseConv2dUnit
 						.out_bias(bias_aligned)
 						);
 				
+				wire [47:0] tmp_P;
 				DSP_A_mul_B_add_C_PCOUT dsp_first_bias 
 										(
 										.CLK(clk),
@@ -341,20 +343,21 @@ module DepthwiseConv2dUnit
 										.A(weight_aligned[k]),
 										.B(kernel_aligned[k]),
 										.C(bias_aligned),
-										// .P(), // not used
+										.P(tmp_P), // not used
 										// .PCIN(PCOUT[k-1]) // not present
 										.PCOUT(PCOUT[k])
 										);
 				end
 			else if (k == 0 && !USE_BIAS)
 				begin
+				wire [44:0] tmp_P;
 				DSP_A_mul_B_PCOUT dsp_first_no_bias
 										(
 										.CLK(clk),
 										.CE(processing_state),
 										.A(weight_aligned[k]),
 										.B(kernel_aligned[k]),
-										// .P(), // not used
+										.P(tmp_P), // not used
 										// .PCIN(PCOUT[k-1]) // not present
 										.PCOUT(PCOUT[k])
 										);
@@ -376,6 +379,7 @@ module DepthwiseConv2dUnit
 			// for intermediate kernel mul-adder
 			else
 				begin
+				wire [47:0] tmp_P;
 				DSP_A_mul_B_add_PCIN_PCOUT dsp_intermediate
 										(
 										.CLK(clk),
@@ -383,7 +387,7 @@ module DepthwiseConv2dUnit
 										.A(weight_aligned[k]),
 										.B(kernel_aligned[k]),
 										.PCIN(PCOUT[k-1]),
-										// .P(), not used
+										.P(tmp_P), // not used
 										.PCOUT(PCOUT[k])
 										);
 				end
@@ -529,6 +533,7 @@ module DepthwiseConv2dUnit
 	wire [OUT_DATA_BIT_WIDTH*GROUPS-1:0] grouped_data[1];
 	wire grouped_data_validity[1];
 	
+	(* dont_touch = "true" *)
 	GrouperUnit	#(
 				.BIT_WIDTH(OUT_DATA_BIT_WIDTH),
 				.GROUPS(GROUPS),
@@ -545,10 +550,11 @@ module DepthwiseConv2dUnit
 				.data_out_validity(grouped_data_validity[0])
 				);
 	
-	wire [OUT_ADDRESS_BITS_32-1:0] local_out_data_memory_address;
+	wire [OUT_ADDRESS_BITS-1:0] local_out_data_memory_address;
 	assign out_data_memory_address = {{(OUT_ADDRESS_BITS_32-OUT_ADDRESS_BITS){1'b0}}, 
 									 local_out_data_memory_address};
 	
+	(* dont_touch = "true" *)
 	MuxWriterUnit
 		#(
 		.BIT_WIDTH(OUT_DATA_BIT_WIDTH*GROUPS),

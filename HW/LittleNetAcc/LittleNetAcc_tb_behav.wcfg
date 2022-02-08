@@ -1,0 +1,1210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="LittleNetAcc_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="LittleNetAcc_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="51850001fs"></ZoomEndTime>
+      <Cursor1Time time="11052000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="150"></NameColumnWidth>
+      <ValueColumnWidth column_width="71"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="296" />
+   <wave_markers>
+      <marker label="" time="2050726000" />
+   </wave_markers>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/m_axis_tdata">
+      <obj_property name="ElementShortName">m_axis_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/m_axis_tkeep">
+      <obj_property name="ElementShortName">m_axis_tkeep[3:0]</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tkeep[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/m_axis_tlast">
+      <obj_property name="ElementShortName">m_axis_tlast</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tlast</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/m_axis_tvalid">
+      <obj_property name="ElementShortName">m_axis_tvalid</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/m_axis_tready">
+      <obj_property name="ElementShortName">m_axis_tready</obj_property>
+      <obj_property name="ObjectShortName">m_axis_tready</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/state">
+      <obj_property name="ElementShortName">state[3:0]</obj_property>
+      <obj_property name="ObjectShortName">state[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/enable">
+      <obj_property name="ElementShortName">enable[0:21]</obj_property>
+      <obj_property name="ObjectShortName">enable[0:21]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/rst">
+      <obj_property name="ElementShortName">rst[0:21]</obj_property>
+      <obj_property name="ObjectShortName">rst[0:21]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/finished">
+      <obj_property name="ElementShortName">finished[0:21]</obj_property>
+      <obj_property name="ObjectShortName">finished[0:21]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/sleep">
+      <obj_property name="ElementShortName">sleep[0:21]</obj_property>
+      <obj_property name="ObjectShortName">sleep[0:21]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_read">
+      <obj_property name="ElementShortName">data_read[0:21][7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_read[0:21][7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_read_address">
+      <obj_property name="ElementShortName">data_read_address[0:21][31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_read_address[0:21][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_read_en">
+      <obj_property name="ElementShortName">data_read_en[0:21]</obj_property>
+      <obj_property name="ObjectShortName">data_read_en[0:21]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_write">
+      <obj_property name="ElementShortName">data_write[0:21][31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_write[0:21][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_write_address">
+      <obj_property name="ElementShortName">data_write_address[0:21][31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_write_address[0:21][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_write_we">
+      <obj_property name="ElementShortName">data_write_we[0:21]</obj_property>
+      <obj_property name="ObjectShortName">data_write_we[0:21]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_0_il_r">
+      <obj_property name="ElementShortName">layer_0_il_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_0_il_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_0_il_r_addr">
+      <obj_property name="ElementShortName">layer_0_il_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_0_il_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_0_il_r_en">
+      <obj_property name="ElementShortName">layer_0_il_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_0_il_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_0_il_w_byte_3">
+      <obj_property name="ElementShortName">layer_0_il_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_0_il_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_0_il_w_byte_2">
+      <obj_property name="ElementShortName">layer_0_il_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_0_il_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_0_il_w_byte_1">
+      <obj_property name="ElementShortName">layer_0_il_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_0_il_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_0_il_w_byte_0">
+      <obj_property name="ElementShortName">layer_0_il_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_0_il_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_0_il_w_addr">
+      <obj_property name="ElementShortName">layer_0_il_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_0_il_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_0_il_w_en">
+      <obj_property name="ElementShortName">layer_0_il_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_0_il_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_1">
+      <obj_property name="ElementShortName">data_weight_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_1">
+      <obj_property name="ElementShortName">data_weight_address_1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_1[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_1">
+      <obj_property name="ElementShortName">data_weight_en_1</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_1</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_1_dw_r">
+      <obj_property name="ElementShortName">layer_1_dw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_1_dw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_1_dw_r_addr">
+      <obj_property name="ElementShortName">layer_1_dw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_1_dw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_1_dw_r_en">
+      <obj_property name="ElementShortName">layer_1_dw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_1_dw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_1_dw_w_byte_3">
+      <obj_property name="ElementShortName">layer_1_dw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_1_dw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_1_dw_w_byte_2">
+      <obj_property name="ElementShortName">layer_1_dw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_1_dw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_1_dw_w_byte_1">
+      <obj_property name="ElementShortName">layer_1_dw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_1_dw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_1_dw_w_byte_0">
+      <obj_property name="ElementShortName">layer_1_dw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_1_dw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_1_dw_w_addr">
+      <obj_property name="ElementShortName">layer_1_dw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_1_dw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_1_dw_w_en">
+      <obj_property name="ElementShortName">layer_1_dw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_1_dw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_2">
+      <obj_property name="ElementShortName">data_weight_2[63:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_2[63:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_2">
+      <obj_property name="ElementShortName">data_weight_address_2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_2[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_2">
+      <obj_property name="ElementShortName">data_weight_en_2</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_2</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_2_pw_r">
+      <obj_property name="ElementShortName">layer_2_pw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_2_pw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_2_pw_r_addr">
+      <obj_property name="ElementShortName">layer_2_pw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_2_pw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_2_pw_r_en">
+      <obj_property name="ElementShortName">layer_2_pw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_2_pw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_2_pw_w_byte_3">
+      <obj_property name="ElementShortName">layer_2_pw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_2_pw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_2_pw_w_byte_2">
+      <obj_property name="ElementShortName">layer_2_pw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_2_pw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_2_pw_w_byte_1">
+      <obj_property name="ElementShortName">layer_2_pw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_2_pw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_2_pw_w_byte_0">
+      <obj_property name="ElementShortName">layer_2_pw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_2_pw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_2_pw_w_addr">
+      <obj_property name="ElementShortName">layer_2_pw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_2_pw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_2_pw_w_en">
+      <obj_property name="ElementShortName">layer_2_pw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_2_pw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_3">
+      <obj_property name="ElementShortName">data_weight_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_3">
+      <obj_property name="ElementShortName">data_weight_address_3[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_3[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_3">
+      <obj_property name="ElementShortName">data_weight_en_3</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_3</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_3_dw_r">
+      <obj_property name="ElementShortName">layer_3_dw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_3_dw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_3_dw_r_addr">
+      <obj_property name="ElementShortName">layer_3_dw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_3_dw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_3_dw_r_en">
+      <obj_property name="ElementShortName">layer_3_dw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_3_dw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_3_dw_w_byte_3">
+      <obj_property name="ElementShortName">layer_3_dw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_3_dw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_3_dw_w_byte_2">
+      <obj_property name="ElementShortName">layer_3_dw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_3_dw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_3_dw_w_byte_1">
+      <obj_property name="ElementShortName">layer_3_dw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_3_dw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_3_dw_w_byte_0">
+      <obj_property name="ElementShortName">layer_3_dw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_3_dw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_3_dw_w_addr">
+      <obj_property name="ElementShortName">layer_3_dw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_3_dw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_3_dw_w_en">
+      <obj_property name="ElementShortName">layer_3_dw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_3_dw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_4">
+      <obj_property name="ElementShortName">data_weight_4[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_4[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_4">
+      <obj_property name="ElementShortName">data_weight_address_4[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_4[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_4">
+      <obj_property name="ElementShortName">data_weight_en_4</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_4</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_4_dw_r">
+      <obj_property name="ElementShortName">layer_4_dw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_4_dw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_4_dw_r_addr">
+      <obj_property name="ElementShortName">layer_4_dw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_4_dw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_4_dw_r_en">
+      <obj_property name="ElementShortName">layer_4_dw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_4_dw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_4_dw_w_byte_3">
+      <obj_property name="ElementShortName">layer_4_dw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_4_dw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_4_dw_w_byte_2">
+      <obj_property name="ElementShortName">layer_4_dw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_4_dw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_4_dw_w_byte_1">
+      <obj_property name="ElementShortName">layer_4_dw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_4_dw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_4_dw_w_byte_0">
+      <obj_property name="ElementShortName">layer_4_dw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_4_dw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_4_dw_w_addr">
+      <obj_property name="ElementShortName">layer_4_dw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_4_dw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_4_dw_w_en">
+      <obj_property name="ElementShortName">layer_4_dw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_4_dw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_5">
+      <obj_property name="ElementShortName">data_weight_5[143:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_5[143:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_5">
+      <obj_property name="ElementShortName">data_weight_address_5[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_5[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_5">
+      <obj_property name="ElementShortName">data_weight_en_5</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_5</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_5_pw_r">
+      <obj_property name="ElementShortName">layer_5_pw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_5_pw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_5_pw_r_addr">
+      <obj_property name="ElementShortName">layer_5_pw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_5_pw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_5_pw_r_en">
+      <obj_property name="ElementShortName">layer_5_pw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_5_pw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_5_pw_w_byte_3">
+      <obj_property name="ElementShortName">layer_5_pw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_5_pw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_5_pw_w_byte_2">
+      <obj_property name="ElementShortName">layer_5_pw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_5_pw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_5_pw_w_byte_1">
+      <obj_property name="ElementShortName">layer_5_pw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_5_pw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_5_pw_w_byte_0">
+      <obj_property name="ElementShortName">layer_5_pw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_5_pw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_5_pw_w_addr">
+      <obj_property name="ElementShortName">layer_5_pw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_5_pw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_5_pw_w_en">
+      <obj_property name="ElementShortName">layer_5_pw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_5_pw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_6">
+      <obj_property name="ElementShortName">data_weight_6[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_6[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_6">
+      <obj_property name="ElementShortName">data_weight_address_6[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_6[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_6">
+      <obj_property name="ElementShortName">data_weight_en_6</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_6</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_6_dw_r">
+      <obj_property name="ElementShortName">layer_6_dw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_6_dw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_6_dw_r_addr">
+      <obj_property name="ElementShortName">layer_6_dw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_6_dw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_6_dw_r_en">
+      <obj_property name="ElementShortName">layer_6_dw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_6_dw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_6_dw_w_byte_3">
+      <obj_property name="ElementShortName">layer_6_dw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_6_dw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_6_dw_w_byte_2">
+      <obj_property name="ElementShortName">layer_6_dw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_6_dw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_6_dw_w_byte_1">
+      <obj_property name="ElementShortName">layer_6_dw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_6_dw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_6_dw_w_byte_0">
+      <obj_property name="ElementShortName">layer_6_dw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_6_dw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_6_dw_w_addr">
+      <obj_property name="ElementShortName">layer_6_dw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_6_dw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_6_dw_w_en">
+      <obj_property name="ElementShortName">layer_6_dw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_6_dw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_7">
+      <obj_property name="ElementShortName">data_weight_7[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_7[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_7">
+      <obj_property name="ElementShortName">data_weight_address_7[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_7[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_7">
+      <obj_property name="ElementShortName">data_weight_en_7</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_7</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_7_dw_r">
+      <obj_property name="ElementShortName">layer_7_dw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_7_dw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_7_dw_r_addr">
+      <obj_property name="ElementShortName">layer_7_dw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_7_dw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_7_dw_r_en">
+      <obj_property name="ElementShortName">layer_7_dw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_7_dw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_7_dw_w_byte_3">
+      <obj_property name="ElementShortName">layer_7_dw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_7_dw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_7_dw_w_byte_2">
+      <obj_property name="ElementShortName">layer_7_dw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_7_dw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_7_dw_w_byte_1">
+      <obj_property name="ElementShortName">layer_7_dw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_7_dw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_7_dw_w_byte_0">
+      <obj_property name="ElementShortName">layer_7_dw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_7_dw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_7_dw_w_addr">
+      <obj_property name="ElementShortName">layer_7_dw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_7_dw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_7_dw_w_en">
+      <obj_property name="ElementShortName">layer_7_dw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_7_dw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_8">
+      <obj_property name="ElementShortName">data_weight_8[143:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_8[143:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_8">
+      <obj_property name="ElementShortName">data_weight_address_8[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_8[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_8">
+      <obj_property name="ElementShortName">data_weight_en_8</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_8</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_8_pw_r">
+      <obj_property name="ElementShortName">layer_8_pw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_8_pw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_8_pw_r_addr">
+      <obj_property name="ElementShortName">layer_8_pw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_8_pw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_8_pw_r_en">
+      <obj_property name="ElementShortName">layer_8_pw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_8_pw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_8_pw_w_byte_3">
+      <obj_property name="ElementShortName">layer_8_pw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_8_pw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_8_pw_w_byte_2">
+      <obj_property name="ElementShortName">layer_8_pw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_8_pw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_8_pw_w_byte_1">
+      <obj_property name="ElementShortName">layer_8_pw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_8_pw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_8_pw_w_byte_0">
+      <obj_property name="ElementShortName">layer_8_pw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_8_pw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_8_pw_w_addr">
+      <obj_property name="ElementShortName">layer_8_pw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_8_pw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_8_pw_w_en">
+      <obj_property name="ElementShortName">layer_8_pw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_8_pw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_9">
+      <obj_property name="ElementShortName">data_weight_9[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_9[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_9">
+      <obj_property name="ElementShortName">data_weight_address_9[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_9[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_9">
+      <obj_property name="ElementShortName">data_weight_en_9</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_9</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_9_dw_r">
+      <obj_property name="ElementShortName">layer_9_dw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_9_dw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_9_dw_r_addr">
+      <obj_property name="ElementShortName">layer_9_dw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_9_dw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_9_dw_r_en">
+      <obj_property name="ElementShortName">layer_9_dw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_9_dw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_9_dw_w_byte_3">
+      <obj_property name="ElementShortName">layer_9_dw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_9_dw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_9_dw_w_byte_2">
+      <obj_property name="ElementShortName">layer_9_dw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_9_dw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_9_dw_w_byte_1">
+      <obj_property name="ElementShortName">layer_9_dw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_9_dw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_9_dw_w_byte_0">
+      <obj_property name="ElementShortName">layer_9_dw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_9_dw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_9_dw_w_addr">
+      <obj_property name="ElementShortName">layer_9_dw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_9_dw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_9_dw_w_en">
+      <obj_property name="ElementShortName">layer_9_dw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_9_dw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_10">
+      <obj_property name="ElementShortName">data_weight_10[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_10[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_10">
+      <obj_property name="ElementShortName">data_weight_address_10[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_10[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_10">
+      <obj_property name="ElementShortName">data_weight_en_10</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_10</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_10_dw_r">
+      <obj_property name="ElementShortName">layer_10_dw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_10_dw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_10_dw_r_addr">
+      <obj_property name="ElementShortName">layer_10_dw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_10_dw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_10_dw_r_en">
+      <obj_property name="ElementShortName">layer_10_dw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_10_dw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_10_dw_w_byte_3">
+      <obj_property name="ElementShortName">layer_10_dw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_10_dw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_10_dw_w_byte_2">
+      <obj_property name="ElementShortName">layer_10_dw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_10_dw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_10_dw_w_byte_1">
+      <obj_property name="ElementShortName">layer_10_dw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_10_dw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_10_dw_w_byte_0">
+      <obj_property name="ElementShortName">layer_10_dw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_10_dw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_10_dw_w_addr">
+      <obj_property name="ElementShortName">layer_10_dw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_10_dw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_10_dw_w_en">
+      <obj_property name="ElementShortName">layer_10_dw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_10_dw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_11">
+      <obj_property name="ElementShortName">data_weight_11[143:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_11[143:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_11">
+      <obj_property name="ElementShortName">data_weight_address_11[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_11[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_11">
+      <obj_property name="ElementShortName">data_weight_en_11</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_11</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_11_pw_r">
+      <obj_property name="ElementShortName">layer_11_pw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_11_pw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_11_pw_r_addr">
+      <obj_property name="ElementShortName">layer_11_pw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_11_pw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_11_pw_r_en">
+      <obj_property name="ElementShortName">layer_11_pw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_11_pw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_11_pw_w_byte_3">
+      <obj_property name="ElementShortName">layer_11_pw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_11_pw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_11_pw_w_byte_2">
+      <obj_property name="ElementShortName">layer_11_pw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_11_pw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_11_pw_w_byte_1">
+      <obj_property name="ElementShortName">layer_11_pw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_11_pw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_11_pw_w_byte_0">
+      <obj_property name="ElementShortName">layer_11_pw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_11_pw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_11_pw_w_addr">
+      <obj_property name="ElementShortName">layer_11_pw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_11_pw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_11_pw_w_en">
+      <obj_property name="ElementShortName">layer_11_pw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_11_pw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_12">
+      <obj_property name="ElementShortName">data_weight_12[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_12[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_12">
+      <obj_property name="ElementShortName">data_weight_address_12[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_12[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_12">
+      <obj_property name="ElementShortName">data_weight_en_12</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_12</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_12_dw_r">
+      <obj_property name="ElementShortName">layer_12_dw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_12_dw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_12_dw_r_addr">
+      <obj_property name="ElementShortName">layer_12_dw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_12_dw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_12_dw_r_en">
+      <obj_property name="ElementShortName">layer_12_dw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_12_dw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_12_dw_w_byte_3">
+      <obj_property name="ElementShortName">layer_12_dw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_12_dw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_12_dw_w_byte_2">
+      <obj_property name="ElementShortName">layer_12_dw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_12_dw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_12_dw_w_byte_1">
+      <obj_property name="ElementShortName">layer_12_dw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_12_dw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_12_dw_w_byte_0">
+      <obj_property name="ElementShortName">layer_12_dw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_12_dw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_12_dw_w_addr">
+      <obj_property name="ElementShortName">layer_12_dw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_12_dw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_12_dw_w_en">
+      <obj_property name="ElementShortName">layer_12_dw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_12_dw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_13">
+      <obj_property name="ElementShortName">data_weight_13[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_13[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_13">
+      <obj_property name="ElementShortName">data_weight_address_13[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_13[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_13">
+      <obj_property name="ElementShortName">data_weight_en_13</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_13</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_13_dw_r">
+      <obj_property name="ElementShortName">layer_13_dw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_13_dw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_13_dw_r_addr">
+      <obj_property name="ElementShortName">layer_13_dw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_13_dw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_13_dw_r_en">
+      <obj_property name="ElementShortName">layer_13_dw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_13_dw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_13_dw_w_byte_3">
+      <obj_property name="ElementShortName">layer_13_dw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_13_dw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_13_dw_w_byte_2">
+      <obj_property name="ElementShortName">layer_13_dw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_13_dw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_13_dw_w_byte_1">
+      <obj_property name="ElementShortName">layer_13_dw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_13_dw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_13_dw_w_byte_0">
+      <obj_property name="ElementShortName">layer_13_dw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_13_dw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_13_dw_w_addr">
+      <obj_property name="ElementShortName">layer_13_dw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_13_dw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_13_dw_w_en">
+      <obj_property name="ElementShortName">layer_13_dw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_13_dw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_14">
+      <obj_property name="ElementShortName">data_weight_14[175:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_14[175:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_14">
+      <obj_property name="ElementShortName">data_weight_address_14[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_14[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_14">
+      <obj_property name="ElementShortName">data_weight_en_14</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_14</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_14_pw_r">
+      <obj_property name="ElementShortName">layer_14_pw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_14_pw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_14_pw_r_addr">
+      <obj_property name="ElementShortName">layer_14_pw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_14_pw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_14_pw_r_en">
+      <obj_property name="ElementShortName">layer_14_pw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_14_pw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_14_pw_w_byte_3">
+      <obj_property name="ElementShortName">layer_14_pw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_14_pw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_14_pw_w_byte_2">
+      <obj_property name="ElementShortName">layer_14_pw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_14_pw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_14_pw_w_byte_1">
+      <obj_property name="ElementShortName">layer_14_pw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_14_pw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_14_pw_w_byte_0">
+      <obj_property name="ElementShortName">layer_14_pw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_14_pw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_14_pw_w_addr">
+      <obj_property name="ElementShortName">layer_14_pw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_14_pw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_14_pw_w_en">
+      <obj_property name="ElementShortName">layer_14_pw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_14_pw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_15">
+      <obj_property name="ElementShortName">data_weight_15[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_15[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_15">
+      <obj_property name="ElementShortName">data_weight_address_15[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_15[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_15">
+      <obj_property name="ElementShortName">data_weight_en_15</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_15</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_15_dw_r">
+      <obj_property name="ElementShortName">layer_15_dw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_15_dw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_15_dw_r_addr">
+      <obj_property name="ElementShortName">layer_15_dw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_15_dw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_15_dw_r_en">
+      <obj_property name="ElementShortName">layer_15_dw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_15_dw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_15_dw_w_byte_3">
+      <obj_property name="ElementShortName">layer_15_dw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_15_dw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_15_dw_w_byte_2">
+      <obj_property name="ElementShortName">layer_15_dw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_15_dw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_15_dw_w_byte_1">
+      <obj_property name="ElementShortName">layer_15_dw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_15_dw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_15_dw_w_byte_0">
+      <obj_property name="ElementShortName">layer_15_dw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_15_dw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_15_dw_w_addr">
+      <obj_property name="ElementShortName">layer_15_dw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_15_dw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_15_dw_w_en">
+      <obj_property name="ElementShortName">layer_15_dw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_15_dw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_16">
+      <obj_property name="ElementShortName">data_weight_16[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_16[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_16">
+      <obj_property name="ElementShortName">data_weight_address_16[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_16[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_16">
+      <obj_property name="ElementShortName">data_weight_en_16</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_16</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_16_dw_r">
+      <obj_property name="ElementShortName">layer_16_dw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_16_dw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_16_dw_r_addr">
+      <obj_property name="ElementShortName">layer_16_dw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_16_dw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_16_dw_r_en">
+      <obj_property name="ElementShortName">layer_16_dw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_16_dw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_16_dw_w_byte_3">
+      <obj_property name="ElementShortName">layer_16_dw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_16_dw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_16_dw_w_byte_2">
+      <obj_property name="ElementShortName">layer_16_dw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_16_dw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_16_dw_w_byte_1">
+      <obj_property name="ElementShortName">layer_16_dw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_16_dw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_16_dw_w_byte_0">
+      <obj_property name="ElementShortName">layer_16_dw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_16_dw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_16_dw_w_addr">
+      <obj_property name="ElementShortName">layer_16_dw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_16_dw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_16_dw_w_en">
+      <obj_property name="ElementShortName">layer_16_dw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_16_dw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_17">
+      <obj_property name="ElementShortName">data_weight_17[255:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_17[255:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_17">
+      <obj_property name="ElementShortName">data_weight_address_17[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_17[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_17">
+      <obj_property name="ElementShortName">data_weight_en_17</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_17</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_17_pw_r">
+      <obj_property name="ElementShortName">layer_17_pw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_17_pw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_17_pw_r_addr">
+      <obj_property name="ElementShortName">layer_17_pw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_17_pw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_17_pw_r_en">
+      <obj_property name="ElementShortName">layer_17_pw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_17_pw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_17_pw_w_byte_3">
+      <obj_property name="ElementShortName">layer_17_pw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_17_pw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_17_pw_w_byte_2">
+      <obj_property name="ElementShortName">layer_17_pw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_17_pw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_17_pw_w_byte_1">
+      <obj_property name="ElementShortName">layer_17_pw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_17_pw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_17_pw_w_byte_0">
+      <obj_property name="ElementShortName">layer_17_pw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_17_pw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_17_pw_w_addr">
+      <obj_property name="ElementShortName">layer_17_pw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_17_pw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_17_pw_w_en">
+      <obj_property name="ElementShortName">layer_17_pw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_17_pw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_18">
+      <obj_property name="ElementShortName">data_weight_18[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_18[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_18">
+      <obj_property name="ElementShortName">data_weight_address_18[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_18[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_18">
+      <obj_property name="ElementShortName">data_weight_en_18</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_18</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_18_dw_r">
+      <obj_property name="ElementShortName">layer_18_dw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_18_dw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_18_dw_r_addr">
+      <obj_property name="ElementShortName">layer_18_dw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_18_dw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_18_dw_r_en">
+      <obj_property name="ElementShortName">layer_18_dw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_18_dw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_18_dw_w_byte_3">
+      <obj_property name="ElementShortName">layer_18_dw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_18_dw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_18_dw_w_byte_2">
+      <obj_property name="ElementShortName">layer_18_dw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_18_dw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_18_dw_w_byte_1">
+      <obj_property name="ElementShortName">layer_18_dw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_18_dw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_18_dw_w_byte_0">
+      <obj_property name="ElementShortName">layer_18_dw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_18_dw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_18_dw_w_addr">
+      <obj_property name="ElementShortName">layer_18_dw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_18_dw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_18_dw_w_en">
+      <obj_property name="ElementShortName">layer_18_dw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_18_dw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_19">
+      <obj_property name="ElementShortName">data_weight_19[15:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_19[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_address_19">
+      <obj_property name="ElementShortName">data_weight_address_19[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_weight_address_19[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/data_weight_en_19">
+      <obj_property name="ElementShortName">data_weight_en_19</obj_property>
+      <obj_property name="ObjectShortName">data_weight_en_19</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_19_pw_r">
+      <obj_property name="ElementShortName">layer_19_pw_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_19_pw_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_19_pw_r_addr">
+      <obj_property name="ElementShortName">layer_19_pw_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_19_pw_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_19_pw_r_en">
+      <obj_property name="ElementShortName">layer_19_pw_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_19_pw_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_19_pw_w_byte_3">
+      <obj_property name="ElementShortName">layer_19_pw_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_19_pw_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_19_pw_w_byte_2">
+      <obj_property name="ElementShortName">layer_19_pw_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_19_pw_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_19_pw_w_byte_1">
+      <obj_property name="ElementShortName">layer_19_pw_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_19_pw_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_19_pw_w_byte_0">
+      <obj_property name="ElementShortName">layer_19_pw_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_19_pw_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_19_pw_w_addr">
+      <obj_property name="ElementShortName">layer_19_pw_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_19_pw_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_19_pw_w_en">
+      <obj_property name="ElementShortName">layer_19_pw_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_19_pw_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_20_mf_r">
+      <obj_property name="ElementShortName">layer_20_mf_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_20_mf_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_20_mf_r_addr">
+      <obj_property name="ElementShortName">layer_20_mf_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_20_mf_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_20_mf_r_en">
+      <obj_property name="ElementShortName">layer_20_mf_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_20_mf_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_20_mf_w_byte_3">
+      <obj_property name="ElementShortName">layer_20_mf_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_20_mf_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_20_mf_w_byte_2">
+      <obj_property name="ElementShortName">layer_20_mf_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_20_mf_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_20_mf_w_byte_1">
+      <obj_property name="ElementShortName">layer_20_mf_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_20_mf_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_20_mf_w_byte_0">
+      <obj_property name="ElementShortName">layer_20_mf_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_20_mf_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_20_mf_w_addr">
+      <obj_property name="ElementShortName">layer_20_mf_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_20_mf_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_20_mf_w_en">
+      <obj_property name="ElementShortName">layer_20_mf_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_20_mf_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_21_ol_r">
+      <obj_property name="ElementShortName">layer_21_ol_r[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_21_ol_r[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_21_ol_r_addr">
+      <obj_property name="ElementShortName">layer_21_ol_r_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_21_ol_r_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_21_ol_r_en">
+      <obj_property name="ElementShortName">layer_21_ol_r_en</obj_property>
+      <obj_property name="ObjectShortName">layer_21_ol_r_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_21_ol_w_byte_3">
+      <obj_property name="ElementShortName">layer_21_ol_w_byte_3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_21_ol_w_byte_3[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_21_ol_w_byte_2">
+      <obj_property name="ElementShortName">layer_21_ol_w_byte_2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_21_ol_w_byte_2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_21_ol_w_byte_1">
+      <obj_property name="ElementShortName">layer_21_ol_w_byte_1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_21_ol_w_byte_1[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_21_ol_w_byte_0">
+      <obj_property name="ElementShortName">layer_21_ol_w_byte_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_21_ol_w_byte_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/layer_21_ol_w_addr">
+      <obj_property name="ElementShortName">layer_21_ol_w_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">layer_21_ol_w_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/LittleNetAcc_tb/ln/ln/layer_21_ol_w_en">
+      <obj_property name="ElementShortName">layer_21_ol_w_en</obj_property>
+      <obj_property name="ObjectShortName">layer_21_ol_w_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/ena">
+      <obj_property name="ElementShortName">ena[0:10]</obj_property>
+      <obj_property name="ObjectShortName">ena[0:10]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/enb">
+      <obj_property name="ElementShortName">enb[0:10]</obj_property>
+      <obj_property name="ObjectShortName">enb[0:10]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/wea">
+      <obj_property name="ElementShortName">wea[0:10]</obj_property>
+      <obj_property name="ObjectShortName">wea[0:10]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/addra">
+      <obj_property name="ElementShortName">addra[0:10][31:0]</obj_property>
+      <obj_property name="ObjectShortName">addra[0:10][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/addrb">
+      <obj_property name="ElementShortName">addrb[0:10][31:0]</obj_property>
+      <obj_property name="ObjectShortName">addrb[0:10][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/dina">
+      <obj_property name="ElementShortName">dina[0:10][31:0]</obj_property>
+      <obj_property name="ObjectShortName">dina[0:10][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/doutb">
+      <obj_property name="ElementShortName">doutb[0:10][7:0]</obj_property>
+      <obj_property name="ObjectShortName">doutb[0:10][7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/port_read_select">
+      <obj_property name="ElementShortName">port_read_select[0:10][0:0]</obj_property>
+      <obj_property name="ObjectShortName">port_read_select[0:10][0:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/port_read_data">
+      <obj_property name="ElementShortName">port_read_data[0:21][7:0]</obj_property>
+      <obj_property name="ObjectShortName">port_read_data[0:21][7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/port_read_address">
+      <obj_property name="ElementShortName">port_read_address[0:21][31:0]</obj_property>
+      <obj_property name="ObjectShortName">port_read_address[0:21][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/port_read_en">
+      <obj_property name="ElementShortName">port_read_en[0:21]</obj_property>
+      <obj_property name="ObjectShortName">port_read_en[0:21]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/port_write_select">
+      <obj_property name="ElementShortName">port_write_select[0:10][0:0]</obj_property>
+      <obj_property name="ObjectShortName">port_write_select[0:10][0:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/port_write_data">
+      <obj_property name="ElementShortName">port_write_data[0:21][31:0]</obj_property>
+      <obj_property name="ObjectShortName">port_write_data[0:21][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/port_write_address">
+      <obj_property name="ElementShortName">port_write_address[0:21][31:0]</obj_property>
+      <obj_property name="ObjectShortName">port_write_address[0:21][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/port_write_en">
+      <obj_property name="ElementShortName">port_write_en[0:21]</obj_property>
+      <obj_property name="ObjectShortName">port_write_en[0:21]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/port_write_we">
+      <obj_property name="ElementShortName">port_write_we[0:21]</obj_property>
+      <obj_property name="ObjectShortName">port_write_we[0:21]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/enable_reg">
+      <obj_property name="ElementShortName">enable_reg[0:3]</obj_property>
+      <obj_property name="ObjectShortName">enable_reg[0:3]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/sleep_reg">
+      <obj_property name="ElementShortName">sleep_reg[0:3]</obj_property>
+      <obj_property name="ObjectShortName">sleep_reg[0:3]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/rst_reg">
+      <obj_property name="ElementShortName">rst_reg[0:3]</obj_property>
+      <obj_property name="ObjectShortName">rst_reg[0:3]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/finished_step">
+      <obj_property name="ElementShortName">finished_step[3:0]</obj_property>
+      <obj_property name="ObjectShortName">finished_step[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/awakening_cntr">
+      <obj_property name="ElementShortName">awakening_cntr[4:0]</obj_property>
+      <obj_property name="ObjectShortName">awakening_cntr[4:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/AWAKENING_TIME">
+      <obj_property name="ElementShortName">AWAKENING_TIME[31:0]</obj_property>
+      <obj_property name="ObjectShortName">AWAKENING_TIME[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/LittleNetAcc_tb/ln/ln/AWAKENING_TIME_BITS">
+      <obj_property name="ElementShortName">AWAKENING_TIME_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">AWAKENING_TIME_BITS[31:0]</obj_property>
+   </wvobject>
+</wave_config>

@@ -1,0 +1,6 @@
+!*.bit
+!*.hwh
+!*.xclbin
+!*.xmodel
+*.pt
+*.zip

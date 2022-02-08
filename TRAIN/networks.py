@@ -672,14 +672,15 @@ class AnchorMul(torch.nn.Module):
     def forward(self, x):
         xvc = x[:,:-2*self.noa,:,:]
         xwh = x[:,-2*self.noa:,:,:]
-        ywh = xwh*torch.exp(self.anchors)
+        am = torch.exp(self.anchors)
+        ywh = xwh*am
         y = torch.cat((xvc,ywh), dim=1)
 
         return y
 
 class QuantAnchorMul(QuantWrapper):
     def __init__(self, num_of_anchors, device=torch.device('cpu'),return_quant_tensor=True):
-        super().__init__(AnchorMul(num_of_anchors, device),return_quant_tensor=True )
+        super().__init__(AnchorMul(num_of_anchors, device),return_quant_tensor=return_quant_tensor )
 
 def align_quantizers(q:tuple):
     if len(q) == 4:
@@ -1016,3 +1017,7 @@ class LittleNet7(Sequential):
             
         super().__init__(L, device=device, return_quant_tensor=False)
 
+
+if __name__ == '__main__':
+    net = LittleNet7(3)
+    print("Num of params:",get_number_of_params(net))

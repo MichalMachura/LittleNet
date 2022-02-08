@@ -245,7 +245,7 @@ module PointwiseComputationUnit
 						.CE(processing_state),
 						// SCLR is not needed here, enough is validity delay clear
 						.A(bn_weight_aligned),
-						.B(reduced_added_bias_aligned),
+						.B(reduced_P_sign_aligned),
 						.C(bn_bias_aligned),
 						.P(normalized)
 						);
@@ -309,8 +309,6 @@ module PointwiseConv2dUnit
 		 parameter USE_MAXPOOL_CEIL_MODE = 1,
 		 parameter PARALLELISM = 1,
 		 parameter GROUPS = 1,
-		 parameter USE_MAX_FINDER = 0,
-		 parameter ANCHORS = 3,
 		 // input data format 
 		 parameter IN_DATA_BIT_WIDTH = 8,
 		 parameter IN_DATA_INT_WIDTH = 1,
@@ -365,15 +363,18 @@ module PointwiseConv2dUnit
 		 localparam INPUT_SIZE = IN_WIDTH*IN_HEIGHT*IN_CHANNELS,
 		 localparam IN_DATA_ADDRESS_BITS = $clog2(INPUT_SIZE),
 		 localparam IN_DATA_ADDRESS_BITS_32 = 32,
+		 // processing cycles -- num of read of whole iput data
+		 // == number of weights batches
+		 localparam NUM_OF_CYCLES  = (OUT_WIDTH*OUT_HEIGHT)%GROUPS == 0
+								|| PARALLELISM == 1	? (OUT_CHANNELS-1)/PARALLELISM+1
+													: ((OUT_CHANNELS-1)/(PARALLELISM*GROUPS)+1)*GROUPS,
 		 // memory weights size = kernel weights + BN_weights + bias
-		 // number of weights batches - weights / threads number
-		 localparam WEIGHTS_SIZE = (IN_CHANNELS+ADDITIONAL_WEIGHTS)*((OUT_CHANNELS-1)/PARALLELISM+1),
+		 localparam WEIGHTS_SIZE = (IN_CHANNELS+ADDITIONAL_WEIGHTS)*NUM_OF_CYCLES,
 		 localparam WEIGHTS_ADDRESS_BITS = $clog2(WEIGHTS_SIZE),
 		 localparam WEIGHTS_ADDRESS_BITS_32 = 32,
 		 // output==result memory size
 		 localparam OUT_SIZE = (OUT_WIDTH*OUT_HEIGHT*OUT_CHANNELS),
-		 localparam OUT_ADDRESS_BITS = USE_MAX_FINDER ? $clog2(7) // for max finder
-		 											  : $clog2(OUT_SIZE / GROUPS), // for std pw conv
+		 localparam OUT_ADDRESS_BITS = $clog2(OUT_SIZE / GROUPS),
 		 localparam OUT_ADDRESS_BITS_32 = 32
 		 )
 		 (
@@ -400,7 +401,7 @@ module PointwiseConv2dUnit
 	wire fully_complete;
 	assign finished = fully_complete;
 	reg all_data_in_stream = 1;
-	wire processing_state = enable && !reset;
+	wire processing_state = enable && !reset && !finished;
 	wire delayed_last_valid_data;
 	
 	always @(posedge clk)
@@ -427,29 +428,30 @@ module PointwiseConv2dUnit
 	wire point_data_validity;
 	wire end_of_point;
 	wire end_of_pass;
-	wire [IN_DATA_ADDRESS_BITS_32-1:0] local_in_data_memory_address;
+	wire [IN_DATA_ADDRESS_BITS-1:0] local_in_data_memory_address;
 	
-	PointStreamerUnit  #(
-						.IN_WIDTH(IN_WIDTH),
-						.IN_HEIGHT(IN_HEIGHT),
-						.IN_CHANNELS(IN_CHANNELS),
-						.BIT_WIDTH(IN_DATA_BIT_WIDTH),
-						.READ_LATENCY(READ_MEMORY_LATENCY)
-						)
-						data_point_streamer
-						(
-						.clk(clk),
-						.enable(point_streamer_enable),
-						.reset(reset),
-						.pixel_value(point_data),
-						.validity(point_data_validity),
-						.end_point(end_of_point),
-						.end_pass(end_of_pass),
-						
-						.in_data_memory_address(local_in_data_memory_address),
-						.in_data_memory_read_enable(in_data_memory_read_enable),
-						.in_data_memory_out(in_data_memory_out)
-						);
+	PointStreamerUnit  
+		#(
+		.IN_WIDTH(IN_WIDTH),
+		.IN_HEIGHT(IN_HEIGHT),
+		.IN_CHANNELS(IN_CHANNELS),
+		.BIT_WIDTH(IN_DATA_BIT_WIDTH),
+		.READ_LATENCY(READ_MEMORY_LATENCY)
+		)
+		data_point_streamer
+		(
+		.clk(clk),
+		.enable(point_streamer_enable),
+		.reset(reset),
+		.pixel_value(point_data),
+		.validity(point_data_validity),
+		.end_point(end_of_point),
+		.end_pass(end_of_pass),
+		
+		.in_data_memory_address(local_in_data_memory_address),
+		.in_data_memory_read_enable(in_data_memory_read_enable),
+		.in_data_memory_out(in_data_memory_out)
+		);
 	assign in_data_memory_address = {{(IN_DATA_ADDRESS_BITS_32-IN_DATA_ADDRESS_BITS){1'b0}}, 
 									 local_in_data_memory_address};
 	
@@ -460,32 +462,33 @@ module PointwiseConv2dUnit
 	wire next_filter;
 	wire end_of_cycle;
 	wire end_of_weights;
-	wire [WEIGHTS_ADDRESS_BITS_32-1:0] local_weights_memory_address;
-	CyclicStreamerUnit #(
-						.BIT_WIDTH(WEIGHT_DATA_BIT_WIDTH*PARALLELISM),
-						.CYCLE_LENGTH(IN_CHANNELS),
-						.PRE_DATA(ADDITIONAL_WEIGHTS),
-						.NUM_OF_CYCLES((OUT_CHANNELS-1)/PARALLELISM+1),
-						.READ_LATENCY(READ_WEIGHT_MEMORY_LATENCY)
-						)
-						weight_cyclic_streamer
-						(
-						.clk(clk),
-						.reset(reset),
-						.enable(cyclic_streamer_enable),
-						
-						.next_cycle(next_filter),
-						
-						.output_stream(weights),
-						.validity(weight_validity),
-						.streaming(weight_streaming),
-						.end_of_cycle(end_of_cycle),
-						.end_of_data(end_of_weights),
-						
-						.data_memory_address(local_weights_memory_address),
-						.data_memory_out(weights_memory_out),
-						.data_memory_read_enable(weights_memory_read_enable)
-						);
+	wire [WEIGHTS_ADDRESS_BITS-1:0] local_weights_memory_address;
+	CyclicStreamerUnit 
+		#(
+		.BIT_WIDTH(WEIGHT_DATA_BIT_WIDTH*PARALLELISM),
+		.CYCLE_LENGTH(IN_CHANNELS),
+		.PRE_DATA(ADDITIONAL_WEIGHTS),
+		.NUM_OF_CYCLES(NUM_OF_CYCLES),
+		.READ_LATENCY(READ_WEIGHT_MEMORY_LATENCY)
+		)
+		weight_cyclic_streamer
+		(
+		.clk(clk),
+		.reset(reset),
+		.enable(cyclic_streamer_enable),
+		
+		.next_cycle(next_filter),
+		
+		.output_stream(weights),
+		.validity(weight_validity),
+		.streaming(weight_streaming),
+		.end_of_cycle(end_of_cycle),
+		.end_of_data(end_of_weights),
+		
+		.data_memory_address(local_weights_memory_address),
+		.data_memory_out(weights_memory_out),
+		.data_memory_read_enable(weights_memory_read_enable)
+		);
 	assign weights_memory_address = {{(WEIGHTS_ADDRESS_BITS_32-WEIGHTS_ADDRESS_BITS){1'b0}}, 
 									 local_weights_memory_address};
 	// enabling control
@@ -510,18 +513,19 @@ module PointwiseConv2dUnit
 	
 	// delay of data. it's validity and flag is this data is last, 
 	// by latency of cyclic streamer
-	ResettableDelayLine #(
-					.WIDTH(IN_DATA_BIT_WIDTH+1+1+1),
-					.DELAY(READ_WEIGHT_MEMORY_LATENCY+1)
-					)
-					delay_of_in_data_by_cyclic_streamer_latency
-					(
-					.clk(clk),
-					.reset(reset),
-					.enable(point_streamer_enable),
-					.data_in({point_data, point_data_validity, last_valid_data, end_of_point}),
-					.data_out({delayed_data, delayed_data_validity, delayed_last_valid_data,delayed_end_of_point})
-					);
+	ResettableDelayLine 
+		#(
+		.WIDTH(IN_DATA_BIT_WIDTH+1+1+1),
+		.DELAY(READ_WEIGHT_MEMORY_LATENCY+1)
+		)
+		delay_of_in_data_by_cyclic_streamer_latency
+		(
+		.clk(clk),
+		.reset(reset),
+		.enable(point_streamer_enable),
+		.data_in({point_data, point_data_validity, last_valid_data, end_of_point}),
+		.data_out({delayed_data, delayed_data_validity, delayed_last_valid_data,delayed_end_of_point})
+		);
 	
 	// ready for computing signals of data, weight and their validities
 	wire [IN_DATA_BIT_WIDTH-1:0] ready_data = delayed_data;
@@ -544,44 +548,45 @@ module PointwiseConv2dUnit
 				end
 			// for end
 			
-			PointwiseComputationUnit	#(
-										.USE_BIAS(USE_BIAS),
-										.USE_BN(USE_BN),
-										.USE_RELU(USE_RELU),
-		 								.IN_DATA_BIT_WIDTH(IN_DATA_BIT_WIDTH),
-		 								.IN_DATA_INT_WIDTH(IN_DATA_INT_WIDTH),
-		 								.IN_DATA_SIGN(IN_DATA_SIGN),
-		 								.WEIGHT_DATA_BIT_WIDTH(WEIGHT_DATA_BIT_WIDTH),
-		 								.WEIGHT_DATA_INT_WIDTH(WEIGHT_DATA_INT_WIDTH),
-		 								.WEIGHT_DATA_SIGN(WEIGHT_DATA_SIGN),
-		 								.BIAS_DATA_BIT_WIDTH(BIAS_DATA_BIT_WIDTH),
-		 								.BIAS_DATA_INT_WIDTH(BIAS_DATA_INT_WIDTH),
-		 								.BIAS_DATA_SIGN(BIAS_DATA_SIGN),
-		 								.INTER_DATA_BIT_WIDTH(INTER_DATA_BIT_WIDTH),
-		 								.INTER_DATA_INT_WIDTH(INTER_DATA_INT_WIDTH),
-		 								.INTER_DATA_SIGN(INTER_DATA_SIGN),
-		 								.BN_W_DATA_BIT_WIDTH(BN_W_DATA_BIT_WIDTH),
-		 								.BN_W_DATA_INT_WIDTH(BN_W_DATA_INT_WIDTH),
-		 								.BN_W_DATA_SIGN(BN_W_DATA_SIGN),
-		 								.BN_B_DATA_BIT_WIDTH(BN_B_DATA_BIT_WIDTH),
-		 								.BN_B_DATA_INT_WIDTH(BN_B_DATA_INT_WIDTH),
-		 								.BN_B_DATA_SIGN(BN_B_DATA_SIGN),
-		 								.OUT_DATA_BIT_WIDTH(OUT_DATA_BIT_WIDTH),
-		 								.OUT_DATA_INT_WIDTH(OUT_DATA_INT_WIDTH),
-		 								.OUT_DATA_SIGN(OUT_DATA_SIGN)
-										)
-										pw_unit
-										(
-										.clk(clk),
-										.enable(processing_state),
-										.reset(reset),
-										.input_data(ready_data),
-										.input_weights(ready_weights_for_th),
-										.input_validity(ready_validity),
-										.input_end_of_point(ready_end_of_point),
-										.output_data(computed_value[gen_i]),
-										.output_data_validity(computed_value_validity[gen_i])
-										);
+			PointwiseComputationUnit	
+				#(
+				.USE_BIAS(USE_BIAS),
+				.USE_BN(USE_BN),
+				.USE_RELU(USE_RELU),
+				.IN_DATA_BIT_WIDTH(IN_DATA_BIT_WIDTH),
+				.IN_DATA_INT_WIDTH(IN_DATA_INT_WIDTH),
+				.IN_DATA_SIGN(IN_DATA_SIGN),
+				.WEIGHT_DATA_BIT_WIDTH(WEIGHT_DATA_BIT_WIDTH),
+				.WEIGHT_DATA_INT_WIDTH(WEIGHT_DATA_INT_WIDTH),
+				.WEIGHT_DATA_SIGN(WEIGHT_DATA_SIGN),
+				.BIAS_DATA_BIT_WIDTH(BIAS_DATA_BIT_WIDTH),
+				.BIAS_DATA_INT_WIDTH(BIAS_DATA_INT_WIDTH),
+				.BIAS_DATA_SIGN(BIAS_DATA_SIGN),
+				.INTER_DATA_BIT_WIDTH(INTER_DATA_BIT_WIDTH),
+				.INTER_DATA_INT_WIDTH(INTER_DATA_INT_WIDTH),
+				.INTER_DATA_SIGN(INTER_DATA_SIGN),
+				.BN_W_DATA_BIT_WIDTH(BN_W_DATA_BIT_WIDTH),
+				.BN_W_DATA_INT_WIDTH(BN_W_DATA_INT_WIDTH),
+				.BN_W_DATA_SIGN(BN_W_DATA_SIGN),
+				.BN_B_DATA_BIT_WIDTH(BN_B_DATA_BIT_WIDTH),
+				.BN_B_DATA_INT_WIDTH(BN_B_DATA_INT_WIDTH),
+				.BN_B_DATA_SIGN(BN_B_DATA_SIGN),
+				.OUT_DATA_BIT_WIDTH(OUT_DATA_BIT_WIDTH),
+				.OUT_DATA_INT_WIDTH(OUT_DATA_INT_WIDTH),
+				.OUT_DATA_SIGN(OUT_DATA_SIGN)
+				)
+				pw_unit
+				(
+				.clk(clk),
+				.enable(processing_state),
+				.reset(reset),
+				.input_data(ready_data),
+				.input_weights(ready_weights_for_th),
+				.input_validity(ready_validity),
+				.input_end_of_point(ready_end_of_point),
+				.output_data(computed_value[gen_i]),
+				.output_data_validity(computed_value_validity[gen_i])
+				);
 			end
 		// for end
 	endgenerate
@@ -593,42 +598,44 @@ module PointwiseConv2dUnit
 		if (USE_MAXPOOL)
 			begin
 			wire delayed_all_data_in_stream;
-			ResettableDelayLine	#(
-								.WIDTH(1),
-								// delay of pw_comp_unit
-								.DELAY(4+(USE_BN)*4)
-								)
-								delay_of_all_in_stream
-								(
-								.clk(clk),
-								.enable(enable),
-								.reset(reset),
-								.data_in(all_data_in_stream),
-								.data_out(delayed_all_data_in_stream)
-								);
+			ResettableDelayLine	
+				#(
+				.WIDTH(1),
+				// delay of pw_comp_unit
+				.DELAY(4+(USE_BN)*4)
+				)
+				delay_of_all_in_stream
+				(
+				.clk(clk),
+				.enable(enable),
+				.reset(reset),
+				.data_in(all_data_in_stream),
+				.data_out(delayed_all_data_in_stream)
+				);
 			
-			MaxPool2dUnit 	#(
-					.DATA_BIT_WIDTH(OUT_DATA_BIT_WIDTH),
-					.DATA_SIGNED(OUT_DATA_SIGN),
-					
-					.IN_WIDTH(IN_WIDTH),
-					.IN_HEIGHT(IN_HEIGHT),
-					.PARALLELISM(PARALLELISM),
-					.CEIL_MODE(USE_MAXPOOL_CEIL_MODE),
-					// because usually ReLU is applied previously
-					.COMPARE_TO_ZERO(0)
-					)
-					mp2d
-					(
-					.clk(clk),
-					.enable(enable),
-					.reset(reset),
-					.all_data_in_stream(delayed_all_data_in_stream),
-					.in_data(computed_value),
-					.in_data_validity(computed_value_validity),
-					.out_data(grouper_in_data),
-					.out_data_validity(grouper_in_data_validity)
-					);
+			MaxPool2dUnit 	
+				#(
+				.DATA_BIT_WIDTH(OUT_DATA_BIT_WIDTH),
+				.DATA_SIGNED(OUT_DATA_SIGN),
+				
+				.IN_WIDTH(IN_WIDTH),
+				.IN_HEIGHT(IN_HEIGHT),
+				.PARALLELISM(PARALLELISM),
+				.CEIL_MODE(USE_MAXPOOL_CEIL_MODE),
+				// because usually ReLU is applied previously
+				.COMPARE_TO_ZERO(0)
+				)
+				mp2d
+				(
+				.clk(clk),
+				.enable(enable),
+				.reset(reset),
+				.all_data_in_stream(delayed_all_data_in_stream),
+				.in_data(computed_value),
+				.in_data_validity(computed_value_validity),
+				.out_data(grouper_in_data),
+				.out_data_validity(grouper_in_data_validity)
+				);
 			end
 		else
 			begin
@@ -644,85 +651,56 @@ module PointwiseConv2dUnit
 	generate
 		for(gen_k = 0; gen_k < PARALLELISM; gen_k = gen_k+1)
 			begin
-			GrouperUnit	#(
-						.BIT_WIDTH(OUT_DATA_BIT_WIDTH),
-						.GROUPS(GROUPS),
-						.ENDIANNESS(0)
-						)
-						grouping
-						(
-						.clk(clk),
-						.reset(reset),
-						.enable(enable),
-						.data_in(grouper_in_data[gen_k]),
-						.data_in_validity(grouper_in_data_validity[gen_k]),
-						.data_out(mux_in_data[gen_k]),
-						.data_out_validity(mux_in_data_validity[gen_k])
-						);
+			GrouperUnit	
+				#(
+				.BIT_WIDTH(OUT_DATA_BIT_WIDTH),
+				.GROUPS(GROUPS),
+				.ENDIANNESS(0)
+				)
+				grouping
+				(
+				.clk(clk),
+				.reset(reset),
+				.enable(enable),
+				.data_in(grouper_in_data[gen_k]),
+				.data_in_validity(grouper_in_data_validity[gen_k]),
+				.data_out(mux_in_data[gen_k]),
+				.data_out_validity(mux_in_data_validity[gen_k])
+				);
 			end
 		// for end
 	endgenerate
 	
-	wire [OUT_ADDRESS_BITS_32-1:0] local_out_data_memory_address;
-	generate
-		if (!USE_MAX_FINDER)
-			begin
-			MuxWriterUnit	#(
-							.BIT_WIDTH(OUT_DATA_BIT_WIDTH*GROUPS),
-							.WIDTH(OUT_WIDTH),
-							.HEIGHT(OUT_HEIGHT),
-							.CHANNELS(OUT_CHANNELS),
-							.GROUPS(GROUPS),
-							.PARALLELISM(PARALLELISM),
-							.REGISTER_FOR_EACH(1),
-							.WRITE_MEMORY_LATENCY(WRITE_MEMORY_LATENCY)
-							)
-							mwu
-							(
-							.clk(clk),
-							.enable(processing_state),
-							.reset(reset),
-						
-							.in_data(mux_in_data),
-							.in_data_validity(mux_in_data_validity),
-							
-							.out_data_memory_in(out_data_memory_in),
-							.out_data_memory_address(local_out_data_memory_address),
-							.out_data_memory_write_enable(out_data_memory_write_enable),
-							
-							.finished(fully_complete)
-							);
-			end
-		else
-			begin
-			MaxFinderUnit	#(
-							.BIT_WIDTH(OUT_DATA_BIT_WIDTH),
-							.SIGNED(OUT_DATA_SIGN),
-							.WIDTH(OUT_WIDTH),
-							.HEIGHT(OUT_HEIGHT),
-							.PARALLELISM(PARALLELISM),
-							.ANCHORS_NUM(ANCHORS),
-							.WRITE_MEMORY_LATENCY(WRITE_MEMORY_LATENCY)
-							)
-							mfu
-							(
-							.clk(clk),
-							.enable(processing_state),
-							.reset(reset),
-							
-							.data_in(mux_in_data),
-							.data_in_validity(mux_in_data_validity),
-							
-							.out_data_memory_in(out_data_memory_in),
-							.out_data_memory_address(local_out_data_memory_address),
-							.out_data_memory_write_enable(out_data_memory_write_enable),
-							
-							.finished(fully_complete)
-							);
-			end
-	endgenerate
-	
+	wire [OUT_ADDRESS_BITS-1:0] local_out_data_memory_address;
 	assign out_data_memory_address = {{(OUT_ADDRESS_BITS_32-OUT_ADDRESS_BITS){1'b0}},
 									  local_out_data_memory_address};
+
+	MuxWriterUnit	
+		#(
+		.BIT_WIDTH(OUT_DATA_BIT_WIDTH*GROUPS),
+		.WIDTH(OUT_WIDTH),
+		.HEIGHT(OUT_HEIGHT),
+		.CHANNELS(OUT_CHANNELS),
+		.GROUPS(GROUPS),
+		.PARALLELISM(PARALLELISM),
+		.REGISTER_FOR_EACH(1),
+		.WRITE_MEMORY_LATENCY(WRITE_MEMORY_LATENCY)
+		)
+		mwu
+		(
+		.clk(clk),
+		.enable(processing_state),
+		.reset(reset),
+	
+		.in_data(mux_in_data),
+		.in_data_validity(mux_in_data_validity),
+		
+		.out_data_memory_in(out_data_memory_in),
+		.out_data_memory_address(local_out_data_memory_address),
+		.out_data_memory_write_enable(out_data_memory_write_enable),
+		
+		.finished(fully_complete)
+		);
+	
 endmodule // PointwiseConv2dUnit
 

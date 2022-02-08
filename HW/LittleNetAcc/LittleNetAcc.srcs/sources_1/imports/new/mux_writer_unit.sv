@@ -24,10 +24,9 @@ module AddressCounter
 		);
 		
 	generate
-		if (BEGIN_ADDRESS != END_ADDRESS)
+		if (BEGIN_ADDRESS < END_ADDRESS)
 			begin
-			reg [ADDRESS_BITS-1:0] counter = END_ADDRESS;
-			reg is_address_valid = 0;
+			reg [ADDRESS_BITS+1-1:0] counter = END_ADDRESS;
 			
 			wire [BIT_WIDTH-1:0] delayed_data;
 			wire delayed_data_validity;
@@ -64,7 +63,6 @@ module AddressCounter
 				if (reset)
 					begin
 					counter <= BEGIN_ADDRESS;
-					is_address_valid <= 1;
 					end
 				// make step if enable and data is valid
 				else if (enable && delayed_data_validity)
@@ -75,18 +73,15 @@ module AddressCounter
 						// update for next data
 						counter <= counter+1;
 						end
-					// allow last data for storing under current address
-					// without delay last data cannot be saved 
-					is_address_valid <= !is_last_address;
 					end
 				end
 			// always end
 			
 			assign out_data = delayed_data;
-			assign out_data_address = counter;
-			assign out_data_validity = delayed_data_validity && is_address_valid;
-			// assign finished = is_last_address;
-			assign finished = !is_address_valid;
+			// assign out_data_address = counter;
+			assign out_data_address = counter[ADDRESS_BITS-1:0];
+			assign out_data_validity = delayed_data_validity && !is_last_address;
+			assign finished = is_last_address;
 			end
 		else
 			begin
@@ -115,9 +110,13 @@ module MuxWriterUnit
 		
 		localparam OUT_SIZE = WIDTH*HEIGHT*CHANNELS / GROUPS,
 		localparam ADDRESS_BITS = $clog2(OUT_SIZE),
-		
-		localparam RANGE_PER_THREAD = WIDTH*HEIGHT*((CHANNELS-1)/PARALLELISM+1) / GROUPS,
-		localparam GLOBAL_LAST_ADDRESS = WIDTH*HEIGHT*CHANNELS-1,
+
+		// each of threads must have num of elem. divisible by groups   
+		localparam CH_PER_TH = (WIDTH*HEIGHT)%GROUPS == 0
+								|| PARALLELISM == 1		? (CHANNELS-1)/PARALLELISM+1
+														: ((CHANNELS-1)/(PARALLELISM*GROUPS)+1)*GROUPS,
+		localparam RANGE_PER_THREAD = (WIDTH * HEIGHT * CH_PER_TH) / GROUPS,
+		localparam GLOBAL_LAST_ADDRESS = OUT_SIZE,
 		
 		localparam SELECTOR_CNTR_BITS = $clog2(PARALLELISM)
 		)
@@ -135,7 +134,12 @@ module MuxWriterUnit
 		
 		output finished
 		);
-	
+    initial
+        begin
+        if (((WIDTH*HEIGHT*CHANNELS) % GROUPS) != 0)
+            $error("Features maps are not divisible by GROUPS", $TIME);
+        end
+    
 	wire processing_state = enable && !reset;
 	
 	wire [PARALLELISM-1:0] in_data_validity_vec;
@@ -149,97 +153,95 @@ module MuxWriterUnit
 	// if in input are valid data
 	assign input_valid = |in_data_validity_vec;
 	
-	genvar gen_i;
+	wire [BIT_WIDTH-1:0] delayed_data [PARALLELISM];
+    wire delayed_data_validity [PARALLELISM];
+    wire [ADDRESS_BITS-1:0] delayed_data_address [PARALLELISM];
+    wire [PARALLELISM-1:0] is_finished;
+    
+    genvar gen_i;
 	generate
-	if (REGISTER_FOR_EACH)
-		begin
-		wire [BIT_WIDTH-1:0] delayed_data [PARALLELISM];
-		wire delayed_data_validity [PARALLELISM];
-		wire [ADDRESS_BITS-1:0] delayed_data_address [PARALLELISM];
-		wire [PARALLELISM-1:0] is_finished;
-		
-		// delays of input data and their validity
-		for(gen_i = 0; gen_i < PARALLELISM; gen_i = gen_i+1)
-			begin
-			localparam BEG_ADDR = gen_i* RANGE_PER_THREAD;
-			localparam END_ADDR = (gen_i+1) * RANGE_PER_THREAD-1;
-			
-			AddressCounter	#(
-							.BIT_WIDTH(BIT_WIDTH),
-							.DELAY(gen_i+1),
-							.BEGIN_ADDRESS(BEG_ADDR < GLOBAL_LAST_ADDRESS ? BEG_ADDR
-																		  : GLOBAL_LAST_ADDRESS),
-							// end address for last thread could be different
-							.END_ADDRESS(END_ADDR < GLOBAL_LAST_ADDRESS ? END_ADDR
-																		: GLOBAL_LAST_ADDRESS),
-							.ADDRESS_BITS(ADDRESS_BITS)
-							)
-							cntr_for_thread
-							(
-							.clk(clk),
-							.enable(processing_state),
-							.reset(reset),
-							
-							.in_data(in_data[gen_i]),
-							.in_data_validity(in_data_validity[gen_i]),
-							
-							.out_data(delayed_data[gen_i]),
-							.out_data_address(delayed_data_address[gen_i]),
-							.out_data_validity(delayed_data_validity[gen_i]),
-							.finished(is_finished[gen_i])
-							);
-			end
-		// for end
-		reg [SELECTOR_CNTR_BITS-1:0] selector_cntr = 0;
-		reg [BIT_WIDTH-1:0] reg_selected_data = 0;
-		reg [ADDRESS_BITS-1:0] reg_selected_address = 0;
-		reg reg_selected_data_validity = 0;
-		
-		always @(posedge clk)
-			begin
-			if (reset)
-				begin
-				reg_selected_data <= 0;
-				reg_selected_address <= 0;
-				reg_selected_data_validity <= 0;
-				selector_cntr <= 0;
-				end
-			else if (enable)
-				begin
-				// iterate over all threads
-				// reset iterator when new data is coming
-				if (input_valid || selector_cntr == PARALLELISM-1)
-					selector_cntr <= 0;
-				else
-					selector_cntr <= selector_cntr+1;
-				
-				// take data from iterated thread
-				reg_selected_data <= delayed_data[selector_cntr];
-				reg_selected_data_validity <= delayed_data_validity[selector_cntr];
-				reg_selected_address <= delayed_data_address[selector_cntr];
-				end
-			end
-		// always end
-		
-		assign out_data_memory_in = reg_selected_data;
-		assign out_data_memory_write_enable = reg_selected_data_validity && enable;
-		assign out_data_memory_address = reg_selected_address;
-		
-		// delay finish state of counters
-		ResettableDelayLine	#(
-							.WIDTH(1),
-							.DELAY(WRITE_MEMORY_LATENCY+1+1) // registers afters selection
-							)
-							delay_of_finish
-							(
-							.clk(clk),
-							.enable(enable),
-							.reset(reset),
-							
-							.data_in(&is_finished),
-							.data_out(finished)
-							);
-		end
+    // delays of input data and their validity
+    for(gen_i = 0; gen_i < PARALLELISM; gen_i = gen_i+1)
+        begin
+        localparam BEG_ADDR = gen_i* RANGE_PER_THREAD;
+        localparam END_ADDR = (gen_i+1) * RANGE_PER_THREAD;
+        localparam BEG_ADDR_SAT = BEG_ADDR < GLOBAL_LAST_ADDRESS ? BEG_ADDR
+                                                                 : GLOBAL_LAST_ADDRESS;
+        localparam END_ADDR_SAT = END_ADDR < GLOBAL_LAST_ADDRESS ? END_ADDR
+                                                                 : GLOBAL_LAST_ADDRESS;
+        AddressCounter	#(
+                        .BIT_WIDTH(BIT_WIDTH),
+                        .DELAY(gen_i+1),
+                        .BEGIN_ADDRESS(BEG_ADDR_SAT),
+                        // end address for last thread could be different
+                        .END_ADDRESS(END_ADDR_SAT),
+                        .ADDRESS_BITS(ADDRESS_BITS)
+                        )
+                        cntr_for_thread
+                        (
+                        .clk(clk),
+                        .enable(processing_state),
+                        .reset(reset),
+                        
+                        .in_data(in_data[gen_i]),
+                        .in_data_validity(in_data_validity[gen_i]),
+                        
+                        .out_data(delayed_data[gen_i]),
+                        .out_data_address(delayed_data_address[gen_i]),
+                        .out_data_validity(delayed_data_validity[gen_i]),
+                        .finished(is_finished[gen_i])
+                        );
+        end
+    // for end
+    reg [SELECTOR_CNTR_BITS-1:0] selector_cntr = 0;
+    reg [BIT_WIDTH-1:0] reg_selected_data = 0;
+    reg [ADDRESS_BITS-1:0] reg_selected_address = 0;
+    reg reg_selected_data_validity = 0;
+    
+    always @(posedge clk)
+        begin
+        if (reset)
+            begin
+            reg_selected_data <= 0;
+            reg_selected_address <= 0;
+            reg_selected_data_validity <= 0;
+            selector_cntr <= 0;
+            end
+        else if (enable)
+            begin
+            // iterate over all threads
+            // reset iterator when new data is coming
+            if (input_valid || selector_cntr == PARALLELISM-1)
+                selector_cntr <= 0;
+            else
+                selector_cntr <= selector_cntr+1;
+            
+            // take data from iterated thread
+            reg_selected_data <= delayed_data[selector_cntr];
+            reg_selected_data_validity <= delayed_data_validity[selector_cntr];
+            reg_selected_address <= delayed_data_address[selector_cntr];
+            end
+        end
+    // always end
+    
+    assign out_data_memory_in = reg_selected_data;
+    assign out_data_memory_write_enable = reg_selected_data_validity && enable;
+    assign out_data_memory_address = reg_selected_address;
+    
+    // delay finish state of counters
+    ResettableDelayLine	#(
+                        .WIDTH(1),
+                        .DELAY(WRITE_MEMORY_LATENCY+1+1) // registers afters selection
+                        )
+                        delay_of_finish
+                        (
+                        .clk(clk),
+                        .enable(enable),
+                        .reset(reset),
+                        
+                        .data_in(&is_finished),
+                        .data_out(finished)
+                        );
 	endgenerate
 endmodule // MuxWriterUnit
 

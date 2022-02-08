@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="DSP_A_mul_B_add_PCIN_PCOUT_synth_1" LaunchPart="xczu3eg-sbva484-1-i" LaunchTime="1642538788">
-  <File Type="VDS-TIMING-PB" Name="DSP_A_mul_B_add_PCIN_PCOUT_timing_summary_synth.pb"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="DSP_A_mul_B_add_PCIN_PCOUT_timing_summary_synth.rpt"/>
-  <File Type="RDS-DCP" Name="DSP_A_mul_B_add_PCIN_PCOUT.dcp"/>
   <File Type="REPORTS-TCL" Name="DSP_A_mul_B_add_PCIN_PCOUT_reports.tcl"/>
   <File Type="PA-TCL" Name="DSP_A_mul_B_add_PCIN_PCOUT.tcl"/>
+  <File Type="RDS-DCP" Name="DSP_A_mul_B_add_PCIN_PCOUT.dcp"/>
   <File Type="RDS-RDS" Name="DSP_A_mul_B_add_PCIN_PCOUT.vds"/>
-  <File Type="RDS-PROPCONSTRS" Name="DSP_A_mul_B_add_PCIN_PCOUT_drc_synth.rpt"/>
   <File Type="RDS-UTIL" Name="DSP_A_mul_B_add_PCIN_PCOUT_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="DSP_A_mul_B_add_PCIN_PCOUT_utilization_synth.pb"/>
   <FileSet Name="sources" Type="BlockSrcs" RelSrcDir="$PSRCDIR/DSP_A_mul_B_add_PCIN_PCOUT">
@@ -42,9 +39,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020">
-      <Desc>Vivado Synthesis Defaults</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020"/>
     <Step Id="synth_design"/>
   </Strategy>
 </GenRun>

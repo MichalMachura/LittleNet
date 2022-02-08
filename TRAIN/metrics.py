@@ -23,6 +23,7 @@ class BaseMetric:
 class CONSTANTS:
     CIOU_SWITCH = True
     OLD_TORCH = False
+    BBOX_BORDER_WIDTH = 1 
 
 
 def iou_based_metric(bbox1, bbox2, border_width=1, mode='iou', eps=1e-7):
@@ -179,6 +180,7 @@ class SingleObjectIOUsBasedMetrics(BaseMetric):
             y_pred[:,:3*self.anchors.shape[0],:,:] = torch.sigmoid(y_pred[:,:3*self.anchors.shape[0],:,:])
             # get predicted bboxes 
             bbox_pred = utils.yolo_outputs_to_single_bbox_v3(y_pred, self.anchors, self.img_shape)
+            
             # convert (p)xcycwh into left top right bottom
             bbox_pred = utils.xcycwh_to_ltrb(bbox_pred[:,1:])
             # reference bboxes
@@ -189,7 +191,7 @@ class SingleObjectIOUsBasedMetrics(BaseMetric):
                 bbox_ref = bbox_ref[:bbox_pred.shape[0],:]
 
             # calculate iou based factors for each sample in batch
-            iou_based_values = iou_based_metric(bbox_pred, bbox_ref, border_width=1, mode='gdciou')
+            iou_based_values = iou_based_metric(bbox_pred, bbox_ref, border_width=CONSTANTS.BBOX_BORDER_WIDTH, mode='gdciou')
             
             for i, m in enumerate(iou_based_values):
                 # calculate mean of iou based metric

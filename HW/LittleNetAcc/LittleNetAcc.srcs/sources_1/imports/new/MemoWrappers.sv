@@ -1,5 +1,52 @@
 `timescale 1ns / 1ps
 
+
+module dROM
+		#(
+		 parameter path="",
+		 parameter WIDTH=8,
+		 parameter DEPTH=1,
+		 
+		 localparam ADDRESS_WIDTH = $clog2(DEPTH),
+       localparam DEPTH_ALIGNED = 2**ADDRESS_WIDTH
+		 )
+		 (
+		 input clka,
+		 input ena,
+		 input [ADDRESS_WIDTH-1:0] addra,
+		 output [WIDTH-1:0] douta,
+		 
+		 input sleep
+		 );
+	(* rom_style = "distributed" *)
+	reg [WIDTH-1:0] memory [DEPTH_ALIGNED];
+   
+	reg [ADDRESS_WIDTH-1:0] latched_in_address = 0;
+	reg [WIDTH-1:0] latched_output = 0;
+	
+	initial
+		begin
+		// for(int i=0; i < DEPTH; i = i+1)
+		// 	memory[i] = 0;
+		$readmemh(path, memory);
+		end
+	
+	always @(posedge clka)
+		begin
+		if (ena)
+			begin
+			latched_in_address <= addra;
+			latched_output <= memory[latched_in_address];
+			end
+		end
+	// always end
+	
+	assign douta = latched_output;
+	
+endmodule // dROM
+
+
+
 module ROM
       #(
       parameter LEN = 2048,
@@ -7,7 +54,7 @@ module ROM
       parameter init_file_name = "rom_hex_white_spaced_file_name.mem",
       parameter LATENCY = 2,
       parameter USE_SLEEP = 1,
-      parameter MEMO_TYPE = "auto"
+      parameter MEMO_TYPE = "distributed"
       )
       (
       input sleep,
@@ -25,44 +72,66 @@ wire [ADDR_WIDTH-1:0] local_addra = addra[ADDR_WIDTH-1:0];
 
 wire local_sleep;
 generate
-if(MEMO_TYPE == "block")
-   assign local_sleep = sleep;
-else
+// if(MEMO_TYPE == "distributed")
+if(MEMO_TYPE == "distributed" || MEMO_TYPE == "auto")
    assign local_sleep = 1'b0;
+else
+   assign local_sleep = sleep;
 endgenerate
 
-xpm_memory_sprom #(
-      .ADDR_WIDTH_A(ADDR_WIDTH),              // DECIMAL
-      .AUTO_SLEEP_TIME(0),           // DECIMAL
-      .CASCADE_HEIGHT(0),            // DECIMAL
-      .ECC_MODE("no_ecc"),           // String
-      .MEMORY_INIT_FILE(init_file_name),     // String
-      .MEMORY_INIT_PARAM(""),       // String
-      .MEMORY_OPTIMIZATION("true"),  // String
-      .MEMORY_PRIMITIVE(MEMO_TYPE),     // String
-      .MEMORY_SIZE(DATA_WIDTH*LEN),            // DECIMAL
-      .MESSAGE_CONTROL(0),           // DECIMAL
-      .READ_DATA_WIDTH_A(DATA_WIDTH),        // DECIMAL
-      .READ_LATENCY_A(LATENCY),            // DECIMAL
-      .READ_RESET_VALUE_A("0"),      // String
-      .RST_MODE_A("SYNC"),           // String
-      .SIM_ASSERT_CHK(0),            // DECIMAL; 0=disable simulation messages, 1=enable simulation messages
-      .USE_MEM_INIT(1),              // DECIMAL
-      .WAKEUP_TIME(USE_SLEEP ? "use_sleep_pin" : "disable_sleep")  // String
-   )
-   inside_ROM_blk (
-      .dbiterra(dbiterra),
-      .douta(douta),
-      .sbiterra(sbiterra),
-      .addra(local_addra),
-      .clka(clka),
-      .ena(ena),
-      .injectdbiterra(1'b0),
-      .injectsbiterra(1'b0),
-      .regcea(1'b1),
-      .rsta(1'b0),
-      .sleep(local_sleep)
-   );
+// if (MEMO_TYPE == "distributed")
+//    begin
+//    dROM 
+//       #(
+//       .path(init_file_name),
+//       .WIDTH(DATA_WIDTH),
+//       .DEPTH(LEN)
+//       )
+//       internal_rom 
+//       (
+//       .clka(clka),
+      
+//       .ena(ena),
+//       .addra(local_addra),
+//       .douta(douta)
+//       );
+//    end
+// else
+//    begin
+   xpm_memory_sprom #(
+         .ADDR_WIDTH_A(ADDR_WIDTH),              // DECIMAL
+         .AUTO_SLEEP_TIME(0),           // DECIMAL
+         .CASCADE_HEIGHT(0),            // DECIMAL
+         .ECC_MODE("no_ecc"),           // String
+         .MEMORY_INIT_FILE(init_file_name),     // String
+         .MEMORY_INIT_PARAM(""),       // String
+         .MEMORY_OPTIMIZATION("true"),  // String
+         .MEMORY_PRIMITIVE(MEMO_TYPE),     // String
+         .MEMORY_SIZE(DATA_WIDTH*LEN),            // DECIMAL
+         .MESSAGE_CONTROL(0),           // DECIMAL
+         .READ_DATA_WIDTH_A(DATA_WIDTH),        // DECIMAL
+         .READ_LATENCY_A(LATENCY),            // DECIMAL
+         .READ_RESET_VALUE_A("0"),      // String
+         .RST_MODE_A("SYNC"),           // String
+         .SIM_ASSERT_CHK(0),            // DECIMAL; 0=disable simulation messages, 1=enable simulation messages
+         .USE_MEM_INIT(1),              // DECIMAL
+         .WAKEUP_TIME(USE_SLEEP ? "use_sleep_pin" : "disable_sleep")  // String
+      )
+      inside_ROM_blk (
+         .dbiterra(dbiterra),
+         .douta(douta),
+         .sbiterra(sbiterra),
+         .addra(local_addra),
+         .clka(clka),
+         .ena(ena),
+         .injectdbiterra(1'b0),
+         .injectsbiterra(1'b0),
+         // .regcea(1'b1),
+         .regcea(ena),
+         .rsta(1'b0),
+         .sleep(local_sleep)
+      );
+   // end
    
 endmodule
 
@@ -144,7 +213,8 @@ module SDP_RAM
       
       .sleep(sleep),                   
       
-      .regceb(1'b1),                
+      // .regceb(1'b1), 
+      .regceb(enb), 
       .rstb(1'b0)          
    );
 

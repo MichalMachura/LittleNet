@@ -2,33 +2,45 @@
 
 
 module PointwiseConv2dUnit_tb ();
-	localparam IN_WIDTH = 13;
-	localparam IN_HEIGHT = 7;
-	localparam IN_CHANNELS = 256;
+	localparam IN_WIDTH = 5;
+	localparam IN_HEIGHT = 5;
+	localparam IN_CHANNELS = 3;
 	localparam OUT_CHANNELS = 15;
 	localparam USE_BIAS = 1;
-	localparam USE_BN = 0;
-	localparam USE_RELU = 0;
+	localparam USE_BN = 1;
+	localparam USE_RELU = 1;
 	// localparam USE_MAXPOOL = 1;
 	// localparam USE_MAXPOOL_CEIL_MODE = 1;
 	localparam USE_MAXPOOL = 0;
 	localparam USE_MAXPOOL_CEIL_MODE = 0;
-	localparam PARALLELISM = 5;
+	localparam PARALLELISM = 3;
 	// localparam PARALLELISM = 1;
 	localparam GROUPS = 1;
 	// localparam PARALLELISM = 1;
 	// localparam GROUPS = 1;
-	localparam USE_MAX_FINDER = 1;
+	localparam USE_MAX_FINDER = 0;
 	// localparam USE_MAX_FINDER = 0;
 	localparam ANCHORS = 3;
 	localparam IN_DATA_BIT_WIDTH = 8;
-	localparam IN_DATA_INT_WIDTH = 1;
+	localparam IN_DATA_INT_WIDTH = 8;
 	localparam IN_DATA_SIGN = 1;
 	localparam WEIGHT_DATA_BIT_WIDTH = 8;
-	localparam WEIGHT_DATA_INT_WIDTH = 3;
+	localparam WEIGHT_DATA_INT_WIDTH = 8;
 	localparam WEIGHT_DATA_SIGN = 1;
+	localparam BIAS_DATA_BIT_WIDTH = 8;
+	localparam BIAS_DATA_INT_WIDTH = 8;
+	localparam BIAS_DATA_SIGN = 1;
+	localparam INTER_DATA_BIT_WIDTH = 8;
+	localparam INTER_DATA_INT_WIDTH = 8;
+	localparam INTER_DATA_SIGN = 1;
+	localparam BN_W_DATA_BIT_WIDTH = 8;
+	localparam BN_W_DATA_INT_WIDTH = 8;
+	localparam BN_W_DATA_SIGN = 1;
+	localparam BN_B_DATA_BIT_WIDTH = 8;
+	localparam BN_B_DATA_INT_WIDTH = 8;
+	localparam BN_B_DATA_SIGN = 1;
 	localparam OUT_DATA_BIT_WIDTH = 8;
-	localparam OUT_DATA_INT_WIDTH = 3;
+	localparam OUT_DATA_INT_WIDTH = 8;
 	localparam OUT_DATA_SIGN = 1;
 	localparam READ_MEMORY_LATENCY = 2;
 	localparam WRITE_MEMORY_LATENCY = 2;
@@ -71,13 +83,13 @@ module PointwiseConv2dUnit_tb ();
 	// always end
 	
 	wire [IN_DATA_BIT_WIDTH-1:0] in_data_memory_out;
-	wire [IN_DATA_ADDRESS_BITS-1:0] in_data_memory_address;
+	wire [32-1:0] in_data_memory_address;
 	wire in_data_memory_read_enable;
 	wire [WEIGHT_DATA_BIT_WIDTH*PARALLELISM-1:0] weights_memory_out;
-	wire [WEIGHTS_ADDRESS_BITS-1:0] weights_memory_address;
+	wire [32-1:0] weights_memory_address;
 	wire weights_memory_read_enable;
 	wire [OUT_DATA_BIT_WIDTH*GROUPS-1:0] out_data_memory_in;
-	wire [OUT_ADDRESS_BITS-1:0] out_data_memory_address;
+	wire [32-1:0] out_data_memory_address;
 	wire out_data_memory_write_enable;
 	
 	reg enable = 0;
@@ -143,10 +155,23 @@ module PointwiseConv2dUnit_tb ();
 						.WEIGHT_DATA_BIT_WIDTH(WEIGHT_DATA_BIT_WIDTH),
 						.WEIGHT_DATA_INT_WIDTH(WEIGHT_DATA_INT_WIDTH),
 						.WEIGHT_DATA_SIGN(WEIGHT_DATA_SIGN),
+						.BIAS_DATA_BIT_WIDTH(BIAS_DATA_BIT_WIDTH),
+						.BIAS_DATA_INT_WIDTH(BIAS_DATA_INT_WIDTH),
+						.BIAS_DATA_SIGN(BIAS_DATA_SIGN),
+						.INTER_DATA_BIT_WIDTH(INTER_DATA_BIT_WIDTH),
+						.INTER_DATA_INT_WIDTH(INTER_DATA_INT_WIDTH),
+						.INTER_DATA_SIGN(INTER_DATA_SIGN),
+						.BN_W_DATA_BIT_WIDTH(BN_W_DATA_BIT_WIDTH),
+						.BN_W_DATA_INT_WIDTH(BN_W_DATA_INT_WIDTH),
+						.BN_W_DATA_SIGN(BN_W_DATA_SIGN),
+						.BN_B_DATA_BIT_WIDTH(BN_B_DATA_BIT_WIDTH),
+						.BN_B_DATA_INT_WIDTH(BN_B_DATA_INT_WIDTH),
+						.BN_B_DATA_SIGN(BN_B_DATA_SIGN),
 						.OUT_DATA_BIT_WIDTH(OUT_DATA_BIT_WIDTH),
 						.OUT_DATA_INT_WIDTH(OUT_DATA_INT_WIDTH),
 						.OUT_DATA_SIGN(OUT_DATA_SIGN),
 						.READ_MEMORY_LATENCY(READ_MEMORY_LATENCY),
+						.READ_WEIGHT_MEMORY_LATENCY(2),
 						.WRITE_MEMORY_LATENCY(WRITE_MEMORY_LATENCY)
 						)
 						pw_conv2d
@@ -169,39 +194,72 @@ module PointwiseConv2dUnit_tb ();
 						);
 	
 	
-	// INPUT DATA
-	FileROM #(
-			  .path("F:/LittleNet_ACC_verilog/LittleNetAcc_2019_1/custom_memory_inits/rom_init_data_pw.txt"),
-			  .IMG_WIDTH(IN_WIDTH),
-			  .IMG_HIGHT(IN_HEIGHT),
-			  .IMG_CHANNELS(IN_CHANNELS),
-		 	  .WIDTH(IN_DATA_BIT_WIDTH)
-			//  .DEPTH(2048)
-		 	 )
-			 file_rom_point_streamer
-			 (
-			 .clka(clk),
-			 .douta(in_data_memory_out),
-			 .addra(in_data_memory_address),
-			 .ena(in_data_memory_read_enable),
-			 .sleep(1'b0)
-			 );
+	// INPUT DATA	
+	xpm_memory_sprom #(
+      .ADDR_WIDTH_A(32),              // DECIMAL
+      .AUTO_SLEEP_TIME(0),           // DECIMAL
+      .CASCADE_HEIGHT(0),            // DECIMAL
+      .ECC_MODE("no_ecc"),           // String
+      .MEMORY_INIT_FILE("sim_memory_input.mem"),     // String
+      .MEMORY_INIT_PARAM(""),       // String
+      .MEMORY_OPTIMIZATION("true"),  // String
+      .MEMORY_PRIMITIVE("block"),     // String
+      .MEMORY_SIZE(8*IN_WIDTH*IN_HEIGHT*IN_CHANNELS),            // DECIMAL
+      .MESSAGE_CONTROL(0),           // DECIMAL
+      .READ_DATA_WIDTH_A(8),        // DECIMAL
+      .READ_LATENCY_A(2),            // DECIMAL
+      .READ_RESET_VALUE_A("0"),      // String
+      .RST_MODE_A("SYNC"),           // String
+      .SIM_ASSERT_CHK(0),            // DECIMAL; 0=disable simulation messages, 1=enable simulation messages
+      .USE_MEM_INIT(1),              // DECIMAL
+      .WAKEUP_TIME("disable_sleep")  // String
+   )
+   input_ROM_blk (
+	  .clka(clk),
+	  .douta(in_data_memory_out),
+	  .addra(in_data_memory_address),
+	  .ena(in_data_memory_read_enable),
+	  .sleep(1'b0),
 	
+      .injectdbiterra(1'b0),
+      .injectsbiterra(1'b0),
+      .regcea(in_data_memory_read_enable),
+      .rsta(1'b0)
+   );
+   
 	// WEIGHT DATA
-	FileROM #(
-			  .path("F:/LittleNet_ACC_verilog/LittleNetAcc_2019_1/custom_memory_inits/rom_init_weights_pw.txt"),
-			  .WIDTH(WEIGHT_DATA_BIT_WIDTH*PARALLELISM),
-			  .DEPTH((IN_CHANNELS+USE_BN*2+USE_BIAS)*((OUT_CHANNELS-1)/PARALLELISM+1))
-		 	 )
-			 file_rom_cyclic_streamer
-			 (
-			 .clka(clk),
-			 .douta(weights_memory_out),
-			 .addra(weights_memory_address),
-			 .ena(weights_memory_read_enable),
-			 .sleep(1'b0)
-			 );
+	xpm_memory_sprom #(
+      .ADDR_WIDTH_A(32),              // DECIMAL
+      .AUTO_SLEEP_TIME(0),           // DECIMAL
+      .CASCADE_HEIGHT(0),            // DECIMAL
+      .ECC_MODE("no_ecc"),           // String
+      .MEMORY_INIT_FILE("sim_memory_weights.mem"),     // String
+      .MEMORY_INIT_PARAM(""),       // String
+      .MEMORY_OPTIMIZATION("true"),  // String
+      .MEMORY_PRIMITIVE("block"),     // String
+      .MEMORY_SIZE((IN_CHANNELS+USE_BN*2+USE_BIAS)*((OUT_CHANNELS-1)/PARALLELISM+1)*WEIGHT_DATA_BIT_WIDTH*PARALLELISM),            // DECIMAL
+      .MESSAGE_CONTROL(0),           // DECIMAL
+      .READ_DATA_WIDTH_A(WEIGHT_DATA_BIT_WIDTH*PARALLELISM),        // DECIMAL
+      .READ_LATENCY_A(2),            // DECIMAL
+      .READ_RESET_VALUE_A("0"),      // String
+      .RST_MODE_A("SYNC"),           // String
+      .SIM_ASSERT_CHK(0),            // DECIMAL; 0=disable simulation messages, 1=enable simulation messages
+      .USE_MEM_INIT(1),              // DECIMAL
+      .WAKEUP_TIME("disable_sleep")  // String
+   )
+   weight_ROM_blk (
+	  .clka(clk),
+	  .douta(weights_memory_out),
+	  .addra(weights_memory_address),
+	  .ena(weights_memory_read_enable),
+	  .sleep(1'b0),
 	
+      .injectdbiterra(1'b0),
+      .injectsbiterra(1'b0),
+      .regcea(weights_memory_read_enable),
+      .rsta(1'b0)
+   );
+   
 	reg prev_finished = 0;
 	reg saving = 0;
 	
@@ -229,9 +287,11 @@ module PointwiseConv2dUnit_tb ();
 		
 	endgenerate
 	SinglePortRAMSavable  #(
-				.path("F:/LittleNet_ACC_verilog/LittleNetAcc_2019_1/custom_memory_inits/ram_out_bin_pw_%0d.txt"),
+				.path("/media/michal/HDD_Linux_2/LittleNet/HW/LittleNetAcc/ram_out_bin_pw_%0d.txt"),
 				.WIDTH(GROUPS*OUT_DATA_BIT_WIDTH),
 				.DEPTH(OUT_SIZE)
+				// .DEPTH(2**32)
+				// .DEPTH(4294967296)
 				)
 				file_ram_out
 				(
